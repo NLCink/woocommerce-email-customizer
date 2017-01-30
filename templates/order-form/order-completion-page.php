@@ -267,7 +267,7 @@ $order = wc_get_order( 24991 );
                   <textarea class="order-form-inputs" name="name" rows="8" cols="80" placeholder="( Insert general guidelines for this branded blog post )"></textarea>
                 </div>
               </div>
-              <div class="word-wrap">
+              <div class="word-wrap">            
                 <input type="submit" name="orderCompletionSave" class="btn-order-fill" value="Save" />
                 <input type="submit" name="orderCompletionSave" class="btn-order-clear" value="Complete" />
               </div>
@@ -277,134 +277,6 @@ $order = wc_get_order( 24991 );
             $inc++;
         }
         ?>
-
-          <?php /* ?><h3 class="form-name">Form 2</h3>
-          <div class="word-wrap">
-            <h3 class="word-count">Product: Branded Blogpost - 1000 words</h3>
-            <a href="#" class="btn-order-clear">Demo</a>
-          </div>
-          <div class="form-wrap area">
-            <form class="order-form area" action="#" method="post">
-              <div class="order-form-full">
-                <div class="order-form-left">
-                  <h5 class="order-form-label">Full Company Name</h5>
-                  <div class="tooltip">
-                    <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
-                    <div class="tooltip-text">
-                      <p>Enter your company name here</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="order-form-right">
-                  <input class="order-form-inputs" name="" value="" type="text">
-                </div>
-              </div>
-              <div class="order-form-full">
-                <div class="order-form-left">
-                  <h5 class="order-form-label">Current Website</h5>
-                  <div class="tooltip">
-                    <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
-                    <div class="tooltip-text">
-                      <p>Example:<br> companysite.com</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="order-form-right">
-                  <input class="order-form-inputs" name="" value="" type="text">
-                </div>
-              </div>
-              <div class="order-form-full">
-                <div class="order-form-left">
-                  <h5 class="order-form-label">Blog Topic</h5>
-                  <div class="tooltip">
-                    <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
-                    <div class="tooltip-text">
-                      <p>Example:<br> Interior Design Trends</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="order-form-right">
-                  <input class="order-form-inputs" name="" value="" type="text">
-                </div>
-              </div>
-              <div class="order-form-full">
-                <div class="order-form-left">
-                  <h5 class="order-form-label">Examples Blog URLs</h5>
-                  <div class="tooltip">
-                    <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
-                    <div class="tooltip-text">
-                      <p>Example:<br> http://example.com</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="order-form-right">
-                  <input class="order-form-inputs" name="" value="" type="text">
-                  <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
-                </div>
-              </div>
-              <div class="order-form-full">
-                <div class="order-form-left">
-                  <h5 class="order-form-label">Reference URL</h5>
-                  <div class="tooltip">
-                    <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
-                    <div class="tooltip-text">
-                      <p>Please include URLs of blogs that you would like us to try and emulate.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="order-form-right">
-                  <input class="order-form-inputs" name="" value="" type="text">
-                </div>
-              </div>
-              <div class="order-form-full">
-                <div class="order-form-left">
-                  <h5 class="order-form-label">Keywords (up to 3)</h5>
-                  <div class="tooltip">
-                    <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
-                    <div class="tooltip-text">
-                      <p>Example:<br>"plumbing SLC"</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="order-form-right">
-                  <input class="order-form-inputs" name="" value="" type="text">
-                  <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
-                </div>
-              </div>
-              <div class="order-form-full">
-                <div class="order-form-left">
-                  <h5 class="order-form-label">Conneting words</h5>
-                  <div class="tooltip">
-                    <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
-                    <div class="tooltip-text">
-                      <p>Connecting words are words such as “in”, “for”, or “around”. These words help make keywords easier to read or grammatically correct. For example, if your keyword was “plumbing SLC”, then including connecting words would allow a writer to insert the keyword in the article as “plumbing in SLC”</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="order-form-right">
-                  <input class="order-form-inputs" name="" value="" type="text">
-                </div>
-              </div>
-              <div class="order-form-full">
-                <div class="order-form-left">
-                  <h5 class="order-form-label">Special Instructions</h5>
-                  <div class="tooltip">
-                    <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
-                    <div class="tooltip-text">
-                      <p>Example:<br> Please mention the company name in the first and last paragraph. Also include a small call to action at the end of the blog telling the reader to contact us. Make the blogs educational, seasonal, fun and reflective of our company voice. Top 3, 5 or 10 item lists are preferred for these.<br>
-          Example:<br> List some of the most popular trends in the industry right now and situations where they would apply</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="order-form-right">
-                  <textarea class="order-form-inputs" name="name" rows="8" cols="80" placeholder="( Insert general guidelines for this branded blog post )"></textarea>
-                </div>
-              </div>
-              <div class="word-wrap">
-                <a href="#" class="btn-order-fill">Save</a><a href="#" class="btn-order-clear">Complete</a>
-              </div>
-            </form>
-          </div><?php */ ?>
         </section>
 
 
@@ -413,10 +285,21 @@ $order = wc_get_order( 24991 );
     </div>
     <link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ); ?>main.css" />
 </div> <!-- #main-content -->
-
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
   function saveOrderCompletion(thisItem){
-      var companyName = $(thisItem).("input[name=companyName]").val();
+      var companyName = $(thisItem).find("input[name=companyName]");
+      if (companyName.val()==null || companyName.val()==""){
+        //order-form-label
+                var labelVal = companyName.parent().parent().find('.order-form-left > .order-form-label').html();
+                console.log(labelVal);
+                companyName.after('<span class="form-msg error">'+labelVal+' is required!</span>');
+                companyName.focus();
+                companyName.select();
+                return false;
+          } else {
+            companyName.after('');
+          }
       console.log(companyName);
       return false;
   }
