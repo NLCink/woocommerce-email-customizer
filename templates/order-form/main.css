@@ -1,0 +1,204 @@
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+/*------------------Order Form----------------*/
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+ /*-------------font-family: 'Open Sans', sans-serif;--------------*/
+
+ * {
+     box-sizing: border-box;
+ }
+.area {
+  width: 100%;
+  float: left;
+}
+.order-section {
+  padding:0 0 50px 0;
+  margin-top:-40px;
+}
+.order-no {
+  color: #000000;
+  font: 22px/24px 'Open Sans', sans-serif;
+  margin: 0 0 40px;
+}
+.order-no span {
+  font-weight: 700;
+}
+.progress-title,
+.order-form-titie {
+  color: #000000;
+  font: 26px/35px 'Open Sans', sans-serif;
+  margin: 0 0 8px;
+}
+.progress-title {
+  font-weight: 700;
+}
+.progress-lenght {
+  color: #5bb900;
+  font-family: 32px;
+  font-weight: 400;
+  margin-left: 10px;
+}
+.progress-container {
+  width: 100%;
+  height: 50px;
+  float: left;
+  background: #c4df9b;
+  position: relative;
+  margin-bottom: 45px;
+}
+.progressbar {
+  height: 100%;
+  background: #5bb900;
+  position: absolute;
+  transition: all 0.3s;
+}
+.divider {
+  width: 100%;
+  height: 2px;
+  background: #c8c8c8;
+  float: left;
+  margin: 25px 0;
+}
+.form-name,
+.word-count {
+  color: #fb921b;
+  font: 700 26px/35px 'Open Sans', sans-serif;
+  margin: 0;
+}
+.word-wrap {
+  text-align: right;
+}
+.word-count {
+  color: #000000;
+  font-weight: 400;
+  float: left;
+  display: inline-block;
+}
+.btn-order-clear,
+.btn-order-fill {
+  color: #46c8c8;
+  font: 700 16px/24px 'Open Sans', sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 8px 35px;
+  border: 1px solid #46c8c8;
+  border-radius: 50px;
+  display: inline-block;
+  cursor: pointer;
+}
+.btn-order-fill {
+  color: #ffffff;
+  background: #46c8c8;
+}
+.order-form {
+  margin: 45px 0;
+}
+.order-form-full {
+  width: 100%;
+  float: left;
+  display: table;
+}
+.order-form-left {
+  width: 300px;
+  text-align: right;
+  display: table-cell;
+  padding-right: 30px;
+  vertical-align: top;
+  position: relative;
+}
+.order-form-right {
+  display: table-cell;
+  vertical-align: top;
+  position: relative;
+}
+.order-form-label {
+  color: #555555;
+  font: 16px/22px 'Open Sans', sans-serif;
+  margin: 0 0 10px 0;
+  display: inline-block;
+}
+.tooltip {
+  display: inline-block;
+  position: relative;
+  bottom: -5px;
+  z-index:111;
+}
+.tooltip-text {
+  background: #000000;
+  padding: 5px;
+  border-radius: 4px;
+  text-align: center;
+  width:250px;
+  position: absolute;
+  left: 50%;
+  bottom:54px;
+  transform: translate(-50%, 0);
+  display: none;
+  transition: all 0.3s;
+}
+.tooltip:hover .tooltip-text {
+  display: block;
+}
+.tooltip-text::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 8px 0 8px;
+  border-color: #000000 transparent transparent transparent;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+.tooltip-text p {
+  color: #ffffff;
+  font: 12px/18px 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.order-form-inputs {
+  color: #000000 !important;
+  background: #f8f8f8 !important;
+  font: 16px/24px 'Open Sans', sans-serif;
+  height: auto;
+  width: 100%;
+  border: 1px solid #c8c8c8 !important;
+  border-radius: 4px;
+  padding: 8px 15px !important;
+  margin-bottom: 20px !important;
+}
+.order-form .btn-order-fill {
+  margin: 0 15px 15px 0;
+}
+.btn-add-more {
+  background: #46c8c8;
+  height: 40px;
+  width: 40px;
+  border: none;
+  border-radius: 4px;
+  position: absolute;
+  right: 1px;
+  top: 1px;
+}
+
+#main-content .container:before{background-color:transparent;}
+
+@media (max-width:767px) {
+  .word-wrap,
+  .order-form-full,
+  .form-name {
+    padding: 0 15px;
+    text-align: left;
+  }
+  .order-form-left,
+  .order-form-right {
+    width: 100%;
+    float: left;
+    display: block;
+    text-align: left;
+  }
+}
+/*------------------ End of Order Form----------------*/
