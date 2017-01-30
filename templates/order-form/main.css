@@ -185,7 +185,15 @@
 }
 
 #main-content .container:before{background-color:transparent;}
-
+.error{color:#a94442;}
+.form-msg{
+    position: absolute;
+    width: 33%;
+    top: 0;
+    left: 67%;
+    border: 1px solid #a94442;
+    padding: 6px;
+}
 @media (max-width:767px) {
   .word-wrap,
   .order-form-full,
