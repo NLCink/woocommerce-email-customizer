@@ -1,7 +1,13 @@
 <?php
 get_header();
-$order = wc_get_order( 24991 );
-/*
+$orderId=(!empty($_GET['order_id']) ? $_GET['order_id'] : 0);
+$order = wc_get_order( $orderId );
+if(empty($order))
+die('Order is not valid, contact with IT help desk!');
+?>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="<?php echo plugin_dir_url( __FILE__ ); ?>js/jquery.validate.js"></script>
+<?php /*
 ?>
 
 <header><h2><?php _e( 'Customer Details', 'woocommerce' ); ?></h2></header>
@@ -139,7 +145,8 @@ $order = wc_get_order( 24991 );
               if ( ! empty( $meta_list ) ) {
                 $output_attribute = $meta_list[0];//implode( $delimiter, $meta_list );
               }
-            } ?>
+            } 
+            ?>
 
           <div class="divider"></div>
           <h3 class="form-name">Form <?php echo $inc; ?></h3>
@@ -151,7 +158,7 @@ $order = wc_get_order( 24991 );
             <a href="#" class="btn-order-clear">Demo</a>
           </div>
           <div class="form-wrap area">
-            <form class="order-form area" action="#" method="post" onsubmit="return saveOrderCompletion(this);">
+            <form class="order-form area orderForm-<?php echo $productID; ?>" action="#" method="post">
               <div class="order-form-full">
                 <div class="order-form-left">
                   <h5 class="order-form-label">Full Company Name</h5>
@@ -163,7 +170,7 @@ $order = wc_get_order( 24991 );
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <input class="order-form-inputs" name="companyName" value="" type="text">
+                  <input class="order-form-inputs required" name="companyName" value="" type="text">
                 </div>
               </div>
               <div class="order-form-full">
@@ -177,7 +184,7 @@ $order = wc_get_order( 24991 );
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <input class="order-form-inputs" name="" value="" type="text">
+                  <input class="order-form-inputs required" name="company_url" value="" type="text">
                 </div>
               </div>
               <div class="order-form-full">
@@ -191,7 +198,7 @@ $order = wc_get_order( 24991 );
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <input class="order-form-inputs" name="" value="" type="text">
+                  <input class="order-form-inputs required" name="blog_topic" value="" type="text">
                 </div>
               </div>
               <div class="order-form-full">
@@ -205,7 +212,7 @@ $order = wc_get_order( 24991 );
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <input class="order-form-inputs" name="" value="" type="text">
+                  <input class="order-form-inputs required" name="blog_url" value="" type="text">
                   <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
                 </div>
               </div>
@@ -220,7 +227,7 @@ $order = wc_get_order( 24991 );
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <input class="order-form-inputs" name="" value="" type="text">
+                  <input class="order-form-inputs required" name="reference_url" value="" type="text">
                 </div>
               </div>
               <div class="order-form-full">
@@ -234,7 +241,7 @@ $order = wc_get_order( 24991 );
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <input class="order-form-inputs" name="" value="" type="text">
+                  <input class="order-form-inputs required" name="keywords" value="" type="text">
                   <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
                 </div>
               </div>
@@ -249,7 +256,7 @@ $order = wc_get_order( 24991 );
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <input class="order-form-inputs" name="" value="" type="text">
+                  <input class="order-form-inputs required" name="conneting_words" value="" type="text">
                 </div>
               </div>
               <div class="order-form-full">
@@ -264,7 +271,7 @@ $order = wc_get_order( 24991 );
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <textarea class="order-form-inputs" name="name" rows="8" cols="80" placeholder="( Insert general guidelines for this branded blog post )"></textarea>
+                  <textarea class="order-form-inputs required" name="special_instructions" rows="8" cols="80" placeholder="( Insert general guidelines for this branded blog post )"></textarea>
                 </div>
               </div>
               <div class="word-wrap">            
@@ -272,6 +279,13 @@ $order = wc_get_order( 24991 );
                 <input type="submit" name="orderCompletionSave" class="btn-order-clear" value="Complete" />
               </div>
             </form>
+
+            <script type="text/javascript">
+              $(document).ready(function(){
+                $(".orderForm-<?php echo $productID; ?>").validate();
+              });
+            </script>
+
           </div>
         <?php
             $inc++;
@@ -285,21 +299,20 @@ $order = wc_get_order( 24991 );
     </div>
     <link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ); ?>main.css" />
 </div> <!-- #main-content -->
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
+  
   function saveOrderCompletion(thisItem){
       var companyName = $(thisItem).find("input[name=companyName]");
-      if (companyName.val()==null || companyName.val()==""){
-        //order-form-label
-                var labelVal = companyName.parent().parent().find('.order-form-left > .order-form-label').html();
-                console.log(labelVal);
-                companyName.after('<span class="form-msg error">'+labelVal+' is required!</span>');
-                companyName.focus();
-                companyName.select();
-                return false;
-          } else {
-            companyName.after('');
-          }
+      // if (companyName.val()==null || companyName.val()==""){
+      //           var labelVal = companyName.parent().parent().find('.order-form-left > .order-form-label').html();
+      //           console.log(labelVal);
+      //           companyName.after('<span class="form-msg error">'+labelVal+' is required!</span>');
+      //           companyName.focus();
+      //           companyName.select();
+      //           return false;
+      //     } else {
+      //       companyName.after('');
+      //     }
       console.log(companyName);
       return false;
   }
