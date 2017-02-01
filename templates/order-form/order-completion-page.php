@@ -158,7 +158,7 @@ die('Order is not valid, contact with IT help desk!');
             <a href="#" class="btn-order-clear">Demo</a>
           </div>
           <div class="form-wrap area">
-            <form class="order-form area orderForm-<?php echo $productID; ?>" action="#" method="post">
+            <form class="order-form area orderForm-<?php echo $productID; ?>" onsubmit="return saveOrderCompletion(this);" action="#" method="post">
               <div class="order-form-full">
                 <div class="order-form-left">
                   <h5 class="order-form-label">Full Company Name</h5>
