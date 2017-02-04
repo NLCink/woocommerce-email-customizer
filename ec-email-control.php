@@ -175,6 +175,10 @@ class WC_Email_Control {
 		// our css is applied, whcih results in some of the CSS not applying.
 		add_filter( 'wc_get_template', array( $this, 'ec_globalize_email_object' ), 10, 5 );
 		add_action( 'woocommerce_mail_content', array( $this, 'ec_style_inline' ), 85 );
+
+		//order completion form submit
+		add_action( 'wp_ajax_nopriv_orderCompletion', array( $this, 'orderCompletion' ), 85);
+		add_action( 'wp_ajax_orderCompletion', array( $this, 'orderCompletion' ), 85 );
 		
 		// Other simpler WooCommerce emails - Content.
 		// add_filter( 'woocommerce_email_content_low_stock', array( $this, 'woocommerce_simple_email_content' ), 10, 2 );
@@ -183,6 +187,38 @@ class WC_Email_Control {
 		// Other simpler WooCommerce emails - Headers.
 		// add_filter( 'woocommerce_email_headers', array( $this, 'woocommerce_simple_email_headers' ), 10, 2 );
 	}
+
+
+
+	public function orderCompletion(){
+        $order_id = $_POST['order_id'];
+        $product_id = $_POST['product_id'];
+        //echo $companyName;
+        if($order_id):
+        	foreach ($_POST as $key => $value) {
+        		if($key !='action')
+        		if ( ! add_post_meta( $order_id, "_comp_{$key}_{$product_id}", $value, true ) ) { 
+					update_post_meta( $order_id, "_comp_{$key}_{$product_id}", $value );
+				}
+        	}
+			
+		 if($order_id){
+			 $results = array(
+				'success' => true,
+				'mess' => 'Email successfully sent.',
+				'all_post'=>$_POST
+			 );
+		 } else {
+			 $results = array(
+				'success' => false,
+				'mess' => 'Email not send, there are some error to send email.'
+			 );
+		 }			
+		echo json_encode($results);
+
+        endif;
+  die();
+  }
 	
 	/**
 	 * Localization
