@@ -146,9 +146,34 @@ die('Order is not valid, contact with IT help desk!');
                 $output_attribute = $meta_list[0];//implode( $delimiter, $meta_list );
               }
             } 
+
+            $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}", true );
+            if(!empty($get_order_id)){
+              $get_company_name = get_post_meta( $orderId, "_comp_company_name_{$productID}", true );
+              $get_company_url = get_post_meta( $orderId, "_comp_company_url_{$productID}", true );
+              $get_blog_topic = get_post_meta( $orderId, "_comp_blog_topic_{$productID}", true );
+              $get_blog_url = get_post_meta( $orderId, "_comp_blog_url_{$productID}", true );
+              $get_reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}", true );
+              $get_keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}", true );
+              $get_conneting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}", true );
+              $get_special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}", true );
+              $get_order_type = get_post_meta( $orderId, "_comp_order_type_{$productID}", true );
+            } else {
+              $get_company_name = '';
+              $get_company_url = '';
+              $get_blog_topic = '';
+              $get_blog_url = '';
+              $get_reference_url = '';
+              $get_keywords = '';
+              $get_conneting_words = '';
+              $get_special_instructions = '';
+              $get_order_type = '';
+            }
+
             ?>
 
           <div class="divider"></div>
+
           <h3 class="form-name">Form <?php echo $inc; ?></h3>
           <div class="word-wrap">
             <h3 class="word-count">Product: <?php echo apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
@@ -158,7 +183,17 @@ die('Order is not valid, contact with IT help desk!');
             <a href="#" class="btn-order-clear">Demo</a>
           </div>
           <div class="form-wrap area">
-            <form class="order-form area orderForm-<?php echo $productID; ?>" onsubmit="return saveOrderCompletion(this);" action="#" method="post">
+            <div class="alert alert-success alert-success-<?php echo $productID; ?>" style="display: none;">
+            <strong>Success!</strong> Indicates a successful or positive action.
+          </div>
+          <?php if(!empty($get_order_type) && $get_order_type == 'complete') { ?>
+          <div class="form-wrap area">
+            <div class="alert alert-success alert-success-<?php echo $productID; ?>">
+            <strong>Success!</strong> Complete this form.
+          </div>
+          <?php } else { ?>
+            <form class="order-form area orderForm-<?php echo $productID; ?>" id="orderForm-<?php echo $productID; ?>" data-order-id="<?php echo $productID; ?>" action="#" method="post">
+            <input type="hidden" name="product_id" value="<?php echo $productID; ?>">
               <div class="order-form-full">
                 <div class="order-form-left">
                   <h5 class="order-form-label">Full Company Name</h5>
@@ -170,7 +205,7 @@ die('Order is not valid, contact with IT help desk!');
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <input class="order-form-inputs required" name="companyName" value="" type="text">
+                  <input class="order-form-inputs required" name="company_name" value="<?php echo $get_company_name; ?>" type="text">
                 </div>
               </div>
               <div class="order-form-full">
@@ -184,7 +219,7 @@ die('Order is not valid, contact with IT help desk!');
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <input class="order-form-inputs required" name="company_url" value="" type="text">
+                  <input class="order-form-inputs required" name="company_url" value="<?php echo $get_company_url; ?>" type="text">
                 </div>
               </div>
               <div class="order-form-full">
@@ -198,7 +233,7 @@ die('Order is not valid, contact with IT help desk!');
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <input class="order-form-inputs required" name="blog_topic" value="" type="text">
+                  <input class="order-form-inputs required" name="blog_topic" value="<?php echo $get_blog_topic; ?>" type="text">
                 </div>
               </div>
               <div class="order-form-full">
@@ -212,7 +247,7 @@ die('Order is not valid, contact with IT help desk!');
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <input class="order-form-inputs required" name="blog_url" value="" type="text">
+                  <input class="order-form-inputs required" name="blog_url" value="<?php echo $get_blog_url; ?>" type="text">
                   <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
                 </div>
               </div>
@@ -227,7 +262,7 @@ die('Order is not valid, contact with IT help desk!');
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <input class="order-form-inputs required" name="reference_url" value="" type="text">
+                  <input class="order-form-inputs required" name="reference_url" value="<?php echo $get_reference_url; ?>" type="text">
                 </div>
               </div>
               <div class="order-form-full">
@@ -241,7 +276,7 @@ die('Order is not valid, contact with IT help desk!');
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <input class="order-form-inputs required" name="keywords" value="" type="text">
+                  <input class="order-form-inputs required" name="keywords" value="<?php echo $get_keywords; ?>" type="text">
                   <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
                 </div>
               </div>
@@ -256,7 +291,7 @@ die('Order is not valid, contact with IT help desk!');
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <input class="order-form-inputs required" name="conneting_words" value="" type="text">
+                  <input class="order-form-inputs required" name="conneting_words" value="<?php echo $get_conneting_words; ?>" type="text">
                 </div>
               </div>
               <div class="order-form-full">
@@ -271,15 +306,21 @@ die('Order is not valid, contact with IT help desk!');
                   </div>
                 </div>
                 <div class="order-form-right">
-                  <textarea class="order-form-inputs required" name="special_instructions" rows="8" cols="80" placeholder="( Insert general guidelines for this branded blog post )"></textarea>
+                  <textarea class="order-form-inputs required" name="special_instructions" rows="8" cols="80" placeholder="( Insert general guidelines for this branded blog post )"><?php echo $get_special_instructions; ?></textarea>
                 </div>
               </div>
               <div class="word-wrap">            
-                <input type="submit" name="orderCompletionSave" class="btn-order-fill" value="Save" />
-                <input type="submit" name="orderCompletionSave" class="btn-order-clear" value="Complete" />
+                <button type="submit" onclick="" name="order_type" class="btn-order-fill" value="save">
+                <i class="fa fa-refresh fa-spin" aria-hidden="true" style="display: none;"></i>
+                Save
+                </button> 
+                <button type="submit" name="order_type" class="btn-order-clear btn-color-white" value="complete">
+                 <i class="fa fa-refresh fa-spin" aria-hidden="true" style="display: none;"></i>
+                Complete
+                </button> 
               </div>
             </form>
-
+            <?php } ?>
             <script type="text/javascript">
               $(document).ready(function(){
                 $(".orderForm-<?php echo $productID; ?>").validate();
@@ -300,22 +341,60 @@ die('Order is not valid, contact with IT help desk!');
     <link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ); ?>main.css" />
 </div> <!-- #main-content -->
 <script type="text/javascript">
-  
-  function saveOrderCompletion(thisItem){
-      var companyName = $(thisItem).find("input[name=companyName]");
-      // if (companyName.val()==null || companyName.val()==""){
-      //           var labelVal = companyName.parent().parent().find('.order-form-left > .order-form-label').html();
-      //           console.log(labelVal);
-      //           companyName.after('<span class="form-msg error">'+labelVal+' is required!</span>');
-      //           companyName.focus();
-      //           companyName.select();
-      //           return false;
-      //     } else {
-      //       companyName.after('');
-      //     }
-      console.log(companyName);
-      return false;
-  }
+
+$(document).on("click", ":submit", function(e){
+      var order_type = $(this);
+      var orderId = order_type.closest("form").attr('data-order-id');
+      var formId = order_type.closest("form").attr('id');
+      order_type.find(".fa-refresh").css("display", "inline-block");
+      var company_name = $('#'+formId).find("input[name=company_name]");
+      var company_url = $('#'+formId).find("input[name=company_url]");
+      var blog_topic = $('#'+formId).find("input[name=blog_topic]");
+      var blog_url = $('#'+formId).find("input[name=blog_url]");
+      var reference_url = $('#'+formId).find("input[name=reference_url]");
+      var keywords = $('#'+formId).find("input[name=keywords]");
+      var conneting_words = $('#'+formId).find("input[name=conneting_words]");
+      var product_id = $('#'+formId).find("input[name=product_id]");
+      var special_instructions = $('#'+formId).find("textarea[name=special_instructions]");
+      if (company_name.val()==""|| company_url.val()=="" || blog_topic.val()=="" 
+        || blog_url.val()=="" || reference_url.val()=="" || keywords.val()=="" 
+        || conneting_words.val()=="" || special_instructions.val()==""){
+        alert('required field must be fill up!');
+        order_type.find(".fa-refresh").css("display", "none");
+      } else {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo admin_url('admin-ajax.php'); ?>',
+            data: {
+            action: 'orderCompletion',
+            order_id:'<?php echo $orderId; ?>',
+            company_name:company_name.val(),
+            company_url:company_url.val(),
+            blog_topic:blog_topic.val(),
+            blog_url:blog_url.val(),
+            reference_url:reference_url.val(),
+            keywords:keywords.val(),
+            conneting_words:conneting_words.val(),
+            special_instructions:special_instructions.val(),
+            order_type:order_type.val(),
+            product_id:product_id.val()
+            },
+            success: function(data){
+              if(order_type.val() == 'complete'){
+                $("#"+formId).css("display", "none");
+              }
+              order_type.find(".fa-refresh").css("display", "none");
+              $(".alert-success-"+orderId).html("<strong>Success!</strong> Successful "+order_type.val()+".").css("display", "block");
+            },
+            error: function(errorThrown){
+              alert(errorThrown);
+            }
+
+            });
+        return false;
+      }
+
+});
 </script>
 
 <?php get_footer(); ?>

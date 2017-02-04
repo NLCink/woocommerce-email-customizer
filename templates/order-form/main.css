@@ -89,6 +89,7 @@
   display: inline-block;
   cursor: pointer;
 }
+.btn-color-white{color: #ffffff;}
 .btn-order-fill {
   color: #ffffff;
   background: #46c8c8;
@@ -185,6 +186,20 @@
 }
 
 #main-content .container:before{background-color:transparent;}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
 .error{color:#a94442;}
 .form-msg{
     position: absolute;
