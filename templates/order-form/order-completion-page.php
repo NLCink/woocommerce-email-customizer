@@ -169,7 +169,8 @@ die('Order is not valid, contact with IT help desk!');
               $get_special_instructions = '';
               $get_order_type = '';
             }
-
+             $get_product_id = $item['product_id'];
+             echo $get_product_id;
             ?>
 
           <div class="divider"></div>
