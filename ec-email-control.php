@@ -179,6 +179,8 @@ class WC_Email_Control {
 		//order completion form submit
 		add_action( 'wp_ajax_nopriv_orderCompletion', array( $this, 'orderCompletion' ), 85);
 		add_action( 'wp_ajax_orderCompletion', array( $this, 'orderCompletion' ), 85 );
+
+		add_action( 'woocommerce_before_order_itemmeta', array( $this, 'so_32457241_before_order_itemmeta'), 10, 3 );
 		
 		// Other simpler WooCommerce emails - Content.
 		// add_filter( 'woocommerce_email_content_low_stock', array( $this, 'woocommerce_simple_email_content' ), 10, 2 );
@@ -188,7 +190,92 @@ class WC_Email_Control {
 		// add_filter( 'woocommerce_email_headers', array( $this, 'woocommerce_simple_email_headers' ), 10, 2 );
 	}
 
+	public function so_32457241_before_order_itemmeta( $item_id, $item, $_product ){
+		
+		if ( ! empty( $item['variation_id'] ) && 'product_variation' === get_post_type( $item['variation_id'] ) ) {
+                $_product = wc_get_product( $item['variation_id'] );
+                $productID = $item['variation_id'];
+              } elseif ( ! empty( $item['product_id']  ) ) {
+                $productID = $item['product_id'];
+                $_product = wc_get_product( $item['product_id'] );
+              } else {
+                $productID = 0;
+                $_product = false;
+              }
+             $orderId = get_the_ID();
 
+
+             $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}", true );
+            if(!empty($get_order_id)){
+              $get_company_name = get_post_meta( $orderId, "_comp_company_name_{$productID}", true );
+              $get_company_url = get_post_meta( $orderId, "_comp_company_url_{$productID}", true );
+              $get_blog_topic = get_post_meta( $orderId, "_comp_blog_topic_{$productID}", true );
+              $get_blog_url = get_post_meta( $orderId, "_comp_blog_url_{$productID}", true );
+              $get_reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}", true );
+              $get_keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}", true );
+              $get_conneting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}", true );
+              $get_special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}", true );
+              $get_order_type = get_post_meta( $orderId, "_comp_order_type_{$productID}", true );
+            } else {
+              $get_company_name = '';
+              $get_company_url = '';
+              $get_blog_topic = '';
+              $get_blog_url = '';
+              $get_reference_url = '';
+              $get_keywords = '';
+              $get_conneting_words = '';
+              $get_special_instructions = '';
+              $get_order_type = '';
+            } 
+            if(!empty($get_order_id)){
+
+            echo '<p>Order Completion Info ( Status : '.ucwords($get_order_type).' )</p>';
+            ?>
+				<table class="widefat fixed" cellspacing="0">
+				    <thead>
+					    <tr>
+				            <th id="cb" class="manage-column" scope="col">Label</th>
+				            <th id="columnname" class="manage-column" scope="col">Value</th>
+					    </tr>
+				    </thead>
+				    <tbody>
+				        <tr class="alternate">
+				            <td class="column-columnname"><b>Full Company Name</b></td>
+				            <td class="column-columnname"><?php echo $get_company_name; ?></td>
+				        </tr>
+				        <tr class="">				        	
+				            <td class="column-columnname"><b>Current Website</b></td>
+				            <td class="column-columnname"><?php echo $get_company_url; ?></td>
+				        </tr>
+				        <tr class="alternate">
+				            <td class="column-columnname"><b>Blog Topic</b></td>
+				            <td class="column-columnname"><?php echo $get_blog_topic; ?></td>
+				        </tr>
+				        <tr class="">				        	
+				            <td class="column-columnname"><b>Examples Blog URLs</b></td>
+				            <td class="column-columnname"><?php echo $get_blog_url; ?></td>
+				        </tr>
+				        <tr class="alternate">
+				            <td class="column-columnname"><b>Reference URL</b></td>
+				            <td class="column-columnname"><?php echo $get_reference_url; ?></td>
+				        </tr>
+				        <tr class="">				        	
+				            <td class="column-columnname"><b>Keywords</b></td>
+				            <td class="column-columnname"><?php echo $get_keywords; ?></td>
+				        </tr>
+				        <tr class="alternate">
+				            <td class="column-columnname"><b>Conneting words</b></td>
+				            <td class="column-columnname"><?php echo $get_conneting_words; ?></td>
+				        </tr>
+				        <tr class="">				        	
+				            <td class="column-columnname"><b>Special Instructions</b></td>
+				            <td class="column-columnname"><?php echo $get_special_instructions; ?></td>
+				        </tr>
+				    </tbody>
+				</table>
+            <?php 
+        } 
+    }
 
 	public function orderCompletion(){
         $order_id = $_POST['order_id'];
