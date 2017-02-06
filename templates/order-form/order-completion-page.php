@@ -86,7 +86,8 @@ die('Order is not valid, contact with IT help desk!');
 
             <?php
             $inc=1;
-
+            $tot=0;
+            $fill=0;
             foreach( $order->get_items() as $item_id => $item ) {
 
             
@@ -158,6 +159,7 @@ die('Order is not valid, contact with IT help desk!');
               $get_conneting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}", true );
               $get_special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}", true );
               $get_order_type = get_post_meta( $orderId, "_comp_order_type_{$productID}", true );
+              
             } else {
               $get_company_name = '';
               $get_company_url = '';
@@ -186,7 +188,7 @@ die('Order is not valid, contact with IT help desk!');
             <div class="alert alert-success alert-success-<?php echo $productID; ?>" style="display: none;">
             <strong>Success!</strong> Indicates a successful or positive action.
           </div>
-          <?php if(!empty($get_order_type) && $get_order_type == 'complete') { ?>
+          <?php if(!empty($get_order_type) && $get_order_type == 'complete') { $fill++; ?>
           <div class="form-wrap area">
             <div class="alert alert-success alert-success-<?php echo $productID; ?>">
             <strong>Success!</strong> Complete this form.
@@ -330,7 +332,10 @@ die('Order is not valid, contact with IT help desk!');
           </div>
         <?php
             $inc++;
+            $tot++;
         }
+        $filupInDiv = (100/$tot);
+        $filupInPer = $filupInDiv*$fill;
         ?>
         </section>
 
@@ -341,7 +346,10 @@ die('Order is not valid, contact with IT help desk!');
     <link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ); ?>main.css" />
 </div> <!-- #main-content -->
 <script type="text/javascript">
-
+$(document).ready(function(){
+  $('.progress-lenght').html('<?php echo $filupInPer; ?>%');
+  $('.progressbar').css('width','<?php echo $filupInPer; ?>%');
+});
 $(document).on("click", ":submit", function(e){
       var order_type = $(this);
       var orderId = order_type.closest("form").attr('data-order-id');
@@ -382,6 +390,10 @@ $(document).on("click", ":submit", function(e){
             success: function(data){
               if(order_type.val() == 'complete'){
                 $("#"+formId).css("display", "none");
+                <?php $incFil = $fill+1; $filupInPer = $filupInDiv*$incFil; ?>
+                $('.progress-lenght').html('<?php echo $filupInPer; ?>%');
+                $('.progressbar').css('width','<?php echo $filupInPer; ?>%');
+
               }
               order_type.find(".fa-refresh").css("display", "none");
               $(".alert-success-"+orderId).html("<strong>Success!</strong> Successful "+order_type.val()+".").css("display", "block");
