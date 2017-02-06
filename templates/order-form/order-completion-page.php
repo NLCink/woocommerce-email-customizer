@@ -77,9 +77,9 @@ die('Order is not valid, contact with IT help desk!');
 
 
           <h4 class="order-no"><span>Order # 3322</span> - Branded Blog Post - 450 words &amp; Branded Blog post -1000 words</h4>
-          <h2 class="progress-title">Your Progress <span class="progress-lenght">45%</span></h2>
+          <h2 class="progress-title">Your Progress <span class="progress-lenght">0%</span></h2>
           <div class="progress-container">
-            <div class="progressbar" style="width:45%"></div>
+            <div class="progressbar" style="width:0%"></div>
           </div>
           <h3 class="order-form-titie">Please complete the forms(s) bellow to complete your order</h3>
 
@@ -172,7 +172,6 @@ die('Order is not valid, contact with IT help desk!');
               $get_order_type = '';
             }
              $get_product_id = $item['product_id'];
-             echo $get_product_id;
             ?>
 
           <div class="divider"></div>
