@@ -4,79 +4,17 @@ $orderId=(!empty($_GET['order_id']) ? $_GET['order_id'] : 0);
 $order = wc_get_order( $orderId );
 if(empty($order))
 die('Order is not valid, contact with IT help desk!');
+
+$get_order_number = get_post_meta( $orderId, "_order_number", true );
 ?>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="<?php echo plugin_dir_url( __FILE__ ); ?>js/jquery.validate.js"></script>
-<?php /*
-?>
-
-<header><h2><?php _e( 'Customer Details', 'woocommerce' ); ?></h2></header>
-
-<table class="shop_table customer_details">
-  <?php if ( $order->customer_note ) : ?>
-    <tr>
-      <th><?php _e( 'Note:', 'woocommerce' ); ?></th>
-      <td><?php echo wptexturize( $order->customer_note ); ?></td>
-    </tr>
-  <?php endif; ?>
-
-  <?php if ( $order->billing_email ) : ?>
-    <tr>
-      <th><?php _e( 'Email:', 'woocommerce' ); ?></th>
-      <td><?php echo esc_html( $order->billing_email ); ?></td>
-    </tr>
-  <?php endif; ?>
-
-  <?php if ( $order->billing_phone ) : ?>
-    <tr>
-      <th><?php _e( 'Telephone:', 'woocommerce' ); ?></th>
-      <td><?php echo esc_html( $order->billing_phone ); ?></td>
-    </tr>
-  <?php endif; ?>
-
-  <?php do_action( 'woocommerce_order_details_after_customer_details', $order ); ?>
-</table>
-
-<?php if ( ! wc_ship_to_billing_address_only() && $order->needs_shipping_address() ) : ?>
-
-<div class="col2-set addresses">
-  <div class="col-1">
-
-<?php endif; ?>
-
-<header class="title">
-  <h3><?php _e( 'Billing Address', 'woocommerce' ); ?></h3>
-</header>
-<address>
-  <?php echo ( $address = $order->get_formatted_billing_address() ) ? $address : __( 'N/A', 'woocommerce' ); ?>
-</address>
-
-<?php if ( ! wc_ship_to_billing_address_only() && $order->needs_shipping_address() ) : ?>
-
-  </div><!-- /.col-1 -->
-  <div class="col-2">
-    <header class="title">
-      <h3><?php _e( 'Shipping Address', 'woocommerce' ); ?></h3>
-    </header>
-    <address>
-      <?php echo ( $address = $order->get_formatted_shipping_address() ) ? $address : __( 'N/A', 'woocommerce' ); ?>
-    </address>
-  </div><!-- /.col-2 -->
-</div><!-- /.col2-set -->
-
-<?php endif; */ ?>
-
-<?php //do_action( 'woocommerce_thankyou', 24991 ); ?>
 <div id="main-content">
 
 <div class="wraper clearfix">
       <div class="container">
         <section class="order-section area">
-
-        
-
-
-          <h4 class="order-no"><span>Order # 3322</span> - Branded Blog Post - 450 words &amp; Branded Blog post -1000 words</h4>
+          <h4 class="order-no"><span>Order # <?php echo $get_order_number; ?></span> - <font class="allProductDes"></font></h4>
           <h2 class="progress-title">Your Progress <span class="progress-lenght">45%</span></h2>
           <div class="progress-container">
             <div class="progressbar" style="width:45%"></div>
@@ -88,14 +26,10 @@ die('Order is not valid, contact with IT help desk!');
             $inc=1;
             $tot=0;
             $fill=0;
-            foreach( $order->get_items() as $item_id => $item ) {
-
-            
+            foreach( $order->get_items() as $item_id => $item ) {            
               //echo $order->display_item_meta( $item );
             //echo $order->get_formatted_line_subtotal( $item );
-
             //print_r($item['item_meta_array']);
-
             $formatted_meta = array();
             $hideprefix = '_';
             if ( ! empty( $item['item_meta_array'] ) ) {
@@ -103,7 +37,6 @@ die('Order is not valid, contact with IT help desk!');
                 if ( "" === $meta->value || is_serialized( $meta->value ) || ( ! empty( $hideprefix ) && substr( $meta->key, 0, 1 ) === $hideprefix ) ) {
                   continue;
                 }
-
                 $attribute_key = urldecode( str_replace( 'attribute_', '', $meta->key ) );
                 $meta_value    = $meta->value;
 
@@ -114,7 +47,7 @@ die('Order is not valid, contact with IT help desk!');
                   if ( ! is_wp_error( $term ) && is_object( $term ) && $term->name ) {
                     $meta_value = $term->name;
                   }
-                }
+                }               
 
                 if ( ! empty( $item['variation_id'] ) && 'product_variation' === get_post_type( $item['variation_id'] ) ) {
                 $_product = wc_get_product( $item['variation_id'] );
@@ -172,14 +105,19 @@ die('Order is not valid, contact with IT help desk!');
               $get_order_type = '';
             }
              $get_product_id = $item['product_id'];
-             echo $get_product_id;
+
+             $productName = apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
+
+             $allProductDes[] = $productName.' - '.$output_attribute;
+
             ?>
 
           <div class="divider"></div>
 
           <h3 class="form-name">Form <?php echo $inc; ?></h3>
           <div class="word-wrap">
-            <h3 class="word-count">Product: <?php echo apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
+            <h3 class="word-count">Product: <?php 
+              echo $productName;
               echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times; %s', $item['qty'] ) . '</strong>', $item );
               echo ' - ';
               echo $output_attribute; ?></h3>
@@ -337,6 +275,7 @@ die('Order is not valid, contact with IT help desk!');
         }
         $filupInDiv = (100/$tot);
         $filupInPer = $filupInDiv*$fill;
+        $allProductD = implode( ' & ', $allProductDes );
         ?>
         </section>
 
@@ -350,6 +289,7 @@ die('Order is not valid, contact with IT help desk!');
 $(document).ready(function(){
   $('.progress-lenght').html('<?php echo $filupInPer; ?>%');
   $('.progressbar').css('width','<?php echo $filupInPer; ?>%');
+  $('.allProductDes').html('<?php echo $allProductD; ?>');
 });
 $(document).on("click", ":submit", function(e){
       var order_type = $(this);
