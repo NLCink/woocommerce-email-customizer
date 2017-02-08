@@ -1,3 +1,23 @@
+<?php 
+  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}", true );
+  if(!empty($get_order_id)){
+    $company_name = get_post_meta( $orderId, "_comp_company_name_{$productID}", true );
+    $current_website = get_post_meta( $orderId, "_comp_current_website_{$productID}", true );
+    $url_needing_rewritten = get_post_meta( $orderId, "_comp_url_needing_rewritten_{$productID}", true );
+    $page_name = get_post_meta( $orderId, "_comp_page_name_{$productID}", true );
+    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}", true );
+    $connecting_words = get_post_meta( $orderId, "_comp_connecting_words_{$productID}", true );
+    $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}", true );
+  } else {
+    $company_name = '';
+    $current_website = '';
+    $url_needing_rewritten = '';
+    $page_name = '';
+    $keywords = '';
+    $connecting_words = '';
+    $special_instructions = '';
+  }
+?>
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Full Company Name</h5>
@@ -9,7 +29,7 @@
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="" value="" type="text">
+    <input class="order-form-inputs" name="company_name" value="<?php echo $company_name; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -23,7 +43,7 @@
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="" value="" type="text">
+    <input class="order-form-inputs" name="current_website" value="<?php echo $current_website; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -38,7 +58,7 @@
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="" value="" type="text">
+    <input class="order-form-inputs" name="url_needing_rewritten" value="<?php echo $url_needing_rewritten; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -53,7 +73,7 @@
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="" value="" type="text">
+    <input class="order-form-inputs" name="page_name" value="<?php echo $page_name; ?>" type="text">
     <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
   </div>
 </div>
@@ -69,7 +89,7 @@ air conditioners in SLC, AC repair in SLC</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="" value="" type="text">
+    <input class="order-form-inputs" name="keywords" value="<?php echo $keywords; ?>" type="text">
     <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
   </div>
 </div>
@@ -84,7 +104,7 @@ air conditioners in SLC, AC repair in SLC</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="" value="" type="text">
+    <input class="order-form-inputs" name="connecting_words" value="<?php echo $connecting_words; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -101,6 +121,6 @@ Make sure to include a bulleted list of the AC Units that we carry somewhere on 
     </div>
   </div>
   <div class="order-form-right">
-    <textarea class="order-form-inputs" name="name" rows="8" cols="80" placeholder="Insert general guidelines for this branded blog post"></textarea>
+    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Insert general guidelines for this branded blog post"><?php echo $special_instructions; ?></textarea>
   </div>
 </div>

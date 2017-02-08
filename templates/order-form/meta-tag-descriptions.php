@@ -1,3 +1,17 @@
+<?php 
+  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}", true );
+  if(!empty($get_order_id)){
+    $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}", true );
+    $primary_keyword = get_post_meta( $orderId, "_comp_primary_keyword_{$productID}", true );
+    $secondary_keyword = get_post_meta( $orderId, "_comp_secondary_keyword_{$productID}", true );
+    $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}", true );    
+  } else {
+    $reference_url = '';
+    $primary_keyword = '';
+    $secondary_keyword = '';
+    $special_instructions = '';
+  }
+?>
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Reference URL</h5>
@@ -10,7 +24,7 @@
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="" value="" type="text">
+    <input class="order-form-inputs" name="reference_url" value="<?php echo $reference_url; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -25,7 +39,7 @@ diamond wedding ring</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="" value="" type="text">
+    <input class="order-form-inputs" name="primary_keyword" value="<?php echo $primary_keyword; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -40,7 +54,7 @@ diamond wedding ring</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="" value="" type="text">
+    <input class="order-form-inputs" name="secondary_keyword" value="<?php echo $secondary_keyword; ?>" type="text">
     <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
   </div>
 </div>
@@ -57,6 +71,6 @@ diamond wedding ring</p>
     </div>
   </div>
   <div class="order-form-right">
-    <textarea class="order-form-inputs" name="name" rows="8" cols="80" placeholder="Meta Description Special Instructions"></textarea>
+    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Meta Description Special Instructions"><?php echo $special_instructions; ?></textarea>
   </div>
 </div>
