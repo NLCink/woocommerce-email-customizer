@@ -3,32 +3,15 @@
   if(!empty($get_order_id)){
     $social_media_type = get_post_meta( $orderId, "_comp_social_media_type_{$productID}", true );
     $web_url = get_post_meta( $orderId, "_comp_web_url_{$productID}", true );   
-
-    $city_state = get_post_meta( $orderId, "_comp_city_state_{$productID}", true );
-    $day_month_year = get_post_meta( $orderId, "_comp_day_month_year_{$productID}", true );
-    $physical_address = get_post_meta( $orderId, "_comp_physical_address_{$productID}", true );
-    $time_day = get_post_meta( $orderId, "_comp_time_day_{$productID}", true );
-    $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}", true );
-    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}", true );
-    $connecting_words = get_post_meta( $orderId, "_comp_connecting_words_{$productID}", true );
-    $relevant_quotes = get_post_meta( $orderId, "_comp_relevant_quotes_{$productID}", true );
-    $boilerplate = get_post_meta( $orderId, "_comp_boilerplate_{$productID}", true );    
-    $news = get_post_meta( $orderId, "_comp_news_{$productID}", true );
+    $subject = get_post_meta( $orderId, "_comp_subject_{$productID}", true );
+    $hashtags = get_post_meta( $orderId, "_comp_hashtags_{$productID}", true );
+    $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}", true );
   } else {
     $social_media_type = '';
     $web_url = '';
-
-    $current_website = '';
-    $city_state = '';
-    $day_month_year = '';
-    $physical_address = '';
-    $time_day = '';
-    $reference_url = '';
-    $keywords = '';
-    $connecting_words = '';
-    $relevant_quotes = '';
-    $boilerplate = '';
-    $news = '';
+    $subject = '';
+    $hashtags = '';
+    $special_instructions = '';
   }
 ?>
 <div class="order-form-full">
@@ -73,7 +56,7 @@ Movies</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="" value="" type="text">
+    <input class="order-form-inputs" name="subject" value="<?php echo $subject; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -88,7 +71,7 @@ Movies</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="" value="" type="text">
+    <input class="order-form-inputs" name="hashtags" value="<?php echo $hashtags; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -103,6 +86,6 @@ Movies</p>
     </div>
   </div>
   <div class="order-form-right">
-    <textarea class="order-form-inputs" name="name" rows="8" cols="80" placeholder="Meta Description Special Instructions"></textarea>
+    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Meta Description Special Instructions"><?php echo $special_instructions; ?></textarea>
   </div>
 </div>
