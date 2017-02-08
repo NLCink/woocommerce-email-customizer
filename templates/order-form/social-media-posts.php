@@ -1,3 +1,36 @@
+<?php 
+  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}", true );
+  if(!empty($get_order_id)){
+    $social_media_type = get_post_meta( $orderId, "_comp_social_media_type_{$productID}", true );
+    $web_url = get_post_meta( $orderId, "_comp_web_url_{$productID}", true );   
+
+    $city_state = get_post_meta( $orderId, "_comp_city_state_{$productID}", true );
+    $day_month_year = get_post_meta( $orderId, "_comp_day_month_year_{$productID}", true );
+    $physical_address = get_post_meta( $orderId, "_comp_physical_address_{$productID}", true );
+    $time_day = get_post_meta( $orderId, "_comp_time_day_{$productID}", true );
+    $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}", true );
+    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}", true );
+    $connecting_words = get_post_meta( $orderId, "_comp_connecting_words_{$productID}", true );
+    $relevant_quotes = get_post_meta( $orderId, "_comp_relevant_quotes_{$productID}", true );
+    $boilerplate = get_post_meta( $orderId, "_comp_boilerplate_{$productID}", true );    
+    $news = get_post_meta( $orderId, "_comp_news_{$productID}", true );
+  } else {
+    $social_media_type = '';
+    $web_url = '';
+
+    $current_website = '';
+    $city_state = '';
+    $day_month_year = '';
+    $physical_address = '';
+    $time_day = '';
+    $reference_url = '';
+    $keywords = '';
+    $connecting_words = '';
+    $relevant_quotes = '';
+    $boilerplate = '';
+    $news = '';
+  }
+?>
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Social Media Type</h5>
@@ -10,7 +43,7 @@ Twitter</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="" value="" type="text">
+    <input class="order-form-inputs" name="social_media_type" value="<?php echo $social_media_type; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -25,7 +58,7 @@ http://example.com</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="" value="" type="text">
+    <input class="order-form-inputs" name="web_url" value="<?php echo $web_url; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
