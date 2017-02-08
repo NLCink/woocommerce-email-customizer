@@ -1,3 +1,25 @@
+<?php 
+  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}", true );
+  if(!empty($get_order_id)){
+    $get_company_name = get_post_meta( $orderId, "_comp_company_name_{$productID}", true );
+    $get_company_url = get_post_meta( $orderId, "_comp_company_url_{$productID}", true );
+    $get_blog_topic = get_post_meta( $orderId, "_comp_blog_topic_{$productID}", true );
+    $get_blog_url = get_post_meta( $orderId, "_comp_blog_url_{$productID}", true );
+    $get_reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}", true );
+    $get_keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}", true );
+    $get_conneting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}", true );
+    $get_special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}", true );    
+  } else {
+    $get_company_name = '';
+    $get_company_url = '';
+    $get_blog_topic = '';
+    $get_blog_url = '';
+    $get_reference_url = '';
+    $get_keywords = '';
+    $get_conneting_words = '';
+    $get_special_instructions = '';
+  }
+?>
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Full Company Name</h5>

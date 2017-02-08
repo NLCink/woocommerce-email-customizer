@@ -83,27 +83,11 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
 
             $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}", true );
             if(!empty($get_order_id)){
-              $get_company_name = get_post_meta( $orderId, "_comp_company_name_{$productID}", true );
-              $get_company_url = get_post_meta( $orderId, "_comp_company_url_{$productID}", true );
-              $get_blog_topic = get_post_meta( $orderId, "_comp_blog_topic_{$productID}", true );
-              $get_blog_url = get_post_meta( $orderId, "_comp_blog_url_{$productID}", true );
-              $get_reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}", true );
-              $get_keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}", true );
-              $get_conneting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}", true );
-              $get_special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}", true );
-              $get_order_type = get_post_meta( $orderId, "_comp_order_type_{$productID}", true );
-              
+              $get_order_type = get_post_meta( $orderId, "_comp_order_type_{$productID}", true );              
             } else {
-              $get_company_name = '';
-              $get_company_url = '';
-              $get_blog_topic = '';
-              $get_blog_url = '';
-              $get_reference_url = '';
-              $get_keywords = '';
-              $get_conneting_words = '';
-              $get_special_instructions = '';
               $get_order_type = '';
             }
+
              $get_product_id = $item['product_id'];
              $post_product = get_post($get_product_id); 
              $slug_product = $post_product->post_name;
@@ -136,6 +120,8 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
           <?php } else { ?>
             <form class="order-form area orderForm-<?php echo $productID; ?>" id="orderForm-<?php echo $productID; ?>" data-order-id="<?php echo $productID; ?>" action="#" method="post">
             <input type="hidden" name="product_id" value="<?php echo $productID; ?>">
+            <input type="hidden" name="action" value="orderCompletion">
+            <input type="hidden" name="order_id" value="<?php echo $orderId; ?>">
               <?php 
               if($slug_product == 'branded-blog-posts'){
                 include('branded-blog-posts.php'); 
@@ -158,7 +144,7 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
               } else if($slug_product == 'web-pages'){
                 include('web-pages.php');
               } else {
-                echo 'This product is invalide for this order complition form! Please contact with it help desk.'
+                echo 'This product is invalide for this order complition form! Please contact with it help desk.';
               }
               
 
@@ -209,27 +195,18 @@ $(document).on("click", ":submit", function(e){
       var orderId = order_type.closest("form").attr('data-order-id');
       var formId = order_type.closest("form").attr('id');
       order_type.find(".fa-refresh").css("display", "inline-block");
-      var company_name = $('#'+formId).find("input[name=company_name]");
+      var product_id = $('#'+formId).find("input[name=product_id]");
+
+      /*var company_name = $('#'+formId).find("input[name=company_name]");
       var company_url = $('#'+formId).find("input[name=company_url]");
       var blog_topic = $('#'+formId).find("input[name=blog_topic]");
       var blog_url = $('#'+formId).find("input[name=blog_url]");
       var reference_url = $('#'+formId).find("input[name=reference_url]");
       var keywords = $('#'+formId).find("input[name=keywords]");
       var conneting_words = $('#'+formId).find("input[name=conneting_words]");
-      var product_id = $('#'+formId).find("input[name=product_id]");
       var special_instructions = $('#'+formId).find("textarea[name=special_instructions]");
-      if (company_name.val()==""|| company_url.val()=="" || blog_topic.val()=="" 
-        || blog_url.val()=="" || reference_url.val()=="" || keywords.val()=="" 
-        || conneting_words.val()=="" || special_instructions.val()==""){
-        alert('required field must be fill up!');
-        order_type.find(".fa-refresh").css("display", "none");
-      } else {
-        $.ajax({
-            type: 'POST',
-            url: '<?php echo admin_url('admin-ajax.php'); ?>',
-            data: {
-            action: 'orderCompletion',
-            order_id:'<?php echo $orderId; ?>',
+
+      product_id:product_id.val(),
             company_name:company_name.val(),
             company_url:company_url.val(),
             blog_topic:blog_topic.val(),
@@ -238,9 +215,26 @@ $(document).on("click", ":submit", function(e){
             keywords:keywords.val(),
             conneting_words:conneting_words.val(),
             special_instructions:special_instructions.val(),
-            order_type:order_type.val(),
-            product_id:product_id.val()
-            },
+            order_type:order_type.val()
+      */
+
+       var allFormField = $('#'+formId).find('input, textarea, select');
+       var values = {};
+      allFormField.each(function() {
+          values[this.name] = $(this).val();
+      });
+      values['order_type'] = order_type.val();
+       //console.log(values);
+       //return false;
+      
+      if (values.length === 0){
+        alert('required field must be fill up!');
+        order_type.find(".fa-refresh").css("display", "none");
+      } else {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo admin_url('admin-ajax.php'); ?>',
+            data: values,
             success: function(data){
               if(order_type.val() == 'complete'){
                 $("#"+formId).css("display", "none");
