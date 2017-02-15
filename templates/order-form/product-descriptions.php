@@ -6,7 +6,7 @@
     $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}", true );
     $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}", true );
   } else {
-    $product_name = ''
+    $product_name = '';
     $reference_url = '';
     $keywords = '';
     $special_instructions = '';
