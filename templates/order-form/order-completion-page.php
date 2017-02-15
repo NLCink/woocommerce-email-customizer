@@ -163,7 +163,7 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
             <?php } ?>
             <script type="text/javascript">
               $(document).ready(function(){
-                $(".orderForm-<?php echo $productID; ?>").validate();
+                $("#orderForm-<?php echo $productID; ?>").validate();
               });
             </script>
 
@@ -186,74 +186,79 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
 </div> <!-- #main-content -->
 <script type="text/javascript">
 $(document).ready(function(){
+  $('.order-form').find('input, textarea, select').addClass('required');
+
   $('.progress-lenght').html('<?php echo round($filupInPer,2); ?>%');
   $('.progressbar').css('width','<?php echo round($filupInPer,2); ?>%');
   $('.allProductDes').html('<?php echo $allProductD; ?>');
 });
-$(document).on("click", ":submit", function(e){
-      var order_type = $(this);
-      var orderId = order_type.closest("form").attr('data-order-id');
-      var formId = order_type.closest("form").attr('id');
-      order_type.find(".fa-refresh").css("display", "inline-block");
-      var product_id = $('#'+formId).find("input[name=product_id]");
+$(document).on("click", ":submit", function(e) {
+    var order_type = $(this);
+    var orderId = order_type.closest("form").attr('data-order-id');
+    var formId = order_type.closest("form").attr('id');
 
-      /*var company_name = $('#'+formId).find("input[name=company_name]");
-      var company_url = $('#'+formId).find("input[name=company_url]");
-      var blog_topic = $('#'+formId).find("input[name=blog_topic]");
-      var blog_url = $('#'+formId).find("input[name=blog_url]");
-      var reference_url = $('#'+formId).find("input[name=reference_url]");
-      var keywords = $('#'+formId).find("input[name=keywords]");
-      var conneting_words = $('#'+formId).find("input[name=conneting_words]");
-      var special_instructions = $('#'+formId).find("textarea[name=special_instructions]");
+    var formValid = $("#" + formId).valid();
+    if (formValid !== false){
+        order_type.find(".fa-refresh").css("display", "inline-block");
+        var product_id = $('#' + formId).find("input[name=product_id]");
 
-      product_id:product_id.val(),
-            company_name:company_name.val(),
-            company_url:company_url.val(),
-            blog_topic:blog_topic.val(),
-            blog_url:blog_url.val(),
-            reference_url:reference_url.val(),
-            keywords:keywords.val(),
-            conneting_words:conneting_words.val(),
-            special_instructions:special_instructions.val(),
-            order_type:order_type.val()
-      */
+        /*var company_name = $('#'+formId).find("input[name=company_name]");
+         var company_url = $('#'+formId).find("input[name=company_url]");
+         var blog_topic = $('#'+formId).find("input[name=blog_topic]");
+         var blog_url = $('#'+formId).find("input[name=blog_url]");
+         var reference_url = $('#'+formId).find("input[name=reference_url]");
+         var keywords = $('#'+formId).find("input[name=keywords]");
+         var conneting_words = $('#'+formId).find("input[name=conneting_words]");
+         var special_instructions = $('#'+formId).find("textarea[name=special_instructions]");
 
-       var allFormField = $('#'+formId).find('input, textarea, select');
-       var values = {};
-      allFormField.each(function() {
-          values[this.name] = $(this).val();
-      });
-      values['order_type'] = order_type.val();
-       //console.log(values);
-       //return false;
-      
-      if (values.length === 0){
-        alert('required field must be fill up!');
-        order_type.find(".fa-refresh").css("display", "none");
-      } else {
-        $.ajax({
-            type: 'POST',
-            url: '<?php echo admin_url('admin-ajax.php'); ?>',
-            data: values,
-            success: function(data){
-              if(order_type.val() == 'complete'){
-                $("#"+formId).css("display", "none");
-                <?php $incFil = $fill+1; $filupInPer = $filupInDiv*$incFil; ?>
-                $('.progress-lenght').html('<?php echo round($filupInPer,2); ?>%');
-                $('.progressbar').css('width','<?php echo round($filupInPer,2); ?>%');
+         product_id:product_id.val(),
+         company_name:company_name.val(),
+         company_url:company_url.val(),
+         blog_topic:blog_topic.val(),
+         blog_url:blog_url.val(),
+         reference_url:reference_url.val(),
+         keywords:keywords.val(),
+         conneting_words:conneting_words.val(),
+         special_instructions:special_instructions.val(),
+         order_type:order_type.val()
+         */
 
-              }
-              order_type.find(".fa-refresh").css("display", "none");
-              $(".alert-success-"+orderId).html("<strong>Success!</strong> Successful "+order_type.val()+".").css("display", "block");
-            },
-            error: function(errorThrown){
-              alert(errorThrown);
-            }
+        var allFormField = $('#' + formId).find('input, textarea, select');
+        var values = {};
+        allFormField.each(function () {
+            values[this.name] = $(this).val();
+        });
+        values['order_type'] = order_type.val();
+        //console.log(values);
+        //return false;
+
+        if (values.length === 0) {
+            alert('required field must be fill up!');
+            order_type.find(".fa-refresh").css("display", "none");
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                data: values,
+                success: function (data) {
+                    if (order_type.val() == 'complete') {
+                        $("#" + formId).css("display", "none");
+                        <?php $incFil = $fill + 1; $filupInPer = $filupInDiv * $incFil; ?>
+                        $('.progress-lenght').html('<?php echo round($filupInPer, 2); ?>%');
+                        $('.progressbar').css('width', '<?php echo round($filupInPer, 2); ?>%');
+
+                    }
+                    order_type.find(".fa-refresh").css("display", "none");
+                    $(".alert-success-" + orderId).html("<strong>Success!</strong> Successful " + order_type.val() + ".").css("display", "block");
+                },
+                error: function (errorThrown) {
+                    alert(errorThrown);
+                }
 
             });
-        return false;
-      }
-
+            return false;
+        }
+    }
 });
 </script>
 
