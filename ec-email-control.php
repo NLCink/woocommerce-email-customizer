@@ -97,7 +97,7 @@ class WC_Email_Control {
 	* Init behaves like, and replaces, construct
 	*/
 	public function init() {
-		
+		add_action('admin_menu', array( $this, 'register_order_forms_submenu_page' ));
 		// Translations
 		add_action( 'init', array( $this, 'load_translation' ) );
 		
@@ -112,6 +112,8 @@ class WC_Email_Control {
 		
 		// Add menu item
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+
+		
 		
 		// Ajax saving of options
 		add_action( 'wp_ajax_save_meta', array( $this, 'save_meta' ) );
@@ -133,6 +135,9 @@ class WC_Email_Control {
 		add_filter( 'wc_get_template', array( $this, 'ec_get_template' ), 10, 5 );
 
 		add_filter( 'page_template', array( $this, 'orderCompletionFormClb' ), 10, 5 );
+
+		//add_action( 'admin_init', array( $this, 'woocommerce_order_forms' ) );
+		
 		
 		//Email Customizer - Admin and Template pages only
 		if ( isset($_REQUEST["page"]) && $_REQUEST["page"] == $this->id ) {
@@ -180,7 +185,7 @@ class WC_Email_Control {
 		add_action( 'wp_ajax_nopriv_orderCompletion', array( $this, 'orderCompletion' ), 85);
 		add_action( 'wp_ajax_orderCompletion', array( $this, 'orderCompletion' ), 85 );
 
-		add_action( 'woocommerce_before_order_itemmeta', array( $this, 'so_32457241_before_order_itemmeta'), 10, 3 );
+		add_action( 'woocommerce_before_order_itemmeta', array( $this, 'order_completion_before_order_itemmeta'), 10, 3 );
 		
 		// Other simpler WooCommerce emails - Content.
 		// add_filter( 'woocommerce_email_content_low_stock', array( $this, 'woocommerce_simple_email_content' ), 10, 2 );
@@ -190,7 +195,7 @@ class WC_Email_Control {
 		// add_filter( 'woocommerce_email_headers', array( $this, 'woocommerce_simple_email_headers' ), 10, 2 );
 	}
 
-	public function so_32457241_before_order_itemmeta( $item_id, $item, $_product ){
+	public function order_completion_before_order_itemmeta( $item_id, $item, $_product ){
 		
 		if ( ! empty( $item['variation_id'] ) && 'product_variation' === get_post_type( $item['variation_id'] ) ) {
                 $_product = wc_get_product( $item['variation_id'] );
@@ -672,6 +677,10 @@ class WC_Email_Control {
 		
 		require_once( 'pages/ec-admin-page.php');
 	}
+
+	public function woocommerce_order_forms(){
+		require_once( 'pages/order-forms-page.php');
+	}
 	
 	/**
 	 * Render template page.
@@ -699,6 +708,22 @@ class WC_Email_Control {
 			'manage_woocommerce',
 			$this->id,
 			array( $this, 'ec_render_admin_page' )
+		);
+
+	}
+
+	public function register_order_forms_submenu_page(){
+		// add_submenu_page( 'woocommerce', 'Order Forms', 'Order Forms', 
+		// 	'manage_woocommerce', 'order-forms', 
+		// 	'woocommerce_order_forms' );
+
+		add_submenu_page(
+			'woocommerce',
+			__( 'Order Forms', 'order-forms' ),
+			__( 'Order Forms', 'order-forms' ),
+			'manage_woocommerce',
+			'woocommerce_order_forms',
+			array( $this, 'woocommerce_order_forms' )
 		);
 	}
 	
