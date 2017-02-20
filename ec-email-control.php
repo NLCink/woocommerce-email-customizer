@@ -103,6 +103,9 @@ class WC_Email_Control {
 		
 		// Register email templates.
 		add_action( 'init', array( $this, 'register_email_templates' ), 100 );
+
+		add_action( 'init', array( $this, 'register_forms_ready_order_status'));
+		add_filter( 'wc_order_statuses', array( $this, 'add_forms_ready_to_order_statuses'));
 		
 		// Enqueue Scripts/Styles - in head of admin page
 		add_action( 'admin_enqueue_scripts', array( $this, 'ec_head_scripts' ) );
@@ -193,6 +196,37 @@ class WC_Email_Control {
 		// add_filter( 'woocommerce_email_content_backorder', array( $this, 'woocommerce_simple_email_content' ), 10, 2 );
 		// Other simpler WooCommerce emails - Headers.
 		// add_filter( 'woocommerce_email_headers', array( $this, 'woocommerce_simple_email_headers' ), 10, 2 );
+	}
+
+
+	// Register new status
+	public function register_forms_ready_order_status() {
+	    register_post_status( 'wc-forms-ready', array(
+	        'label'                     => 'Forms Ready',
+	        'public'                    => true,
+	        'exclude_from_search'       => false,
+	        'show_in_admin_all_list'    => true,
+	        'show_in_admin_status_list' => true,
+	        'label_count'               => _n_noop( 'Forms Ready <span class="count">(%s)</span>', 'Forms Ready <span class="count">(%s)</span>' )
+	    ) );
+	}
+
+	// Add to list of WC Order statuses
+	public function add_forms_ready_to_order_statuses( $order_statuses ) {
+	  
+	    $new_order_statuses = array();
+	  
+	    // add new order status after processing
+	    foreach ( $order_statuses as $key => $status ) {
+	  
+	        $new_order_statuses[ $key ] = $status;
+	  
+	        if ( 'wc-processing' === $key ) {
+	            $new_order_statuses['wc-forms-ready'] = 'Forms Ready';
+	        }
+	    }
+	  
+	    return $new_order_statuses;
 	}
 
 	public function order_completion_before_order_itemmeta( $item_id, $item, $_product ){
