@@ -322,22 +322,40 @@ class WC_Email_Control {
         //echo $companyName;
         if($order_id):
         	foreach ($_POST as $key => $value) {
-        		if($key !='action')
-        		if ( ! add_post_meta( $order_id, "_comp_{$key}_{$product_id}", $value, true ) ) { 
-					update_post_meta( $order_id, "_comp_{$key}_{$product_id}", $value );
+        		if($key !='action' && $key !='total_forms' && $key !='total_complete_forms' && $key !='progressLength'){
+	        		if ( ! add_post_meta( $order_id, "_comp_{$key}_{$product_id}", $value, true ) ) { 
+						update_post_meta( $order_id, "_comp_{$key}_{$product_id}", $value );
+					}
 				}
         	}
+
+			$progressLength = $_POST['progressLength'];
+        	if ( ! add_post_meta( $order_id, "_comp_status_{$order_id}", $progressLength, true ) ) { 
+				update_post_meta( $order_id, "_comp_status_{$order_id}", $progressLength );
+			}
 			
-		 if($order_id){
+		 if($order_id){		 	
+		 	$order_type = $_POST['order_type'];
+		 	if($order_type == 'complete'){
+			 	$total_forms = $_POST['total_forms'];
+	        	$total_complete_forms = $_POST['total_complete_forms'];
+	        	if($total_complete_forms == $total_forms){
+	        		$order_post = array(
+					      'ID'           => $order_id,
+					      'post_status'   => 'wc-forms-ready'
+					  );
+					  wp_update_post( $order_post );
+	        	}
+	        }
 			 $results = array(
 				'success' => true,
-				'mess' => 'Email successfully sent.',
+				'mess' => 'Form successfully sent.',
 				'all_post'=>$_POST
 			 );
 		 } else {
 			 $results = array(
 				'success' => false,
-				'mess' => 'Email not send, there are some error to send email.'
+				'mess' => 'Form not send, there are some error to send email.'
 			 );
 		 }			
 		echo json_encode($results);

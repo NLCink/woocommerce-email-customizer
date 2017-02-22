@@ -58,6 +58,7 @@
 
 <fieldset>
 <legend><span> Forms Ready </span></legend>
+<div style="margin:-22px 0 10px"><a href="#" alt="Download Selected Forms">Download Selected Forms</a></div>
 <table id="formsReady" class="display" cellspacing="0" width="100%">
     <thead>
         <tr>
@@ -95,12 +96,15 @@
         ?>
 
         <tr>
-            <td><a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$order_number; ?></a></td>
+            <td>
+            <input type="checkbox" name="complete-form-<?php echo $orderId; ?>">
+            <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$order_number; ?></a>
+            </td>
             <td><?php echo $pfx_date; ?></td>
             <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
             <td><?php echo $billing_company_name; ?></td>
             <td>-</td>
-            <td><a style="text-decoration: none;" href="<?php echo home_url('/order-completion-form/?order_id='.$orderId); ?>" alt="Order Completion Form" target="_blank"><span class="dashicons dashicons-external"></span></a></td>
+            <td><a style="text-decoration: none;" href="<?php echo home_url('/order-completion-form/?order_id='.$orderId); ?>" alt="Order Completion Form" target="_blank"><span class="dashicons dashicons-download"></span></a></td>
         </tr>
         <?php         
         }
