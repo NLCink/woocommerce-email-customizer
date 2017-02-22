@@ -19,8 +19,12 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
           <div class="progress-container">
             <div class="progressbar" style="width:45%"></div>
           </div>
-          <h3 class="order-form-titie">Please complete the forms(s) bellow to complete your order</h3>
-
+          <?php 
+             $get_status = get_post_meta( $orderId, "_comp_status_{$orderId}", true );
+            if(!empty($get_status) && $get_status < 95){
+          ?>
+          <h3 class="order-form-titie formCompleteTitle">Please complete the forms(s) bellow to complete your order</h3>
+          <?php } ?>
 
             <?php
             $inc=1;
@@ -114,7 +118,7 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
           </div>
           <?php if(!empty($get_order_type) && $get_order_type == 'complete') { $fill++; ?>
           <div class="form-wrap area">
-            <div class="alert alert-success alert-success-<?php echo $productID; ?>">
+            <div class="alert alert-success alert-success-<?php echo $productID; ?> completeForms">
             <strong>Success!</strong> Complete this form.
           </div>
           <?php } else { ?>
@@ -229,6 +233,15 @@ $(document).on("click", ":submit", function(e) {
             values[this.name] = $(this).val();
         });
         values['order_type'] = order_type.val();
+        var totalForms = '<?php echo $tot; ?>';
+        values['total_forms'] = totalForms;
+        var completeForm = $('.completeForms').length + 1;
+        values['total_complete_forms'] = completeForm;
+
+        var filupInDiv = (100/totalForms);
+        var filupInPer = filupInDiv*completeForm;
+        var progressLength = Math.round(filupInPer);
+        values['progressLength'] = progressLength;
         //console.log(values);
         //return false;
 
@@ -243,13 +256,18 @@ $(document).on("click", ":submit", function(e) {
                 success: function (data) {
                     if (order_type.val() == 'complete') {
                         $("#" + formId).css("display", "none");
-                        <?php $incFil = $fill + 1; $filupInPer = $filupInDiv * $incFil; ?>
-                        $('.progress-lenght').html('<?php echo round($filupInPer, 2); ?>%');
-                        $('.progressbar').css('width', '<?php echo round($filupInPer, 2); ?>%');
+                        
+                        $('.progress-lenght').html(progressLength+'%');
+                        $('.progressbar').css('width', progressLength+'%');
 
                     }
                     order_type.find(".fa-refresh").css("display", "none");
-                    $(".alert-success-" + orderId).html("<strong>Success!</strong> Successful " + order_type.val() + ".").css("display", "block");
+                    $(".alert-success-" + orderId).html("<strong>Success!</strong> Successful " + order_type.val() + ".").css("display", "block").addClass('completeForms');
+
+                    if(progressLength > 95){
+                      $('.formCompleteTitle').css("display", "none");
+                    }
+
                 },
                 error: function (errorThrown) {
                     alert(errorThrown);
