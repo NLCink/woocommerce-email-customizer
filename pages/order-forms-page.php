@@ -5,7 +5,7 @@
 ?>
 <fieldset>
 <legend><span> Incomplete Forms </span></legend>
-<table id="incompleteForms" class="display" cellspacing="0" width="100%">
+<table id="incompleteForms" class="display order-completion-table" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>Order #</th>
@@ -58,8 +58,8 @@
 
 <fieldset>
 <legend><span> Forms Ready </span></legend>
-<div style="margin:-22px 0 10px"><a href="#" alt="Download Selected Forms">Download Selected Forms</a></div>
-<table id="formsReady" class="display" cellspacing="0" width="100%">
+<div style="margin:-22px 0 10px"><a href="javascript:void(0)" onclick="exportSelected()" alt="Download Selected Forms">Download Selected Forms</a></div>
+<table id="formsReady" class="display order-completion-table" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>Order #</th>
@@ -97,14 +97,14 @@
 
         <tr>
             <td>
-            <input type="checkbox" name="complete-form-<?php echo $orderId; ?>">
+            <input type="checkbox" name="readyForms[]" value="<?php echo $orderId; ?>">
             <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$order_number; ?></a>
             </td>
             <td><?php echo $pfx_date; ?></td>
             <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
             <td><?php echo $billing_company_name; ?></td>
             <td>-</td>
-            <td><a style="text-decoration: none;" href="<?php echo home_url('/order-completion-form/?order_id='.$orderId); ?>" alt="Order Completion Form" target="_blank"><span class="dashicons dashicons-download"></span></a></td>
+            <td><a style="text-decoration: none;" href="<?php echo admin_url( 'admin.php?page=woocommerce_order_forms&export='.$orderId ); ?>" alt="Order Completion Form"><span class="dashicons dashicons-download"></span></a></td>
         </tr>
         <?php         
         }
@@ -115,7 +115,7 @@
 
 <fieldset>
 <legend><span> In Writing </span></legend>
-<table id="inWriting" class="display" cellspacing="0" width="100%">
+<table id="inWriting" class="display order-completion-table" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>Order #</th>
@@ -166,7 +166,7 @@
 
 <fieldset>
 <legend><span> Delivered </span></legend>
-<table id="delivered" class="display" cellspacing="0" width="100%">
+<table id="delivered" class="display order-completion-table" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>Order #</th>
@@ -233,6 +233,31 @@
         font-weight: bold;
     }
 
+    .order-completion-table.dataTable > thead > tr {
+        background-color: #C5E3F0;
+        color: #333;
+    }
+
+    .order-completion-table.dataTable > thead > tr > th {
+        text-align: left;
+        padding-left: 11px;
+        border-top: 1px solid #333;
+    }    
+
+    .order-completion-table.dataTable > tbody > tr:nth-of-type(odd) {
+        background-color: #eee;
+    }
+
+    .order-completion-table > tbody > tr > td, .table-striped > tbody > tr > th {
+        padding: 1px 5px;
+        border: 1px dotted #ddd;
+        text-align: left;
+    }
+
+    .order-completion-table{
+
+    }
+
 </style>
 
 <link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ); ?>../assets/css/jquery.dataTables.min.css" />
@@ -240,6 +265,22 @@
 <script src="<?php echo plugin_dir_url( __FILE__ ); ?>../assets/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
+
+    function exportSelected() {
+        var checkedboxesCount = document.querySelectorAll('input[name="readyForms[]"]:checked').length;
+        if(checkedboxesCount < 1){
+            alert('Select checkbox for further action!');
+        } else {
+            var checkboxesaa = document.querySelectorAll('input[name="readyForms[]"]:checked');
+            var getSelected = [];
+            for(var i=0, n=checkboxesaa.length;i<n;i++) {           
+                getSelected.push(checkboxesaa[i].value);        
+            }
+            console.log(getSelected);
+            window.open("<?php echo admin_url( 'admin.php?page=woocommerce_order_forms&multiple=1&export='); ?>"+getSelected,'_blank');
+        }
+       return false;
+    }
 	$(document).ready(function(){
 	    $('#incompleteForms, #formsReady, #inWriting, #delivered').DataTable({
 	        "order": [[ 1, "desc" ]]

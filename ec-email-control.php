@@ -100,6 +100,8 @@ class WC_Email_Control {
 		add_action('admin_menu', array( $this, 'register_order_forms_submenu_page' ));
 		// Translations
 		add_action( 'init', array( $this, 'load_translation' ) );
+
+		add_action( 'init', array( $this, 'initialize_page_create' ) );
 		
 		// Register email templates.
 		add_action( 'init', array( $this, 'register_email_templates' ), 100 );
@@ -188,7 +190,7 @@ class WC_Email_Control {
 		add_action( 'wp_ajax_nopriv_orderCompletion', array( $this, 'orderCompletion' ), 85);
 		add_action( 'wp_ajax_orderCompletion', array( $this, 'orderCompletion' ), 85 );
 
-		add_action( 'woocommerce_before_order_itemmeta', array( $this, 'order_completion_before_order_itemmeta'), 10, 3 );
+		// add_action( 'woocommerce_before_order_itemmeta', array( $this, 'order_completion_before_order_itemmeta'), 10, 3 );
 		
 		// Other simpler WooCommerce emails - Content.
 		// add_filter( 'woocommerce_email_content_low_stock', array( $this, 'woocommerce_simple_email_content' ), 10, 2 );
@@ -389,6 +391,41 @@ class WC_Email_Control {
 		
 		// Look for languages here: wp-content/plugins/pluginname/languages/pluginname-en_US.mo
 		load_plugin_textdomain( $domain, FALSE, dirname( plugin_basename( __FILE__ ) ) . "/languages/" );
+	}
+	
+
+	public static function initialize_page_create(){
+		// Initialize the post ID to -1. This indicates no action has been taken.
+		$post_id = -1;
+
+		// Setup the author, slug, and title for the post
+		$author_id = 1;
+		$slug = 'order-completion-form';
+		$title = 'Order Completion Form';
+
+		// If the page doesn't already exist, then create it
+		if( null == get_page_by_title( $title ) ) {
+
+			// Set the page ID so that we know the page was created successfully
+			$post_id = wp_insert_post(
+				array(
+					'comment_status'	=>	'closed',
+					'ping_status'		=>	'closed',
+					'post_author'		=>	$author_id,
+					'post_name'		=>	$slug,
+					'post_title'		=>	$title,
+					'post_status'		=>	'publish',
+					'post_type'		=>	'page'
+				)
+			);
+
+		// Otherwise, we'll stop and set a flag
+		} else {
+
+		    // Arbitrarily use -2 to indicate that the page with the title already exists
+		    $post_id = -2;
+
+		} // end if
 	}
 	
 	/**
@@ -732,6 +769,10 @@ class WC_Email_Control {
 
 	public function woocommerce_order_forms(){
 		require_once( 'pages/order-forms-page.php');
+
+		if(isset($_GET['export'])){
+			require_once( 'pages/forms-ready-export.php');			
+		}
 	}
 	
 	/**
