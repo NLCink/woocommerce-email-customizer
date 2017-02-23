@@ -773,6 +773,21 @@ class WC_Email_Control {
 		if(isset($_GET['export'])){
 			require_once( 'pages/forms-ready-export.php');			
 		}
+
+		if(isset($_GET['change_to']) && isset($_GET['change_for'])){
+			$postIds = explode(',', $_GET['change_for']);
+			foreach ($postIds as $key => $order_id) {
+				$order_post = array(
+			      'ID'           => $order_id,
+			      'post_status'   => $_GET['change_to']
+			  );
+			  wp_update_post( $order_post );	
+			} ?>
+			<script type="text/javascript">
+				window.location.href = "<?php echo admin_url( 'admin.php?page=woocommerce_order_forms'); ?>";
+			</script>
+					
+		<?php }
 	}
 	
 	/**
