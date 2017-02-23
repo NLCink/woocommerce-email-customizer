@@ -3,8 +3,19 @@
 //print_r($array);
 
 ?>
-<fieldset>
+<fieldset style="position: relative;">
 <legend><span> Incomplete Forms </span></legend>
+<div class="top tablePrivate">    
+    <div class="alignleft actions bulkactions">                                             
+        <select name="action" id="bulk-action-incompleteForms">
+            <option value="">Bulk Actions</option>
+            <option value="wc-forms-ready">Forms Ready</option>
+            <option value="wc-in-writing-queue">In Writing</option>
+            <option value="wc-delivered">Delivered</option>
+        </select>
+        <a class="button action" onClick="bulkAction('bulk-action-incompleteForms','incompleteForms')" value="Apply">Apply</a>
+    </div>
+</div>
 <table id="incompleteForms" class="display order-completion-table" cellspacing="0" width="100%">
     <thead>
         <tr>
@@ -42,7 +53,9 @@
         ?>
 
         <tr>
-            <td><a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$order_number; ?></a></td>
+            <td>
+            <input type="checkbox" name="readyForms[]" value="<?php echo $orderId; ?>">
+            <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$order_number; ?></a></td>
             <td><?php echo $pfx_date; ?></td>
             <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
             <td><?php echo $billing_company_name; ?></td>
@@ -56,9 +69,20 @@
 </table>
 </fieldset>
 
-<fieldset>
+<fieldset style="position: relative;">
 <legend><span> Forms Ready </span></legend>
 <div style="margin:-22px 0 10px"><a href="javascript:void(0)" onclick="exportSelected()" alt="Download Selected Forms">Download Selected Forms</a></div>
+<div class="top tablePrivate">    
+    <div class="alignleft actions bulkactions">                                             
+        <select name="action" id="bulk-action-formsReady">
+            <option value="">Bulk Actions</option>
+            <option value="wc-on-hold">Incomplete Forms</option>
+            <option value="wc-in-writing-queue">In Writing</option>
+            <option value="wc-delivered">Delivered</option>
+        </select>
+        <a class="button action" onClick="bulkAction('bulk-action-formsReady','formsReady')" value="Apply">Apply</a>
+    </div>
+</div>
 <table id="formsReady" class="display order-completion-table" cellspacing="0" width="100%">
     <thead>
         <tr>
@@ -113,8 +137,19 @@
 </table>
 </fieldset>
 
-<fieldset>
+<fieldset style="position: relative;">
 <legend><span> In Writing </span></legend>
+<div class="top tablePrivate">    
+    <div class="alignleft actions bulkactions">                                             
+        <select name="action" id="bulk-action-inWriting">
+            <option value="">Bulk Actions</option>
+            <option value="wc-on-hold">Incomplete Forms</option>
+            <option value="wc-forms-ready">Forms Ready</option>                        
+            <option value="wc-delivered">Delivered</option>
+        </select>
+        <a class="button action" onClick="bulkAction('bulk-action-inWriting','inWriting')" value="Apply">Apply</a>
+    </div>
+</div>
 <table id="inWriting" class="display order-completion-table" cellspacing="0" width="100%">
     <thead>
         <tr>
@@ -150,7 +185,9 @@
             ?>
 
             <tr>
-                <td><a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$order_number; ?></a></td>
+                <td>
+                <input type="checkbox" name="readyForms[]" value="<?php echo $orderId; ?>">
+                <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$order_number; ?></a></td>
                 <td><?php echo $pfx_date; ?></td>
                 <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
                 <td><?php echo $billing_company_name; ?></td>
@@ -164,8 +201,19 @@
 </table>
 </fieldset>
 
-<fieldset>
+<fieldset  style="position: relative;">
 <legend><span> Delivered </span></legend>
+<div class="top tablePrivate">    
+    <div class="alignleft actions bulkactions">                                             
+        <select name="action" id="bulk-action-delivered">
+            <option value="">Bulk Actions</option>
+            <option value="wc-forms-ready">Forms Ready</option>
+            <option value="wc-on-hold">Incomplete Forms</option>            
+            <option value="wc-in-writing-queue">In Writing</option>
+        </select>
+        <a class="button action" onClick="bulkAction('bulk-action-delivered','delivered')" value="Apply">Apply</a>
+    </div>
+</div>
 <table id="delivered" class="display order-completion-table" cellspacing="0" width="100%">
     <thead>
         <tr>
@@ -200,7 +248,9 @@
             $billing_company_name = get_post_meta( $orderId, "_billing_company", true );
             ?>
             <tr>
-                <td><a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$order_number; ?></a></td>
+                <td>
+                <input type="checkbox" name="readyForms[]" value="<?php echo $orderId; ?>">
+                <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$order_number; ?></a></td>
                 <td><?php echo $pfx_date; ?></td>
                 <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
                 <td><?php echo $billing_company_name; ?></td>
@@ -254,8 +304,15 @@
         text-align: left;
     }
 
-    .order-completion-table{
-
+    .tablePrivate{
+        vertical-align: middle;
+        position: absolute;
+        overflow: hidden;
+        left: 11%;
+        z-index: 1;
+    }
+    #list_length{
+        float:right;
     }
 
 </style>
@@ -267,20 +324,39 @@
 <script type="text/javascript">
 
     function exportSelected() {
-        var checkedboxesCount = document.querySelectorAll('input[name="readyForms[]"]:checked').length;
+        var checkedboxesCount = $("#formsReady input[name='readyForms[]']:checked").length;
         if(checkedboxesCount < 1){
             alert('Select checkbox for further action!');
         } else {
-            var checkboxesaa = document.querySelectorAll('input[name="readyForms[]"]:checked');
+            //var checkboxesaa = document.querySelectorAll('input[name="readyForms[]"]:checked');
+            var checkboxesaa = $("#formsReady input[name='readyForms[]']:checked");
             var getSelected = [];
             for(var i=0, n=checkboxesaa.length;i<n;i++) {           
                 getSelected.push(checkboxesaa[i].value);        
             }
-            console.log(getSelected);
             window.open("<?php echo admin_url( 'admin.php?page=woocommerce_order_forms&multiple=1&export='); ?>"+getSelected,'_blank');
         }
        return false;
     }
+
+    function bulkAction(selId,tableId){
+
+        var checkedboxesCount = $("#"+tableId+" input[name='readyForms[]']:checked").length;
+        if(checkedboxesCount < 1){
+            alert('Select checkbox for further action!');
+        } else {
+            var bulkActionSel = document.getElementById(selId).value;
+            var checkboxesaa = $("#"+tableId+" input[name='readyForms[]']:checked");
+            var getSelected = [];
+            for(var i=0, n=checkboxesaa.length;i<n;i++) {           
+                getSelected.push(checkboxesaa[i].value);        
+            }
+            window.location.href = "<?php echo admin_url( 'admin.php?page=woocommerce_order_forms&change_to='); ?>"+bulkActionSel+'&change_for='+getSelected;
+        }
+
+        return false;
+    }
+
 	$(document).ready(function(){
 	    $('#incompleteForms, #formsReady, #inWriting, #delivered').DataTable({
 	        "order": [[ 1, "desc" ]]
