@@ -1,0 +1,109 @@
+fieldset {
+    background: #ffffff;
+    border: none !important;
+    padding:60px 15px 15px !important;
+    margin-top: 30px;
+  }
+  fieldset legend {
+    position: relative;
+    bottom: -40px;
+  }
+  fieldset span {
+    font-size: 18px;
+  }
+  .dataTables_length {
+    margin-bottom: 20px;
+  }
+  .tablePrivate select,
+  .dataTables_wrapper select {
+    border-radius: 4px;
+  }
+  .tablePrivate .button.action {
+    color: #ffffff;
+    line-height: 22px;
+    background: #0073aa;
+    margin-top: 1px;
+    padding: 1px 20px 5px;
+    box-shadow: none;
+    border: none;
+    border-radius: 4px;
+    height: auto;
+  }
+  .dataTables_filter,
+  .dataTables_filter label {
+    width: 100%;
+    max-width: 500px;
+  }
+  .dataTables_filter input {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 4px;
+  }
+  .order-completion-table tbody .even {
+    background: #ebebeb !important;
+  }
+  .order-completion-table thead tr {
+    background: #c6e3f1;
+    border-radius: 4px !important;
+  }
+  .order-completion-table thead tr th {
+    border: none !important;
+    padding: 10px 15px !important;
+  }
+  .order-completion-table tbody tr {
+    background: none !important;
+  }
+  .order-completion-table tbody tr td {
+    background: none !important;
+    border: none !important;
+    border-bottom: 1px solid #e5e5e5 !important;
+    padding: 15px !important;
+  }
+  .order-completion-table tbody tr td a {
+    color: #016699;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .order-completion-table tbody tr td a .dashicons {
+    color: #ffffff;
+    background: #333333;
+    padding: 4px;
+    border-radius: 4px;
+  }
+  fieldset div > a {
+    color: #016699;
+    text-decoration: none;
+    margin-left: 15px;
+  }
+  fieldset div > a .dashicons-download {
+    color: #ffffff;
+    background: #016699;
+    padding: 4px;
+    border-radius: 4px;
+    margin: -3px 5px 0 0;
+  }
+  .order-completion-table tbody tr td a .dashicons-download {
+    background: #016699;
+  }
+  #formsReady thead tr th {
+    border-top: 1px solid #0073aa !important;
+    border-bottom: 1px solid #0073aa !important;
+  }
+  #formsReady thead tr th:first-child {
+    border-left: 1px solid #0073aa !important;
+  }
+  #formsReady thead tr th:last-child {
+    border-right: 1px solid #0073aa !important;
+  }
+  #inWriting thead tr {
+    background: #959595 !important;
+  }
+  #inWriting thead tr th {
+    color: #ffffff;
+  }
+  #delivered thead tr {
+    background: #d7d7d7 !important;
+  }
+  .dataTables_paginate span a {
+    padding: 5px !important;
+  }

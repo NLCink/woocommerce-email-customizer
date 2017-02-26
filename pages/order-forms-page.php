@@ -319,6 +319,7 @@
 
 <link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ); ?>../assets/css/jquery.dataTables.min.css" />
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ); ?>order-forms-page.css" />
 <script src="<?php echo plugin_dir_url( __FILE__ ); ?>../assets/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
