@@ -71,7 +71,10 @@
 
 <fieldset style="position: relative;">
 <legend><span> Forms Ready </span></legend>
-<div style="margin:-22px 0 10px"><a href="javascript:void(0)" onclick="exportSelected()" alt="Download Selected Forms">Download Selected Forms</a></div>
+<div class="selectDownload">
+    <span class="dashicons dashicons-download"></span>
+    <a href="javascript:void(0)" onclick="exportSelected()" alt="Download Selected Forms">Download Selected Forms</a>
+</div>
 <div class="top tablePrivate">    
     <div class="alignleft actions bulkactions">                                             
         <select name="action" id="bulk-action-formsReady">
@@ -263,59 +266,6 @@
     </tbody>
 </table>
 </fieldset>
-
-<style type="text/css">
-    fieldset {
-        padding: 10px;
-        margin-bottom: 15px;
-        -moz-border-radius: 0;
-        -webkit-border-radius: 0;
-        border: 2px solid #AAA5A2;
-    }
-
-    legend {
-        display: block;
-        padding: 0;
-        margin-bottom: 20px;
-        font-size: 14px;
-        line-height: inherit;
-        color: #333;
-        font-weight: bold;
-    }
-
-    .order-completion-table.dataTable > thead > tr {
-        background-color: #C5E3F0;
-        color: #333;
-    }
-
-    .order-completion-table.dataTable > thead > tr > th {
-        text-align: left;
-        padding-left: 11px;
-        border-top: 1px solid #333;
-    }    
-
-    .order-completion-table.dataTable > tbody > tr:nth-of-type(odd) {
-        background-color: #eee;
-    }
-
-    .order-completion-table > tbody > tr > td, .table-striped > tbody > tr > th {
-        padding: 1px 5px;
-        border: 1px dotted #ddd;
-        text-align: left;
-    }
-
-    .tablePrivate{
-        vertical-align: middle;
-        position: absolute;
-        overflow: hidden;
-        left: 11%;
-        z-index: 1;
-    }
-    #list_length{
-        float:right;
-    }
-
-</style>
 
 <link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ); ?>../assets/css/jquery.dataTables.min.css" />
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>

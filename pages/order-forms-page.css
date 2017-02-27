@@ -1,3 +1,37 @@
+.order-completion-table.dataTable > thead > tr {
+    color: #333;
+}
+
+.order-completion-table.dataTable > thead > tr > th {
+    text-align: left;
+}    
+
+.order-completion-table.dataTable > tbody > tr:nth-of-type(odd) {
+    background-color: #eee;
+}
+
+.order-completion-table > tbody > tr > td, .table-striped > tbody > tr > th {
+    text-align: left;
+}
+.tablePrivate{
+    vertical-align: middle;
+    position: absolute;
+    overflow: hidden;
+    left: 11%;
+    z-index: 1;
+}
+#list_length{
+    float:right;
+}
+.selectDownload{
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+.selectDownload a{
+  margin-left: -3px;
+  font-size: 14px;
+}
+
 fieldset {
     background: #ffffff;
     border: none !important;
@@ -7,6 +41,13 @@ fieldset {
   fieldset legend {
     position: relative;
     bottom: -40px;
+
+    display: block;
+    padding: 0;
+    font-size: 14px;
+    line-height: inherit;
+    color: #333;
+    font-weight: bold;
   }
   fieldset span {
     font-size: 18px;
