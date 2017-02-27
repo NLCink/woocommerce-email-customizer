@@ -142,7 +142,7 @@
 
 <fieldset style="position: relative;">
 <legend><span> In Writing </span></legend>
-<div class="top tablePrivate">    
+<!-- <div class="top tablePrivate">    
     <div class="alignleft actions bulkactions">                                             
         <select name="action" id="bulk-action-inWriting">
             <option value="">Bulk Actions</option>
@@ -152,7 +152,7 @@
         </select>
         <a class="button action" onClick="bulkAction('bulk-action-inWriting','inWriting')" value="Apply">Apply</a>
     </div>
-</div>
+</div> -->
 <table id="inWriting" class="display order-completion-table" cellspacing="0" width="100%">
     <thead>
         <tr>
@@ -206,7 +206,7 @@
 
 <fieldset  style="position: relative;">
 <legend><span> Delivered </span></legend>
-<div class="top tablePrivate">    
+<!-- <div class="top tablePrivate">    
     <div class="alignleft actions bulkactions">                                             
         <select name="action" id="bulk-action-delivered">
             <option value="">Bulk Actions</option>
@@ -216,7 +216,7 @@
         </select>
         <a class="button action" onClick="bulkAction('bulk-action-delivered','delivered')" value="Apply">Apply</a>
     </div>
-</div>
+</div> -->
 <table id="delivered" class="display order-completion-table" cellspacing="0" width="100%">
     <thead>
         <tr>
