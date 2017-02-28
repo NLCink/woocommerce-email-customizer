@@ -154,7 +154,7 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
 
               ?>
               <div class="word-wrap">            
-                <button type="submit" onclick="" name="order_type" class="btn-order-fill" value="save">
+                <button type="submit" name="order_type" class="btn-order-fill" value="save">
                 <i class="fa fa-refresh fa-spin" aria-hidden="true" style="display: none;"></i>
                 Save
                 </button> 
@@ -200,8 +200,13 @@ $(document).on("click", ":submit", function(e) {
     var order_type = $(this);
     var orderId = order_type.closest("form").attr('data-order-id');
     var formId = order_type.closest("form").attr('id');
+    if(order_type.val() == 'complete'){
+      var formValid = $("#" + formId).valid();
+    } else {
+      var formValid = true;
+    }
+    
 
-    var formValid = $("#" + formId).valid();
     if (formValid !== false){
         order_type.find(".fa-refresh").css("display", "inline-block");
         var product_id = $('#' + formId).find("input[name=product_id]");
@@ -237,7 +242,6 @@ $(document).on("click", ":submit", function(e) {
         values['total_forms'] = totalForms;
         var completeForm = $('.completeForms').length + 1;
         values['total_complete_forms'] = completeForm;
-
         var filupInDiv = (100/totalForms);
         var filupInPer = filupInDiv*completeForm;
         var progressLength = Math.round(filupInPer);
@@ -262,7 +266,12 @@ $(document).on("click", ":submit", function(e) {
 
                     }
                     order_type.find(".fa-refresh").css("display", "none");
-                    $(".alert-success-" + orderId).html("<strong>Success!</strong> Successful " + order_type.val() + ".").css("display", "block").addClass('completeForms');
+                    if(order_type.val()=='save'){
+                      var success_class = 'saveForms';
+                    } else {
+                      var success_class = 'completeForms';
+                    }
+                    $(".alert-success-" + orderId).html("<strong>Success!</strong> Successful " + order_type.val() + ".").css("display", "block").addClass(success_class);
 
                     if(progressLength > 95){
                       $('.formCompleteTitle').css("display", "none");
