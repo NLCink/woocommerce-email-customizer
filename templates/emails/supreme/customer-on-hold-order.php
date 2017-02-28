@@ -21,7 +21,8 @@ do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 			</div>
 			<div class="top_paragraph">
 				<?php echo get_option( "ec_supreme_customer_on_hold_order_main_text" ); ?>
-				<a href="<?php echo home_url('/order-completion-form/?order_id='.$order->id); ?>" target="_blank" title="Order Completion" alt="Order Completion"><?php echo home_url('/order-completion-form/?order_id='.$order->id); ?></a>
+				<div class="link_meg" style="font-weight: bold;">Please click on the link below to complete your order...</div>
+				<a style="color:red;margin-bottom:20px;display: block;" href="<?php echo home_url('/order-completion-form/?order_id='.$order->id); ?>" target="_blank" title="Order Completion" alt="Order Completion"><?php echo home_url('/order-completion-form/?order_id='.$order->id); ?></a>
 			</div>
 			
 		</td>
@@ -46,7 +47,10 @@ do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, 
  * @hooked WC_Emails::email_address() Shows email address
  */
 do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email );
-
+?>
+<div class="link_meg" style="font-weight: bold;">Please click on the link below to complete your order...</div>
+<a style="color:red;margin-bottom:20px;display: block;" href="<?php echo home_url('/order-completion-form/?order_id='.$order->id); ?>" target="_blank" title="Order Completion" alt="Order Completion"><?php echo home_url('/order-completion-form/?order_id='.$order->id); ?></a>
+<?php
 /**
  * @hooked WC_Emails::email_footer() Output the email footer
  */

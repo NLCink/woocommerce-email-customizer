@@ -341,12 +341,13 @@ class WC_Email_Control {
 		 	if($order_type == 'complete'){
 			 	$total_forms = $_POST['total_forms'];
 	        	$total_complete_forms = $_POST['total_complete_forms'];
+	        	
 	        	if($total_complete_forms == $total_forms){
 	        		$order_post = array(
 					      'ID'           => $order_id,
 					      'post_status'   => 'wc-forms-ready'
 					  );
-					  wp_update_post( $order_post );
+					  wp_update_post( $order_post, true );
 	        	}
 	        }
 			 $results = array(

@@ -55,7 +55,7 @@
         <tr>
             <td>
             <input type="checkbox" name="readyForms[]" value="<?php echo $orderId; ?>">
-            <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$order_number; ?></a></td>
+            <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$orderId; ?></a></td>
             <td><?php echo $pfx_date; ?></td>
             <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
             <td><?php echo $billing_company_name; ?></td>
@@ -110,12 +110,13 @@
                           }
 
                           if ( ! empty( $meta_list ) ) {
-                            $output_attribute = $meta_list[0];//implode( $delimiter, $meta_list );
+                            $attributes = explode(' - ', $meta_list[0]);
+                            $output_attribute = $attributes[0];//implode( $delimiter, $meta_list );
                           }
                         } 
 
                         $productName = apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
-                        echo $productName.' - '.$output_attribute.'<br/>';
+                        echo '<strong>'.$productName.'</strong><br/>'.$output_attribute.'<br/>';
                     }
                 ?>
             </td>
@@ -184,7 +185,7 @@
         <tr>
             <td>
             <input type="checkbox" name="readyForms[]" value="<?php echo $orderId; ?>">
-            <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$order_number; ?></a>
+            <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$orderId; ?></a>
             </td>
             <td><?php echo $pfx_date; ?></td>
             <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
@@ -240,12 +241,13 @@
                           }
 
                           if ( ! empty( $meta_list ) ) {
-                            $output_attribute = $meta_list[0];//implode( $delimiter, $meta_list );
+                            $attributes = explode(' - ', $meta_list[0]);
+                            $output_attribute = $attributes[0];//implode( $delimiter, $meta_list );
                           }
                         } 
 
                         $productName = apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
-                        echo $productName.' - '.$output_attribute.'<br/>';
+                        echo '<strong>'.$productName.'</strong><br/>'.$output_attribute.'<br/>';
                     }
                 ?>
             </td>
@@ -307,7 +309,7 @@
             <tr>
                 <td>
                 <input type="checkbox" name="readyForms[]" value="<?php echo $orderId; ?>">
-                <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$order_number; ?></a></td>
+                <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$orderId; ?></a></td>
                 <td><?php echo $pfx_date; ?></td>
                 <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
                 <td><?php echo $billing_company_name; ?></td>
@@ -362,12 +364,13 @@
                           }
 
                           if ( ! empty( $meta_list ) ) {
-                            $output_attribute = $meta_list[0];//implode( $delimiter, $meta_list );
+                            $attributes = explode(' - ', $meta_list[0]);
+                            $output_attribute = $attributes[0];//implode( $delimiter, $meta_list );
                           }
                         } 
 
                         $productName = apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
-                        echo $productName.' - '.$output_attribute.'<br/>';
+                        echo '<strong>'.$productName.'</strong><br/>'.$output_attribute.'<br/>';
                     }
                 ?>
                 </td>
@@ -427,7 +430,7 @@
             <tr>
                 <td>
                 <input type="checkbox" name="readyForms[]" value="<?php echo $orderId; ?>">
-                <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$order_number; ?></a></td>
+                <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$orderId; ?></a></td>
                 <td><?php echo $pfx_date; ?></td>
                 <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
                 <td><?php echo $billing_company_name; ?></td>
@@ -482,12 +485,13 @@
                           }
 
                           if ( ! empty( $meta_list ) ) {
-                            $output_attribute = $meta_list[0];//implode( $delimiter, $meta_list );
+                            $attributes = explode(' - ', $meta_list[0]);
+                            $output_attribute = $attributes[0];//implode( $delimiter, $meta_list );
                           }
                         } 
 
                         $productName = apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
-                        echo $productName.' - '.$output_attribute.'<br/>';
+                        echo '<strong>'.$productName.'</strong><br/>'.$output_attribute.'<br/>';
                     }
                 ?>
                 </td>
