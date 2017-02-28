@@ -59,7 +59,66 @@
             <td><?php echo $pfx_date; ?></td>
             <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
             <td><?php echo $billing_company_name; ?></td>
-            <td>-</td>
+            <td>
+                <?php 
+                    foreach( $order->get_items() as $item_id => $item ) {
+                        $formatted_meta = array();
+                        $hideprefix = '_';
+                        if ( ! empty( $item['item_meta_array'] ) ) {
+                          foreach ( $item['item_meta_array'] as $meta_id => $meta ) {
+                            if ( "" === $meta->value || is_serialized( $meta->value ) || ( ! empty( $hideprefix ) && substr( $meta->key, 0, 1 ) === $hideprefix ) ) {
+                              continue;
+                            }
+                            $attribute_key = urldecode( str_replace( 'attribute_', '', $meta->key ) );
+                            $meta_value    = $meta->value;
+
+                            // If this is a term slug, get the term's nice name
+                            if ( taxonomy_exists( $attribute_key ) ) {
+                              $term = get_term_by( 'slug', $meta_value, $attribute_key );
+
+                              if ( ! is_wp_error( $term ) && is_object( $term ) && $term->name ) {
+                                $meta_value = $term->name;
+                              }
+                            }               
+
+                            if ( ! empty( $item['variation_id'] ) && 'product_variation' === get_post_type( $item['variation_id'] ) ) {
+                            $_product = wc_get_product( $item['variation_id'] );
+                            $productID = $item['variation_id'];
+                          } elseif ( ! empty( $item['product_id']  ) ) {
+                            $productID = $item['product_id'];
+                            $_product = wc_get_product( $item['product_id'] );
+                          } else {
+                            $productID = 0;
+                            $_product = false;
+                          }
+
+                            $formatted_meta[ $meta_id ] = array(
+                              'key'   => $meta->key,
+                              'label' => wc_attribute_label( $attribute_key, $_product ),
+                              'value' => apply_filters( 'woocommerce_order_item_display_meta_value', $meta_value ),
+                            );
+
+                          }
+                        }
+
+                        $delimiter = ", \n";
+                        if ( ! empty( $formatted_meta ) ) {
+                          $meta_list = array();
+
+                          foreach ( $formatted_meta as $meta ) {
+                              $meta_list[] = wp_kses_post( $meta['value'] );
+                          }
+
+                          if ( ! empty( $meta_list ) ) {
+                            $output_attribute = $meta_list[0];//implode( $delimiter, $meta_list );
+                          }
+                        } 
+
+                        $productName = apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
+                        echo $productName.' - '.$output_attribute.'<br/>';
+                    }
+                ?>
+            </td>
             <td><a style="text-decoration: none;" href="<?php echo home_url('/order-completion-form/?order_id='.$orderId); ?>" alt="Order Completion Form" target="_blank"><span class="dashicons dashicons-external"></span></a></td>
         </tr>
         <?php         
@@ -130,7 +189,66 @@
             <td><?php echo $pfx_date; ?></td>
             <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
             <td><?php echo $billing_company_name; ?></td>
-            <td>-</td>
+            <td>
+                <?php 
+                    foreach( $order->get_items() as $item_id => $item ) {
+                        $formatted_meta = array();
+                        $hideprefix = '_';
+                        if ( ! empty( $item['item_meta_array'] ) ) {
+                          foreach ( $item['item_meta_array'] as $meta_id => $meta ) {
+                            if ( "" === $meta->value || is_serialized( $meta->value ) || ( ! empty( $hideprefix ) && substr( $meta->key, 0, 1 ) === $hideprefix ) ) {
+                              continue;
+                            }
+                            $attribute_key = urldecode( str_replace( 'attribute_', '', $meta->key ) );
+                            $meta_value    = $meta->value;
+
+                            // If this is a term slug, get the term's nice name
+                            if ( taxonomy_exists( $attribute_key ) ) {
+                              $term = get_term_by( 'slug', $meta_value, $attribute_key );
+
+                              if ( ! is_wp_error( $term ) && is_object( $term ) && $term->name ) {
+                                $meta_value = $term->name;
+                              }
+                            }               
+
+                            if ( ! empty( $item['variation_id'] ) && 'product_variation' === get_post_type( $item['variation_id'] ) ) {
+                            $_product = wc_get_product( $item['variation_id'] );
+                            $productID = $item['variation_id'];
+                          } elseif ( ! empty( $item['product_id']  ) ) {
+                            $productID = $item['product_id'];
+                            $_product = wc_get_product( $item['product_id'] );
+                          } else {
+                            $productID = 0;
+                            $_product = false;
+                          }
+
+                            $formatted_meta[ $meta_id ] = array(
+                              'key'   => $meta->key,
+                              'label' => wc_attribute_label( $attribute_key, $_product ),
+                              'value' => apply_filters( 'woocommerce_order_item_display_meta_value', $meta_value ),
+                            );
+
+                          }
+                        }
+
+                        $delimiter = ", \n";
+                        if ( ! empty( $formatted_meta ) ) {
+                          $meta_list = array();
+
+                          foreach ( $formatted_meta as $meta ) {
+                              $meta_list[] = wp_kses_post( $meta['value'] );
+                          }
+
+                          if ( ! empty( $meta_list ) ) {
+                            $output_attribute = $meta_list[0];//implode( $delimiter, $meta_list );
+                          }
+                        } 
+
+                        $productName = apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
+                        echo $productName.' - '.$output_attribute.'<br/>';
+                    }
+                ?>
+            </td>
             <td><a style="text-decoration: none;" href="<?php echo admin_url( 'admin.php?page=woocommerce_order_forms&export='.$orderId ); ?>" alt="Order Completion Form"><span class="dashicons dashicons-download"></span></a></td>
         </tr>
         <?php         
@@ -142,7 +260,7 @@
 
 <fieldset style="position: relative;">
 <legend><span> In Writing </span></legend>
-<!-- <div class="top tablePrivate">    
+<div class="top tablePrivate">    
     <div class="alignleft actions bulkactions">                                             
         <select name="action" id="bulk-action-inWriting">
             <option value="">Bulk Actions</option>
@@ -152,7 +270,7 @@
         </select>
         <a class="button action" onClick="bulkAction('bulk-action-inWriting','inWriting')" value="Apply">Apply</a>
     </div>
-</div> -->
+</div>
 <table id="inWriting" class="display order-completion-table" cellspacing="0" width="100%">
     <thead>
         <tr>
@@ -161,7 +279,6 @@
             <th>Customer Name</th>
             <th>Company Name</th>
             <th>Product/Word count</th>
-            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -194,8 +311,66 @@
                 <td><?php echo $pfx_date; ?></td>
                 <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
                 <td><?php echo $billing_company_name; ?></td>
-                <td>-</td>
-                <td><a style="text-decoration: none;" href="<?php echo home_url('/order-completion-form/?order_id='.$orderId); ?>" alt="Order Completion Form" target="_blank"><span class="dashicons dashicons-external"></span></a></td>
+                <td>
+                    <?php 
+                    foreach( $order->get_items() as $item_id => $item ) {
+                        $formatted_meta = array();
+                        $hideprefix = '_';
+                        if ( ! empty( $item['item_meta_array'] ) ) {
+                          foreach ( $item['item_meta_array'] as $meta_id => $meta ) {
+                            if ( "" === $meta->value || is_serialized( $meta->value ) || ( ! empty( $hideprefix ) && substr( $meta->key, 0, 1 ) === $hideprefix ) ) {
+                              continue;
+                            }
+                            $attribute_key = urldecode( str_replace( 'attribute_', '', $meta->key ) );
+                            $meta_value    = $meta->value;
+
+                            // If this is a term slug, get the term's nice name
+                            if ( taxonomy_exists( $attribute_key ) ) {
+                              $term = get_term_by( 'slug', $meta_value, $attribute_key );
+
+                              if ( ! is_wp_error( $term ) && is_object( $term ) && $term->name ) {
+                                $meta_value = $term->name;
+                              }
+                            }               
+
+                            if ( ! empty( $item['variation_id'] ) && 'product_variation' === get_post_type( $item['variation_id'] ) ) {
+                            $_product = wc_get_product( $item['variation_id'] );
+                            $productID = $item['variation_id'];
+                          } elseif ( ! empty( $item['product_id']  ) ) {
+                            $productID = $item['product_id'];
+                            $_product = wc_get_product( $item['product_id'] );
+                          } else {
+                            $productID = 0;
+                            $_product = false;
+                          }
+
+                            $formatted_meta[ $meta_id ] = array(
+                              'key'   => $meta->key,
+                              'label' => wc_attribute_label( $attribute_key, $_product ),
+                              'value' => apply_filters( 'woocommerce_order_item_display_meta_value', $meta_value ),
+                            );
+
+                          }
+                        }
+
+                        $delimiter = ", \n";
+                        if ( ! empty( $formatted_meta ) ) {
+                          $meta_list = array();
+
+                          foreach ( $formatted_meta as $meta ) {
+                              $meta_list[] = wp_kses_post( $meta['value'] );
+                          }
+
+                          if ( ! empty( $meta_list ) ) {
+                            $output_attribute = $meta_list[0];//implode( $delimiter, $meta_list );
+                          }
+                        } 
+
+                        $productName = apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
+                        echo $productName.' - '.$output_attribute.'<br/>';
+                    }
+                ?>
+                </td>
             </tr>
             <?php         
             }
@@ -206,7 +381,7 @@
 
 <fieldset  style="position: relative;">
 <legend><span> Delivered </span></legend>
-<!-- <div class="top tablePrivate">    
+<div class="top tablePrivate">    
     <div class="alignleft actions bulkactions">                                             
         <select name="action" id="bulk-action-delivered">
             <option value="">Bulk Actions</option>
@@ -216,7 +391,7 @@
         </select>
         <a class="button action" onClick="bulkAction('bulk-action-delivered','delivered')" value="Apply">Apply</a>
     </div>
-</div> -->
+</div>
 <table id="delivered" class="display order-completion-table" cellspacing="0" width="100%">
     <thead>
         <tr>
@@ -225,7 +400,6 @@
             <th>Customer Name</th>
             <th>Company Name</th>
             <th>Product/Word count</th>
-            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -257,8 +431,66 @@
                 <td><?php echo $pfx_date; ?></td>
                 <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
                 <td><?php echo $billing_company_name; ?></td>
-                <td>-</td>
-                <td><a style="text-decoration: none;" href="<?php echo home_url('/order-completion-form/?order_id='.$orderId); ?>" alt="Order Completion Form" target="_blank"><span class="dashicons dashicons-external"></span></a></td>
+                <td>
+                    <?php 
+                    foreach( $order->get_items() as $item_id => $item ) {
+                        $formatted_meta = array();
+                        $hideprefix = '_';
+                        if ( ! empty( $item['item_meta_array'] ) ) {
+                          foreach ( $item['item_meta_array'] as $meta_id => $meta ) {
+                            if ( "" === $meta->value || is_serialized( $meta->value ) || ( ! empty( $hideprefix ) && substr( $meta->key, 0, 1 ) === $hideprefix ) ) {
+                              continue;
+                            }
+                            $attribute_key = urldecode( str_replace( 'attribute_', '', $meta->key ) );
+                            $meta_value    = $meta->value;
+
+                            // If this is a term slug, get the term's nice name
+                            if ( taxonomy_exists( $attribute_key ) ) {
+                              $term = get_term_by( 'slug', $meta_value, $attribute_key );
+
+                              if ( ! is_wp_error( $term ) && is_object( $term ) && $term->name ) {
+                                $meta_value = $term->name;
+                              }
+                            }               
+
+                            if ( ! empty( $item['variation_id'] ) && 'product_variation' === get_post_type( $item['variation_id'] ) ) {
+                            $_product = wc_get_product( $item['variation_id'] );
+                            $productID = $item['variation_id'];
+                          } elseif ( ! empty( $item['product_id']  ) ) {
+                            $productID = $item['product_id'];
+                            $_product = wc_get_product( $item['product_id'] );
+                          } else {
+                            $productID = 0;
+                            $_product = false;
+                          }
+
+                            $formatted_meta[ $meta_id ] = array(
+                              'key'   => $meta->key,
+                              'label' => wc_attribute_label( $attribute_key, $_product ),
+                              'value' => apply_filters( 'woocommerce_order_item_display_meta_value', $meta_value ),
+                            );
+
+                          }
+                        }
+
+                        $delimiter = ", \n";
+                        if ( ! empty( $formatted_meta ) ) {
+                          $meta_list = array();
+
+                          foreach ( $formatted_meta as $meta ) {
+                              $meta_list[] = wp_kses_post( $meta['value'] );
+                          }
+
+                          if ( ! empty( $meta_list ) ) {
+                            $output_attribute = $meta_list[0];//implode( $delimiter, $meta_list );
+                          }
+                        } 
+
+                        $productName = apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
+                        echo $productName.' - '.$output_attribute.'<br/>';
+                    }
+                ?>
+                </td>
             </tr>
             <?php         
             }

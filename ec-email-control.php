@@ -768,11 +768,6 @@ class WC_Email_Control {
 	}
 
 	public function woocommerce_order_forms(){
-		require_once( 'pages/order-forms-page.php');
-
-		if(isset($_GET['export'])){
-			require_once( 'pages/forms-ready-export.php');			
-		}
 
 		if(isset($_GET['change_to']) && isset($_GET['change_for'])){
 			$postIds = explode(',', $_GET['change_for']);
@@ -782,12 +777,14 @@ class WC_Email_Control {
 			      'post_status'   => $_GET['change_to']
 			  );
 			  wp_update_post( $order_post );	
-			} ?>
-			<script type="text/javascript">
-				window.location.href = "<?php echo admin_url( 'admin.php?page=woocommerce_order_forms'); ?>";
-			</script>
-					
-		<?php }
+			} 
+		}
+
+		require_once( 'pages/order-forms-page.php');
+
+		if(isset($_GET['export'])){
+			require_once( 'pages/forms-ready-export.php');			
+		}
 	}
 	
 	/**
