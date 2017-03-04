@@ -98,7 +98,7 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
              $productName = apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item['name'] ) : $item['name'], $item, $is_visible );
 
              $allProductDes[] = $productName.' - '.$output_attribute;
-
+            for($q=1;$q<=$item['qty'];$q++){
             ?>
 
           <div class="divider"></div>
@@ -107,23 +107,27 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
           <div class="word-wrap">
             <h3 class="word-count">Product: <?php 
               echo $productName;
-              echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times; %s', $item['qty'] ) . '</strong>', $item );
+              if($item['qty'] >1 ){
+                echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times; %s', 1 ) . '</strong>', $item );
+              } else {
+                echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times; %s', $item['qty'] ) . '</strong>', $item );
+              }
               echo ' - ';
               echo $output_attribute; ?></h3>
             <a href="#" class="btn-order-clear">Demo</a>
           </div>
           <div class="form-wrap area">
-            <div class="alert alert-success alert-success-<?php echo $productID; ?>" style="display: none;">
+            <div class="alert alert-success alert-success-<?php echo $productID.'-'.$q; ?>" style="display: none;">
             <strong>Success!</strong> Indicates a successful or positive action.
           </div>
           <?php if(!empty($get_order_type) && $get_order_type == 'complete') { $fill++; ?>
           <div class="form-wrap area">
-            <div class="alert alert-success alert-success-<?php echo $productID; ?> completeForms">
+            <div class="alert alert-success alert-success-<?php echo $productID.'-'.$q; ?> completeForms">
             <strong>Success!</strong> Complete this form.
           </div>
           <?php } else { ?>
-            <form class="order-form area orderForm-<?php echo $productID; ?>" id="orderForm-<?php echo $productID; ?>" data-order-id="<?php echo $productID; ?>" action="#" method="post">
-            <input type="hidden" name="product_id" value="<?php echo $productID; ?>">
+            <form class="order-form area orderForm-<?php echo $productID.'-'.$q; ?>" id="orderForm-<?php echo $productID.'-'.$q; ?>" data-order-id="<?php echo $productID.'-'.$q; ?>" action="#" method="post">
+            <input type="hidden" name="product_id" value="<?php echo $productID.'-'.$q; ?>">
             <input type="hidden" name="action" value="orderCompletion">
             <input type="hidden" name="order_id" value="<?php echo $orderId; ?>">
               <?php 
@@ -167,7 +171,7 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
             <?php } ?>
             <script type="text/javascript">
               $(document).ready(function(){
-                $("#orderForm-<?php echo $productID; ?>").validate();
+                $("#orderForm-<?php echo $productID.'-'.$q; ?>").validate();
               });
             </script>
 
@@ -176,6 +180,7 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
             $inc++;
             $tot++;
         }
+      }
         $filupInDiv = (100/$tot);
         $filupInPer = $filupInDiv*$fill;
         $allProductD = implode( ' & ', $allProductDes );
@@ -189,8 +194,46 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
     <link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ); ?>main.css" />
 </div> <!-- #main-content -->
 <script type="text/javascript">
+function addNewItem(cloneThisDiv,cloneThisDivAdd){
+    var x = document.getElementById(cloneThisDiv).cloneNode(true);
+    x.id = "";
+    x.style.display = "";
+
+    var rowCount = $('#' + cloneThisDivAdd).find('input').length;
+    var lastTr = $('#' + cloneThisDivAdd).find('.order-form-full').last().attr('data-number');
+    //var production_desc_val = $('#' + tableID).find('tr').last().find('.production_desc_1st').val();
+    if (lastTr != '' && typeof lastTr !== "undefined"){
+        rowCount = parseInt(lastTr) + 1;
+    }
+    //Increment id
+    var rowCo = rowCount+2;
+    var idText = 'rowCount' + rowCount;
+    x.id = idText;
+
+    $("#" + cloneThisDivAdd).append(x);
+    $("#"+cloneThisDivAdd).find('.order-form-left').css('visibility','hidden');
+    $("#"+cloneThisDivAdd).find('#' + idText).find('.btn-add-more').html('<i style="font-size:47px;margin-top:-3px;" class="fa fa-minus-square" aria-hidden="true"></i>').removeClass('btn-primary').addClass('btn-danger').attr('onclick', 'removeItem("'+cloneThisDivAdd+'","' + idText + '")');
+    $('#' + cloneThisDivAdd).find('#'+idText).attr('data-number', rowCount);
+
+    //get input elements
+    var attrInput = $("#" + cloneThisDivAdd).find('#' + idText).find('input');
+    for (var i = 0; i < attrInput.length; i++){
+        var nameAtt = attrInput[i].name;
+        //increment all array element name
+        var repText = nameAtt.replace('1', rowCo);
+        attrInput[i].name = repText;
+    }
+    attrInput.val(''); //value reset
+
+    return false;
+}
+
+function removeItem(cloneThisDivAdd,removeNum){
+  $('#' + cloneThisDivAdd).find('#' + removeNum).remove();
+}
+
 $(document).ready(function(){
-  $('.order-form').find('input, textarea, select').addClass('required');
+  $('.order-form').find('input, select').addClass('required');
 
   $('.progress-lenght').html('<?php echo round($filupInPer,2); ?>%');
   $('.progressbar').css('width','<?php echo round($filupInPer,2); ?>%');
@@ -268,10 +311,12 @@ $(document).on("click", ":submit", function(e) {
                     order_type.find(".fa-refresh").css("display", "none");
                     if(order_type.val()=='save'){
                       var success_class = 'saveForms';
+                      var saveMsg = 'You have successfully saved this form.';
                     } else {
                       var success_class = 'completeForms';
+                      var saveMsg = 'You have successfully completed this form.';
                     }
-                    $(".alert-success-" + orderId).html("<strong>Success!</strong> Successful " + order_type.val() + ".").css("display", "block").addClass(success_class);
+                    $(".alert-success-" + orderId).html("<strong>Success!</strong> " + saveMsg).css("display", "block").addClass(success_class);
 
                     if(progressLength > 95){
                       $('.formCompleteTitle').css("display", "none");

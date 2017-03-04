@@ -62,7 +62,7 @@
     <input class="order-form-inputs required" name="blog_topic" value="<?php echo $get_blog_topic; ?>" type="text">
   </div>
 </div>
-<div class="order-form-full">
+<div class="order-form-full" id="cloneExpBlogSpDiv-<?php echo $q; ?>">
   <div class="order-form-left">
     <h5 class="order-form-label">Examples Blog URLs</h5>
     <div class="tooltip">
@@ -73,10 +73,11 @@
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs required" name="blog_url" value="<?php echo $get_blog_url; ?>" type="text">
-    <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
+    <input class="order-form-inputs required" name="blog_url-1" value="<?php echo $get_blog_url; ?>" type="text">
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneExpBlogSpDiv-<?php echo $q; ?>','cloneExpBlogSpDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
+<div id="cloneExpBlogSpDivAdd-<?php echo $q; ?>"></div>
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Reference URL</h5>
@@ -91,7 +92,7 @@
     <input class="order-form-inputs required" name="reference_url" value="<?php echo $get_reference_url; ?>" type="text">
   </div>
 </div>
-<div class="order-form-full">
+<div class="order-form-full" id="cloneKeywordSpDiv-<?php echo $q; ?>">
   <div class="order-form-left">
     <h5 class="order-form-label">Keywords (up to 3)</h5>
     <div class="tooltip">
@@ -102,10 +103,11 @@
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs required" name="keywords" value="<?php echo $get_keywords; ?>" type="text">
-    <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
+    <input class="order-form-inputs required" name="keywords-1" value="<?php echo $get_keywords; ?>" type="text">
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordSpDiv-<?php echo $q; ?>','cloneKeywordSpDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
+<div id="cloneKeywordSpDivAdd-<?php echo $q; ?>"></div>
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Conneting words</h5>
@@ -132,6 +134,6 @@ Example:<br> List some of the most popular trends in the industry right now and 
     </div>
   </div>
   <div class="order-form-right">
-    <textarea class="order-form-inputs required" name="special_instructions" rows="8" cols="80" placeholder="( Insert general guidelines for this branded blog post )"><?php echo $get_special_instructions; ?></textarea>
+    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="( Insert general guidelines for this branded blog post )"><?php echo $get_special_instructions; ?></textarea>
   </div>
 </div>

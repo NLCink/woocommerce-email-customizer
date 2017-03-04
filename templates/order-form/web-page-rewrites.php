@@ -61,7 +61,7 @@
     <input class="order-form-inputs" name="url_needing_rewritten" value="<?php echo $url_needing_rewritten; ?>" type="text">
   </div>
 </div>
-<div class="order-form-full">
+<div class="order-form-full" id="clonePageWpreDiv-<?php echo $q; ?>">
   <div class="order-form-left">
     <h5 class="order-form-label">Page Name</h5>
     <div class="tooltip">
@@ -73,11 +73,12 @@
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="page_name" value="<?php echo $page_name; ?>" type="text">
-    <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
+    <input class="order-form-inputs" name="page_name-1" value="<?php echo $page_name; ?>" type="text">
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('clonePageWpreDiv-<?php echo $q; ?>','clonePageWpreDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
-<div class="order-form-full">
+<div id="clonePageWpreDivAdd-<?php echo $q; ?>"></div>
+<div class="order-form-full" id="cloneKeywordWpreDiv-<?php echo $q; ?>">
   <div class="order-form-left">
     <h5 class="order-form-label">Keywords (up to 3)</h5>
     <div class="tooltip">
@@ -89,10 +90,11 @@ air conditioners in SLC, AC repair in SLC</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="keywords" value="<?php echo $keywords; ?>" type="text">
-    <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
+    <input class="order-form-inputs" name="keywords-1" value="<?php echo $keywords; ?>" type="text">
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordWpreDiv-<?php echo $q; ?>','cloneKeywordWpreDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
+<div id="cloneKeywordWpreDivAdd-<?php echo $q; ?>"></div>
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Connecting Words</h5>

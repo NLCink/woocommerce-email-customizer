@@ -68,7 +68,7 @@ Cooling<br>
     <input class="order-form-inputs" name="page_name" value="<?php echo $page_name; ?>" type="text">
   </div>
 </div>
-<div class="order-form-full">
+<div class="order-form-full" id="cloneExpWebSpwpDiv-<?php echo $q; ?>">
   <div class="order-form-left">
     <h5 class="order-form-label">Example Websites</h5>
     <div class="tooltip">
@@ -79,10 +79,11 @@ Cooling<br>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="example_websites" value="<?php echo $example_websites; ?>" type="text">
-    <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
+    <input class="order-form-inputs" name="example_websites-1" value="<?php echo $example_websites; ?>" type="text">
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneExpWebSpwpDiv-<?php echo $q; ?>','cloneExpWebSpwpDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
+<div id="cloneExpWebSpwpDivAdd-<?php echo $q; ?>"></div>
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Reference URL</h5>
@@ -98,7 +99,7 @@ http://example.com</p>
     <input class="order-form-inputs" name="reference_url" value="<?php echo $reference_url; ?>" type="text">
   </div>
 </div>
-<div class="order-form-full">
+<div class="order-form-full" id="cloneKeywordSpwpDiv-<?php echo $q; ?>">
   <div class="order-form-left">
     <h5 class="order-form-label">Keywords (up to 3)</h5>
     <div class="tooltip">
@@ -110,10 +111,11 @@ http://example.com</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="keywords" value="<?php echo $Keywords; ?>" type="text">
-    <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
+    <input class="order-form-inputs" name="keywords-1" value="<?php echo $Keywords; ?>" type="text">
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordSpwpDiv-<?php echo $q; ?>','cloneKeywordSpwpDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
+<div id="cloneKeywordSpwpDivAdd-<?php echo $q; ?>"></div>
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Connecting Words</h5>
