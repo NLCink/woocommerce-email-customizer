@@ -1,15 +1,15 @@
 <?php 
-  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}", true );
+  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}-{$q}", true );
   if(!empty($get_order_id)){
-    $company_name = get_post_meta( $orderId, "_comp_company_name_{$productID}", true );
-    $current_website = get_post_meta( $orderId, "_comp_current_website_{$productID}", true );
-    $page_name = get_post_meta( $orderId, "_comp_page_name_{$productID}", true );
-    $example_websites = get_post_meta( $orderId, "_comp_example_websites_{$productID}", true );
-    $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}", true );
-    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}", true );
-    $connecting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}", true );
-    $headlines = get_post_meta( $orderId, "_comp_headlines_{$productID}", true );
-    $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}", true );    
+    $company_name = get_post_meta( $orderId, "_comp_company_name_{$productID}-{$q}", true );
+    $current_website = get_post_meta( $orderId, "_comp_current_website_{$productID}-{$q}", true );
+    $page_name = get_post_meta( $orderId, "_comp_page_name_{$productID}-{$q}", true );
+    $example_websites = get_post_meta( $orderId, "_comp_example_websites_{$productID}-{$q}", true );
+    $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}-{$q}", true );
+    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
+    $connecting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}-{$q}", true );
+    $headlines = get_post_meta( $orderId, "_comp_headlines_{$productID}-{$q}", true );
+    $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}-{$q}", true );    
   } else {
     $company_name = '';
     $current_website = '';
@@ -82,7 +82,7 @@ Cooling<br>
   </div>
   <div class="order-form-right">
     <input class="order-form-inputs" name="example_websites-1" value="<?php echo $example_websites; ?>" type="text">
-    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneExmWePDiv-<?php echo $q; ?>','cloneExmWePDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneExmWePDiv-<?php echo $q; ?>','cloneExmWePDivAdd-<?php echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
 <div id="cloneExmWePDivAdd-<?php echo $q; ?>"></div>
@@ -114,7 +114,7 @@ http://example.com</p>
   </div>
   <div class="order-form-right">
     <input class="order-form-inputs" name="keywords-1" value="<?php echo $Keywords; ?>" type="text">
-    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyWordWpDiv-<?php echo $q; ?>','cloneKeyWordWpDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyWordWpDiv-<?php echo $q; ?>','cloneKeyWordWpDivAdd-<?php echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
 <div id="cloneKeyWordWpDivAdd-<?php echo $q; ?>"></div>

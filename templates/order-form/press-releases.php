@@ -1,18 +1,18 @@
 <?php 
-  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}", true );
+  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}-{$q}", true );
   if(!empty($get_order_id)){
-    $company_name = get_post_meta( $orderId, "_comp_company_name_{$productID}", true );
-    $current_website = get_post_meta( $orderId, "_comp_current_website_{$productID}", true );   
-    $city_state = get_post_meta( $orderId, "_comp_city_state_{$productID}", true );
-    $day_month_year = get_post_meta( $orderId, "_comp_day_month_year_{$productID}", true );
-    $physical_address = get_post_meta( $orderId, "_comp_physical_address_{$productID}", true );
-    $time_day = get_post_meta( $orderId, "_comp_time_day_{$productID}", true );
-    $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}", true );
-    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}", true );
-    $connecting_words = get_post_meta( $orderId, "_comp_connecting_words_{$productID}", true );
-    $relevant_quotes = get_post_meta( $orderId, "_comp_relevant_quotes_{$productID}", true );
-    $boilerplate = get_post_meta( $orderId, "_comp_boilerplate_{$productID}", true );    
-    $news = get_post_meta( $orderId, "_comp_news_{$productID}", true );
+    $company_name = get_post_meta( $orderId, "_comp_company_name_{$productID}-{$q}", true );
+    $current_website = get_post_meta( $orderId, "_comp_current_website_{$productID}-{$q}", true );   
+    $city_state = get_post_meta( $orderId, "_comp_city_state_{$productID}-{$q}", true );
+    $day_month_year = get_post_meta( $orderId, "_comp_day_month_year_{$productID}-{$q}", true );
+    $physical_address = get_post_meta( $orderId, "_comp_physical_address_{$productID}-{$q}", true );
+    $time_day = get_post_meta( $orderId, "_comp_time_day_{$productID}-{$q}", true );
+    $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}-{$q}", true );
+    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
+    $connecting_words = get_post_meta( $orderId, "_comp_connecting_words_{$productID}-{$q}", true );
+    $relevant_quotes = get_post_meta( $orderId, "_comp_relevant_quotes_{$productID}-{$q}", true );
+    $boilerplate = get_post_meta( $orderId, "_comp_boilerplate_{$productID}-{$q}", true );    
+    $news = get_post_meta( $orderId, "_comp_news_{$productID}-{$q}", true );
   } else {
     $company_name = '';
     $current_website = '';
@@ -125,7 +125,7 @@
 </div>
 <div class="order-form-right">
   <input class="order-form-inputs" name="reference_url-1" value="<?php echo $reference_url; ?>" type="text">
-  <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneRefUrlDiv-<?php echo $q; ?>','cloneRefUrlDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+  <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneRefUrlDiv-<?php echo $q; ?>','cloneRefUrlDivAdd-<?php echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
 </div>
 </div>
 <div id="cloneRefUrlDivAdd-<?php echo $q; ?>"></div>
@@ -142,7 +142,7 @@
 </div>
 <div class="order-form-right">
   <input class="order-form-inputs" name="keywords" value="<?php echo $keywords; ?>" type="text">
-  <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyPreReDiv-<?php echo $q; ?>','cloneKeyPreReDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+  <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyPreReDiv-<?php echo $q; ?>','cloneKeyPreReDivAdd-<?php echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
 </div>
 </div>
 <div id="cloneKeyPreReDivAdd-<?php echo $q; ?>"></div>

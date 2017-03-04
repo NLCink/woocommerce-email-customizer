@@ -194,12 +194,16 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
     <link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ); ?>main.css" />
 </div> <!-- #main-content -->
 <script type="text/javascript">
-function addNewItem(cloneThisDiv,cloneThisDivAdd){
+function addNewItem(cloneThisDiv,cloneThisDivAdd,maxinput=0){
     var x = document.getElementById(cloneThisDiv).cloneNode(true);
     x.id = "";
     x.style.display = "";
 
     var rowCount = $('#' + cloneThisDivAdd).find('input').length;
+    if(rowCount+1 >= maxinput){
+      alert('Maximum input exceed!');
+      return false;
+    }
     var lastTr = $('#' + cloneThisDivAdd).find('.order-form-full').last().attr('data-number');
     //var production_desc_val = $('#' + tableID).find('tr').last().find('.production_desc_1st').val();
     if (lastTr != '' && typeof lastTr !== "undefined"){
