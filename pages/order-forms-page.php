@@ -14,6 +14,7 @@
             <option value="wc-delivered">Delivered</option>
         </select>
         <a class="button action" onClick="bulkAction('bulk-action-incompleteForms','incompleteForms')" value="Apply">Apply</a>
+        <a href="javascript:void(0)" onclick="selectNDeselect(1,'incompleteForms')">Select All</a> -<a href="javascript:void(0)" onclick="selectNDeselect(0,'incompleteForms')">Deselect All</a>
     </div>
 </div>
 <table id="incompleteForms" class="display order-completion-table" cellspacing="0" width="100%">
@@ -32,10 +33,10 @@
         $filters = array(
         'post_status' => 'wc-on-hold',
         'post_type' => 'shop_order',
-        'posts_per_page' => 200,
+        'posts_per_page' => -1,
         'paged' => 1,
-        'orderby' => 'modified',
-        'order' => 'ASC'
+        'orderby' => 'date',
+        'order' => 'DESC'
     );
 
     $loop = new WP_Query($filters);
@@ -144,6 +145,7 @@
             <option value="wc-delivered">Delivered</option>
         </select>
         <a class="button action" onClick="bulkAction('bulk-action-formsReady','formsReady')" value="Apply">Apply</a>
+        <a href="javascript:void(0)" onclick="selectNDeselect(1,'formsReady')">Select All</a> -<a href="javascript:void(0)" onclick="selectNDeselect(0,'formsReady')">Deselect All</a>
     </div>
 </div>
 <table id="formsReady" class="display order-completion-table" cellspacing="0" width="100%">
@@ -162,10 +164,10 @@
         $filters = array(
         'post_status' => 'wc-forms-ready',
         'post_type' => 'shop_order',
-        'posts_per_page' => 200,
+        'posts_per_page' => -1,
         'paged' => 1,
-        'orderby' => 'modified',
-        'order' => 'ASC'
+        'orderby' => 'date',
+        'order' => 'DESC'
     );
 
     $loop = new WP_Query($filters);
@@ -271,6 +273,7 @@
             <option value="wc-delivered">Delivered</option>
         </select>
         <a class="button action" onClick="bulkAction('bulk-action-inWriting','inWriting')" value="Apply">Apply</a>
+        <a href="javascript:void(0)" onclick="selectNDeselect(1,'inWriting')">Select All</a> -<a href="javascript:void(0)" onclick="selectNDeselect(0,'inWriting')">Deselect All</a>
     </div>
 </div>
 <table id="inWriting" class="display order-completion-table" cellspacing="0" width="100%">
@@ -288,10 +291,10 @@
             $filters = array(
             'post_status' => 'wc-in-writing-queue',
             'post_type' => 'shop_order',
-            'posts_per_page' => 200,
+            'posts_per_page' => -1,
             'paged' => 1,
-            'orderby' => 'modified',
-            'order' => 'ASC'
+            'orderby' => 'date',
+            'order' => 'DESC'
         );
         $loop = new WP_Query($filters);
         while ($loop->have_posts()) {
@@ -393,6 +396,7 @@
             <option value="wc-in-writing-queue">In Writing</option>
         </select>
         <a class="button action" onClick="bulkAction('bulk-action-delivered','delivered')" value="Apply">Apply</a>
+        <a href="javascript:void(0)" onclick="selectNDeselect(1,'delivered')">Select All</a> -<a href="javascript:void(0)" onclick="selectNDeselect(0,'delivered')">Deselect All</a>
     </div>
 </div>
 <table id="delivered" class="display order-completion-table" cellspacing="0" width="100%">
@@ -410,10 +414,10 @@
             $filters = array(
             'post_status' => 'wc-delivered',
             'post_type' => 'shop_order',
-            'posts_per_page' => 200,
+            'posts_per_page' => -1,
             'paged' => 1,
-            'orderby' => 'modified',
-            'order' => 'ASC'
+            'orderby' => 'date',
+            'order' => 'DESC'
         );
         $loop = new WP_Query($filters);
         while ($loop->have_posts()) {
@@ -510,6 +514,14 @@
 
 <script type="text/javascript">
 
+    function selectNDeselect(source,formId) {
+      checkboxes = $("#"+formId).find("[name='readyForms[]']");
+      if(source==1) { var chkStatus = true; } else { var chkStatus = false; }
+      for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = chkStatus;             
+      }
+    }
+
     function exportSelected() {
         var checkedboxesCount = $("#formsReady input[name='readyForms[]']:checked").length;
         if(checkedboxesCount < 1){
@@ -521,7 +533,8 @@
             for(var i=0, n=checkboxesaa.length;i<n;i++) {           
                 getSelected.push(checkboxesaa[i].value);        
             }
-            window.open("<?php echo admin_url( 'admin.php?page=woocommerce_order_forms&multiple=1&export='); ?>"+getSelected,'_blank');
+            window.location.href = "<?php echo admin_url( 'admin.php?page=woocommerce_order_forms&multiple=1&export='); ?>"+getSelected;
+
         }
        return false;
     }

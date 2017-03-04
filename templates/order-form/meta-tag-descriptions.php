@@ -42,7 +42,7 @@ diamond wedding ring</p>
     <input class="order-form-inputs" name="primary_keyword" value="<?php echo $primary_keyword; ?>" type="text">
   </div>
 </div>
-<div class="order-form-full">
+<div class="order-form-full" id="cloneKeywordSecDiv-<?php echo $q; ?>">
   <div class="order-form-left">
     <h5 class="order-form-label">Secondary Keyword</h5>
     <div class="tooltip">
@@ -54,10 +54,11 @@ diamond wedding ring</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="secondary_keyword" value="<?php echo $secondary_keyword; ?>" type="text">
-    <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
+    <input class="order-form-inputs" name="secondary_keyword-1" value="<?php echo $secondary_keyword; ?>" type="text">
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordSecDiv-<?php echo $q; ?>','cloneKeywordSecDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
+<div id=cloneKeywordSecDivAdd-<?php echo $q; ?>"></div>
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Special Instructions</h5>

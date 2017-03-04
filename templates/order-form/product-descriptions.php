@@ -42,7 +42,7 @@ http://example.com</p>
     <input class="order-form-inputs" name="reference_url" value="<?php echo $reference_url; ?>" type="text">
   </div>
 </div>
-<div class="order-form-full">
+<div class="order-form-full" id="cloneKeyPreDesDiv-<?php echo $q; ?>">
   <div class="order-form-left">
     <h5 class="order-form-label">Keywords (up to 3)</h5>
     <div class="tooltip">
@@ -54,10 +54,11 @@ Disney</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="keywords" value="<?php echo $keywords; ?>" type="text">
-    <button class="btn-add-more"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon"></button>
+    <input class="order-form-inputs" name="keywords-1" value="<?php echo $keywords; ?>" type="text">
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyPreDesDiv-<?php echo $q; ?>','cloneKeyPreDesDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
+<div id="cloneKeyPreDesDivAdd-<?php echo $q; ?>"></div>
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Special Instructions</h5>
