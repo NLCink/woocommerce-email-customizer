@@ -1,10 +1,10 @@
 <?php 
-  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}", true );
+  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}-{$q}", true );
   if(!empty($get_order_id)){
-    $product_name = get_post_meta( $orderId, "_comp_product_name_{$productID}", true );
-    $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}", true );
-    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}", true );
-    $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}", true );
+    $product_name = get_post_meta( $orderId, "_comp_product_name_{$productID}-{$q}", true );
+    $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}-{$q}", true );
+    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
+    $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}-{$q}", true );
   } else {
     $product_name = '';
     $reference_url = '';
@@ -55,7 +55,7 @@ Disney</p>
   </div>
   <div class="order-form-right">
     <input class="order-form-inputs" name="keywords-1" value="<?php echo $keywords; ?>" type="text">
-    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyPreDesDiv-<?php echo $q; ?>','cloneKeyPreDesDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyPreDesDiv-<?php echo $q; ?>','cloneKeyPreDesDivAdd-<?php echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
 <div id="cloneKeyPreDesDivAdd-<?php echo $q; ?>"></div>

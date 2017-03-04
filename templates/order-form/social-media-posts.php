@@ -1,11 +1,11 @@
 <?php 
-  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}", true );
+  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}-{$q}", true );
   if(!empty($get_order_id)){
-    $social_media_type = get_post_meta( $orderId, "_comp_social_media_type_{$productID}", true );
-    $web_url = get_post_meta( $orderId, "_comp_web_url_{$productID}", true );   
-    $subject = get_post_meta( $orderId, "_comp_subject_{$productID}", true );
-    $hashtags = get_post_meta( $orderId, "_comp_hashtags_{$productID}", true );
-    $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}", true );
+    $social_media_type = get_post_meta( $orderId, "_comp_social_media_type_{$productID}-{$q}", true );
+    $web_url = get_post_meta( $orderId, "_comp_web_url_{$productID}-{$q}", true );   
+    $subject = get_post_meta( $orderId, "_comp_subject_{$productID}-{$q}", true );
+    $hashtags = get_post_meta( $orderId, "_comp_hashtags_{$productID}-{$q}", true );
+    $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}-{$q}", true );
   } else {
     $social_media_type = '';
     $web_url = '';

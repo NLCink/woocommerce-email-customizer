@@ -1,10 +1,10 @@
 <?php 
-  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}", true );
+  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}-{$q}", true );
   if(!empty($get_order_id)){
-    $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}", true );
-    $primary_keyword = get_post_meta( $orderId, "_comp_primary_keyword_{$productID}", true );
-    $secondary_keyword = get_post_meta( $orderId, "_comp_secondary_keyword_{$productID}", true );
-    $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}", true );    
+    $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}-{$q}", true );
+    $primary_keyword = get_post_meta( $orderId, "_comp_primary_keyword_{$productID}-{$q}", true );
+    $secondary_keyword = get_post_meta( $orderId, "_comp_secondary_keyword_{$productID}-{$q}", true );
+    $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}-{$q}", true );    
   } else {
     $reference_url = '';
     $primary_keyword = '';
@@ -55,7 +55,7 @@ diamond wedding ring</p>
   </div>
   <div class="order-form-right">
     <input class="order-form-inputs" name="secondary_keyword-1" value="<?php echo $secondary_keyword; ?>" type="text">
-    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordSecDiv-<?php echo $q; ?>','cloneKeywordSecDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordSecDiv-<?php echo $q; ?>','cloneKeywordSecDivAdd-<?php echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
 <div id=cloneKeywordSecDivAdd-<?php echo $q; ?>"></div>

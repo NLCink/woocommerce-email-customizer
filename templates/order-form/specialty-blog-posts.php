@@ -1,14 +1,14 @@
 <?php 
-  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}", true );
+  $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}-{$q}", true );
   if(!empty($get_order_id)){
-    $get_company_name = get_post_meta( $orderId, "_comp_company_name_{$productID}", true );
-    $get_company_url = get_post_meta( $orderId, "_comp_company_url_{$productID}", true );
-    $get_blog_topic = get_post_meta( $orderId, "_comp_blog_topic_{$productID}", true );
-    $get_blog_url = get_post_meta( $orderId, "_comp_blog_url_{$productID}", true );
-    $get_reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}", true );
-    $get_keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}", true );
-    $get_conneting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}", true );
-    $get_special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}", true );    
+    $get_company_name = get_post_meta( $orderId, "_comp_company_name_{$productID}-{$q}", true );
+    $get_company_url = get_post_meta( $orderId, "_comp_company_url_{$productID}-{$q}", true );
+    $get_blog_topic = get_post_meta( $orderId, "_comp_blog_topic_{$productID}-{$q}", true );
+    $get_blog_url = get_post_meta( $orderId, "_comp_blog_url_{$productID}-{$q}", true );
+    $get_reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}-{$q}", true );
+    $get_keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
+    $get_conneting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}-{$q}", true );
+    $get_special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}-{$q}", true );    
   } else {
     $get_company_name = '';
     $get_company_url = '';
@@ -74,7 +74,7 @@
   </div>
   <div class="order-form-right">
     <input class="order-form-inputs required" name="blog_url-1" value="<?php echo $get_blog_url; ?>" type="text">
-    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneExpBlogSpDiv-<?php echo $q; ?>','cloneExpBlogSpDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneExpBlogSpDiv-<?php echo $q; ?>','cloneExpBlogSpDivAdd-<?php echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
 <div id="cloneExpBlogSpDivAdd-<?php echo $q; ?>"></div>
@@ -104,7 +104,7 @@
   </div>
   <div class="order-form-right">
     <input class="order-form-inputs required" name="keywords-1" value="<?php echo $get_keywords; ?>" type="text">
-    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordSpDiv-<?php echo $q; ?>','cloneKeywordSpDivAdd-<?php echo $q; ?>')"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordSpDiv-<?php echo $q; ?>','cloneKeywordSpDivAdd-<?php echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
 <div id="cloneKeywordSpDivAdd-<?php echo $q; ?>"></div>
