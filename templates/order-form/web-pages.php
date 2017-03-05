@@ -4,9 +4,9 @@
     $company_name = get_post_meta( $orderId, "_comp_company_name_{$productID}-{$q}", true );
     $current_website = get_post_meta( $orderId, "_comp_current_website_{$productID}-{$q}", true );
     $page_name = get_post_meta( $orderId, "_comp_page_name_{$productID}-{$q}", true );
-    $example_websites = get_post_meta( $orderId, "_comp_example_websites_{$productID}-{$q}", true );
+    $example_websites = get_post_meta( $orderId, "_comp_example_websites-1_{$productID}-{$q}", true );
     $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}-{$q}", true );
-    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
+    $keywords = get_post_meta( $orderId, "_comp_keywords-1_{$productID}-{$q}", true );
     $connecting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}-{$q}", true );
     $headlines = get_post_meta( $orderId, "_comp_headlines_{$productID}-{$q}", true );
     $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}-{$q}", true );    
@@ -85,7 +85,30 @@ Cooling<br>
     <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneExmWePDiv-<?php echo $q; ?>','cloneExmWePDivAdd-<?php echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
-<div id="cloneExmWePDivAdd-<?php echo $q; ?>"></div>
+<div id="cloneExmWePDivAdd-<?php echo $q; ?>">
+  <?php 
+    $get_post_data = $wpdb->get_results("SELECT * FROM gpm_postmeta as pm WHERE pm.post_id=$orderId AND pm.meta_key LIKE '_comp_example_websites-%".$productID."-".$q."' ORDER BY pm.meta_id ASC");
+    $r=1;
+    foreach ($get_post_data as $key => $value) { 
+      if($r > 1 ){
+      ?>
+      <div class="order-form-full" id="rowCount-cloneExmWePDiv-<?php echo $q; ?>-<?php echo $r; ?>" data-number="0">
+        <div class="order-form-left" style="visibility: hidden;">
+          <h5 class="order-form-label">Example Websites(s)</h5>
+          <div class="tooltip">
+            <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
+            <div class="tooltip-text">
+              <p>Please give us the URLs of websites that we can pull information from (or emulate). These could also be competitors' websites that have content that you like.</p>
+            </div>
+          </div>
+        </div>
+        <div class="order-form-right">
+          <input class="order-form-inputs" name="example_websites-<?php echo $r; ?>" value="<?php echo $value->meta_value; ?>" type="text" aria-required="true">
+          <a href="javascript:void(0)" class="btn-add-more btn-danger" onclick="removeItem('cloneExmWePDivAdd-<?php echo $q; ?>','rowCount-cloneExmWePDiv-<?php echo $q; ?>-<?php echo $r; ?>')"><i style="font-size:47px;margin-top:-3px;" class="fa fa-minus-square" aria-hidden="true"></i></a>
+        </div>
+      </div>
+   <?php } $r++; } ?>
+</div>
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Reference URL</h5>
@@ -117,7 +140,31 @@ http://example.com</p>
     <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyWordWpDiv-<?php echo $q; ?>','cloneKeyWordWpDivAdd-<?php echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
-<div id="cloneKeyWordWpDivAdd-<?php echo $q; ?>"></div>
+<div id="cloneKeyWordWpDivAdd-<?php echo $q; ?>">
+  <?php 
+    $get_post_data = $wpdb->get_results("SELECT * FROM gpm_postmeta as pm WHERE pm.post_id=$orderId AND pm.meta_key LIKE '_comp_keywords-%".$productID."-".$q."' ORDER BY pm.meta_id ASC");
+    $r=1;
+    foreach ($get_post_data as $key => $value) { 
+      if($r > 1 ){
+      ?>
+      <div class="order-form-full" id="rowCount-cloneKeyWordWpDiv-<?php echo $q; ?>-<?php echo $r; ?>" data-number="0">
+        <div class="order-form-left" style="visibility: hidden;">
+          <h5 class="order-form-label">Keywords (up to 5)</h5>
+          <div class="tooltip">
+            <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
+            <div class="tooltip-text">
+              <p><strong>Example:</strong><br>
+                air conditioners, AC repair in Utah</p>
+            </div>
+          </div>
+        </div>
+        <div class="order-form-right">
+          <input class="order-form-inputs" name="keywords-<?php echo $r; ?>" value="<?php echo $value->meta_value; ?>" type="text" aria-required="true">
+          <a href="javascript:void(0)" class="btn-add-more btn-danger" onclick="removeItem('cloneKeyWordWpDivAdd-<?php echo $q; ?>','rowCount-cloneKeyWordWpDiv-<?php echo $q; ?>-<?php echo $r; ?>')"><i style="font-size:47px;margin-top:-3px;" class="fa fa-minus-square" aria-hidden="true"></i></a>
+        </div>
+      </div>
+   <?php } $r++; } ?>
+</div>
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Connecting Words</h5>

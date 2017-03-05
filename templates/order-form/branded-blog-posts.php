@@ -84,7 +84,7 @@
     foreach ($get_post_data as $key => $value) { 
       if($r > 1 ){
       ?>
-      <div class="order-form-full" id="rowCount<?php echo $r; ?>" data-number="0">
+      <div class="order-form-full" id="rowCount-cloneBlogUrlDiv-<?php echo $q; ?>-<?php echo $r; ?>" data-number="0">
         <div class="order-form-left" style="visibility: hidden;">
           <h5 class="order-form-label">Examples Blog URLs</h5>
           <div class="tooltip">
@@ -96,7 +96,7 @@
         </div>
         <div class="order-form-right">
           <input class="order-form-inputs" name="blog_url-<?php echo $r; ?>" value="<?php echo $value->meta_value; ?>" type="text" aria-required="true">
-          <a href="javascript:void(0)" class="btn-add-more btn-danger" onclick="removeItem('cloneBlogUrlDivAdd-<?php echo $q; ?>','rowCount<?php echo $r; ?>')"><i style="font-size:47px;margin-top:-3px;" class="fa fa-minus-square" aria-hidden="true"></i></a>
+          <a href="javascript:void(0)" class="btn-add-more btn-danger" onclick="removeItem('cloneBlogUrlDivAdd-<?php echo $q; ?>','rowCount-cloneBlogUrlDiv-<?php echo $q; ?>-<?php echo $r; ?>')"><i style="font-size:47px;margin-top:-3px;" class="fa fa-minus-square" aria-hidden="true"></i></a>
         </div>
       </div>
    <?php } $r++; } ?>
@@ -137,7 +137,7 @@
     foreach ($get_post_data as $key => $value) { 
       if($r > 1 ){
       ?>
-      <div class="order-form-full" id="rowCount<?php echo $r; ?>" data-number="0">
+      <div class="order-form-full" id="rowCount-cloneKeywordDiv-<?php echo $q; ?>-<?php echo $r; ?>" data-number="0">
         <div class="order-form-left" style="visibility: hidden;">
           <h5 class="order-form-label">Keywords (up to 3)</h5>
           <div class="tooltip">
@@ -149,7 +149,7 @@
         </div>
         <div class="order-form-right">
           <input class="order-form-inputs required" name="keywords-<?php echo $r; ?>" value="<?php echo $value->meta_value; ?>" type="text" aria-required="true">
-          <a href="javascript:void(0)" class="btn-add-more btn-danger" onclick="removeItem('cloneKeywordDivAdd-<?php echo $q; ?>','rowCount<?php echo $r; ?>')"><i style="font-size:47px;margin-top:-3px;" class="fa fa-minus-square" aria-hidden="true"></i></a>
+          <a href="javascript:void(0)" class="btn-add-more btn-danger" onclick="removeItem('cloneKeywordDivAdd-<?php echo $q; ?>','rowCount-cloneKeywordDiv-<?php echo $q; ?>-<?php echo $r; ?>')"><i style="font-size:47px;margin-top:-3px;" class="fa fa-minus-square" aria-hidden="true"></i></a>
         </div>
       </div>
     <?php } $r++; } ?>
