@@ -7,8 +7,8 @@
     $day_month_year = get_post_meta( $orderId, "_comp_day_month_year_{$productID}-{$q}", true );
     $physical_address = get_post_meta( $orderId, "_comp_physical_address_{$productID}-{$q}", true );
     $time_day = get_post_meta( $orderId, "_comp_time_day_{$productID}-{$q}", true );
-    $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}-{$q}", true );
-    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
+    $reference_url = get_post_meta( $orderId, "_comp_reference_url-1_{$productID}-{$q}", true );
+    $keywords = get_post_meta( $orderId, "_comp_keywords-1_{$productID}-{$q}", true );
     $connecting_words = get_post_meta( $orderId, "_comp_connecting_words_{$productID}-{$q}", true );
     $relevant_quotes = get_post_meta( $orderId, "_comp_relevant_quotes_{$productID}-{$q}", true );
     $boilerplate = get_post_meta( $orderId, "_comp_boilerplate_{$productID}-{$q}", true );    
@@ -128,7 +128,31 @@
   <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneRefUrlDiv-<?php echo $q; ?>','cloneRefUrlDivAdd-<?php echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
 </div>
 </div>
-<div id="cloneRefUrlDivAdd-<?php echo $q; ?>"></div>
+<div id="cloneRefUrlDivAdd-<?php echo $q; ?>">
+  <?php 
+    $get_post_data = $wpdb->get_results("SELECT * FROM gpm_postmeta as pm WHERE pm.post_id=$orderId AND pm.meta_key LIKE '_comp_reference_url-%".$productID."-".$q."' ORDER BY pm.meta_id ASC");
+    $r=1;
+    foreach ($get_post_data as $key => $value) { 
+      if($r > 1 ){
+      ?>
+      <div class="order-form-full" id="rowCount-cloneRefUrlDiv-<?php echo $q; ?>-<?php echo $r; ?>" data-number="0">
+        <div class="order-form-left" style="visibility: hidden;">
+            <h5 class="order-form-label">Reference URLs</h5>
+            <div class="tooltip">
+              <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
+              <div class="tooltip-text">
+                <p><strong>Example</strong><br>
+                  http://example.com</p>
+              </div>
+            </div>
+          </div>
+        <div class="order-form-right">
+          <input class="order-form-inputs" name="reference_url-<?php echo $r; ?>" value="<?php echo $value->meta_value; ?>" type="text" aria-required="true">
+          <a href="javascript:void(0)" class="btn-add-more btn-danger" onclick="removeItem('cloneRefUrlDivAdd-<?php echo $q; ?>','rowCount-cloneRefUrlDiv-<?php echo $q; ?>-<?php echo $r; ?>')"><i style="font-size:47px;margin-top:-3px;" class="fa fa-minus-square" aria-hidden="true"></i></a>
+        </div>
+      </div>
+   <?php } $r++; } ?>
+</div>
 <div class="order-form-full" id="cloneKeyPreReDiv-<?php echo $q; ?>">
 <div class="order-form-left">
   <h5 class="order-form-label">Keywords (up to 3)</h5>
@@ -141,11 +165,35 @@
   </div>
 </div>
 <div class="order-form-right">
-  <input class="order-form-inputs" name="keywords" value="<?php echo $keywords; ?>" type="text">
+  <input class="order-form-inputs" name="keywords-1" value="<?php echo $keywords; ?>" type="text">
   <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyPreReDiv-<?php echo $q; ?>','cloneKeyPreReDivAdd-<?php echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
 </div>
 </div>
-<div id="cloneKeyPreReDivAdd-<?php echo $q; ?>"></div>
+<div id="cloneKeyPreReDivAdd-<?php echo $q; ?>">
+  <?php 
+    $get_post_data = $wpdb->get_results("SELECT * FROM gpm_postmeta as pm WHERE pm.post_id=$orderId AND pm.meta_key LIKE '_comp_keywords-%".$productID."-".$q."' ORDER BY pm.meta_id ASC");
+    $r=1;
+    foreach ($get_post_data as $key => $value) { 
+      if($r > 1 ){
+      ?>
+      <div class="order-form-full" id="rowCount-cloneKeyPreReDiv-<?php echo $q; ?>-<?php echo $r; ?>" data-number="0">
+        <div class="order-form-left" style="visibility: hidden;">
+          <h5 class="order-form-label">Keywords (up to 3)</h5>
+          <div class="tooltip">
+            <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
+            <div class="tooltip-text">
+              <p><strong>Example</strong><br>
+                plumbing in SLC, emergency plumbing services</p>
+            </div>
+          </div>
+        </div>
+        <div class="order-form-right">
+          <input class="order-form-inputs" name="keywords-<?php echo $r; ?>" value="<?php echo $value->meta_value; ?>" type="text" aria-required="true">
+          <a href="javascript:void(0)" class="btn-add-more btn-danger" onclick="removeItem('cloneKeyPreReDivAdd-<?php echo $q; ?>','rowCount-cloneKeyPreReDiv-<?php echo $q; ?>-<?php echo $r; ?>')"><i style="font-size:47px;margin-top:-3px;" class="fa fa-minus-square" aria-hidden="true"></i></a>
+        </div>
+      </div>
+   <?php } $r++; } ?>
+</div>
 <div class="order-form-full">
 <div class="order-form-left">
   <h5 class="order-form-label">Connecting Words</h5>

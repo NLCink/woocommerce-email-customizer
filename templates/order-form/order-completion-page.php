@@ -123,7 +123,7 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
           <?php if(!empty($get_order_type) && $get_order_type == 'complete') { $fill++; ?>
           <div class="form-wrap area">
             <div class="alert alert-success alert-success-<?php echo $productID.'-'.$q; ?> completeForms">
-            <strong>Success!</strong> Complete this form.
+            <strong>Success!</strong> You have successfully completed this form.
           </div>
           <?php } else { ?>
             <form class="order-form area orderForm-<?php echo $productID.'-'.$q; ?>" id="orderForm-<?php echo $productID.'-'.$q; ?>" data-order-id="<?php echo $productID.'-'.$q; ?>" action="#" method="post">
@@ -211,7 +211,7 @@ function addNewItem(cloneThisDiv,cloneThisDivAdd,maxinput=0){
     }
     //Increment id
     var rowCo = rowCount+2;
-    var idText = 'rowCount' + rowCount;
+    var idText = 'rowCount-'+cloneThisDiv + '-' +rowCount;
     x.id = idText;
 
     $("#" + cloneThisDivAdd).append(x);
