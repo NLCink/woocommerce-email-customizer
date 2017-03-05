@@ -212,6 +212,6 @@ H2:  Reasons to Invest in Professional Service for Your AC<br>
     </div>
   </div>
   <div class="order-form-right">
-    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Insert general guidelines for this branded blog post"><?php echo $special_instructions; ?></textarea>
+    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Insert general guidelines (optional)"><?php echo $special_instructions; ?></textarea>
   </div>
 </div>

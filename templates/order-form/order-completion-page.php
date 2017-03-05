@@ -200,7 +200,7 @@ function addNewItem(cloneThisDiv,cloneThisDivAdd,maxinput=0){
     x.style.display = "";
 
     var rowCount = $('#' + cloneThisDivAdd).find('input').length;
-    if(rowCount+1 >= maxinput){
+    if(rowCount >= maxinput){
       alert('Maximum input exceed!');
       return false;
     }
@@ -237,7 +237,7 @@ function removeItem(cloneThisDivAdd,removeNum){
 }
 
 $(document).ready(function(){
-  $('.order-form').find('input, select').addClass('required');
+  $('.order-form').find('input:not(.not_required), select:not(.not_required)').addClass('required');
 
   $('.progress-lenght').html('<?php echo round($filupInPer,2); ?>%');
   $('.progressbar').css('width','<?php echo round($filupInPer,2); ?>%');

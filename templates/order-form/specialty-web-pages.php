@@ -135,7 +135,7 @@ http://example.com</p>
   </div>
   <div class="order-form-right">
     <input class="order-form-inputs" name="keywords-1" value="<?php echo $Keywords; ?>" type="text">
-    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordSpwpDiv-<?php echo $q; ?>','cloneKeywordSpwpDivAdd-<?php echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordSpwpDiv-<?php echo $q; ?>','cloneKeywordSpwpDivAdd-<?php echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
 <div id="cloneKeywordSpwpDivAdd-<?php echo $q; ?>">
@@ -191,6 +191,6 @@ Make sure to include a bulleted list of the AC Units that we carry somewhere on 
     </div>
   </div>
   <div class="order-form-right">
-    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Insert general guidelines for this branded blog post"><?php echo $special_instructions; ?></textarea>
+    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Insert general guidelines (optional)"><?php echo $special_instructions; ?></textarea>
   </div>
 </div>
