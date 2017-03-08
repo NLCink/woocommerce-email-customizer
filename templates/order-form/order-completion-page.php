@@ -20,10 +20,10 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
             <div class="progressbar" style="width:45%"></div>
           </div>
           <?php 
-             $get_status = get_post_meta( $orderId, "_comp_status_{$orderId}", true );
+             $get_status = get_post_meta( $orderId, "_comp_status_{$orderId}-1", true );
             if(!empty($get_status) && $get_status < 95){
           ?>
-          <h3 class="order-form-titie formCompleteTitle">Please complete the forms(s) bellow to complete your order</h3>
+          <h3 class="order-form-titie formCompleteTitle">Please complete the forms(s) below to complete your order</h3>
           <?php } ?>
 
             <?php
@@ -85,9 +85,9 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
               }
             } 
 
-            $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}", true );
+            $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}-1", true );
             if(!empty($get_order_id)){
-              $get_order_type = get_post_meta( $orderId, "_comp_order_type_{$productID}", true );              
+              $get_order_type = get_post_meta( $orderId, "_comp_order_type_{$productID}-1", true );              
             } else {
               $get_order_type = '';
             }

@@ -89,7 +89,11 @@
   display: inline-block;
   cursor: pointer;
 }
-.btn-color-white{color: #ffffff;}
+.btn-color-white{
+  color: #ffffff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
 .btn-order-fill {
   color: #ffffff;
   background: #46c8c8;
