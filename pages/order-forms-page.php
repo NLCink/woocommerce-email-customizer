@@ -47,6 +47,7 @@
         $orderId = $order->id;
         $order_number = get_post_meta( $orderId, "_order_number", true );
         $pfx_date = get_the_date( 'M d, Y', $orderId );
+        $pfx_date_sort = get_the_date( 'Ymd', $orderId );
 
         $billing_first_name = get_post_meta( $orderId, "_billing_first_name", true );
         $billing_last_name = get_post_meta( $orderId, "_billing_last_name", true );
@@ -57,7 +58,7 @@
             <td>
             <input type="checkbox" name="readyForms[]" value="<?php echo $orderId; ?>">
             <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$orderId; ?></a></td>
-            <td><?php echo $pfx_date; ?></td>
+            <td><span style="display: none;"><?php echo $pfx_date_sort; ?></span><?php echo $pfx_date; ?></td>
             <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
             <td><?php echo $billing_company_name; ?></td>
             <td>
@@ -178,6 +179,7 @@
         $orderId = $order->id;
         $order_number = get_post_meta( $orderId, "_order_number", true );
         $pfx_date = get_the_date( 'M d, Y', $orderId );
+        $pfx_date_sort = get_the_date( 'Ymd', $orderId );
 
         $billing_first_name = get_post_meta( $orderId, "_billing_first_name", true );
         $billing_last_name = get_post_meta( $orderId, "_billing_last_name", true );
@@ -189,7 +191,7 @@
             <input type="checkbox" name="readyForms[]" value="<?php echo $orderId; ?>">
             <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$orderId; ?></a>
             </td>
-            <td><?php echo $pfx_date; ?></td>
+            <td><span style="display: none;"><?php echo $pfx_date_sort; ?></span><?php echo $pfx_date; ?></td>
             <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
             <td><?php echo $billing_company_name; ?></td>
             <td>
@@ -303,6 +305,7 @@
             $orderId = $order->id;
             $order_number = get_post_meta( $orderId, "_order_number", true );
             $pfx_date = get_the_date( 'M d, Y', $orderId );
+            $pfx_date_sort = get_the_date( 'Ymd', $orderId );
 
             $billing_first_name = get_post_meta( $orderId, "_billing_first_name", true );
             $billing_last_name = get_post_meta( $orderId, "_billing_last_name", true );
@@ -313,7 +316,7 @@
                 <td>
                 <input type="checkbox" name="readyForms[]" value="<?php echo $orderId; ?>">
                 <a href="<?php echo admin_url( 'post.php?post='.$orderId.'&action=edit' ); ?>"><?php echo '#'.$orderId; ?></a></td>
-                <td><?php echo $pfx_date; ?></td>
+                <td><span style="display: none;"><?php echo $pfx_date_sort; ?></span><?php echo $pfx_date; ?></td>
                 <td><?php echo $billing_first_name.' '.$billing_last_name; ?></td>
                 <td><?php echo $billing_company_name; ?></td>
                 <td>
