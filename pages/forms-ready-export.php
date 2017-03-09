@@ -40,12 +40,13 @@ class CSVExport
         
         $csv_output .= "Title,Values,";
         $csv_output .= "\n";
-
+        $inc=0;
         foreach ($get_post_data as $key => $value) {
             $export_title = explode("_", $value->title);
             if(($export_title[2] != 'order' && $export_title[3] != 'type') && $export_title[2] != 'status'){
                 
             if($export_title[2] == 'product' && $export_title[3] == 'id'){
+                if($inc !=0 ){ $csv_output .= "\n"; } $inc++;
                 $csv_output .= "Product Name,";
                 $order = wc_get_order( $value->post_id );
                 $items = $order->get_items(); 
