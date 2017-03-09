@@ -266,6 +266,10 @@
 
 <fieldset style="position: relative;">
 <legend><span> In Writing </span></legend>
+<div class="selectDownload">
+    <span class="dashicons dashicons-download"></span>
+    <a href="javascript:void(0)" onclick="exportSelected()" alt="Download Selected Forms">Download Selected Forms</a>
+</div>
 <div class="top tablePrivate">    
     <div class="alignleft actions bulkactions">                                             
         <select name="action" id="bulk-action-inWriting">
@@ -286,6 +290,7 @@
             <th>Customer Name</th>
             <th>Company Name</th>
             <th>Product/Word count</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -380,6 +385,7 @@
                     }
                 ?>
                 </td>
+                <td><a style="text-decoration: none;" href="<?php echo admin_url( 'admin.php?page=woocommerce_order_forms&export='.$orderId ); ?>" alt="Order Completion Form"><span class="dashicons dashicons-download"></span></a></td>
             </tr>
             <?php         
             }
@@ -390,6 +396,10 @@
 
 <fieldset  style="position: relative;">
 <legend><span> Delivered </span></legend>
+<div class="selectDownload">
+    <span class="dashicons dashicons-download"></span>
+    <a href="javascript:void(0)" onclick="exportSelected()" alt="Download Selected Forms">Download Selected Forms</a>
+</div>
 <div class="top tablePrivate">    
     <div class="alignleft actions bulkactions">                                             
         <select name="action" id="bulk-action-delivered">
@@ -410,6 +420,7 @@
             <th>Customer Name</th>
             <th>Company Name</th>
             <th>Product/Word count</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -503,6 +514,7 @@
                     }
                 ?>
                 </td>
+                <td><a style="text-decoration: none;" href="<?php echo admin_url( 'admin.php?page=woocommerce_order_forms&export='.$orderId ); ?>" alt="Order Completion Form"><span class="dashicons dashicons-download"></span></a></td>
             </tr>
             <?php         
             }
