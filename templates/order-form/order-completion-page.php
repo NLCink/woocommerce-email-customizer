@@ -15,15 +15,15 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
       <div class="container">
         <section class="order-section area">
           <h4 class="order-no"><span>Order # <?php echo $get_order_number; ?></span> - <font class="allProductDes"></font></h4>
-          <h2 class="progress-title">Your Progress <span class="progress-lenght">45%</span></h2>
+          <h2 class="progress-title">Your Progress <span class="progress-lenght">0%</span></h2>
           <div class="progress-container">
-            <div class="progressbar" style="width:45%"></div>
+            <div class="progressbar" style="width:0%"></div>
           </div>
           <?php 
              $get_status = get_post_meta( $orderId, "_comp_status_{$orderId}-1", true );
-            if(!empty($get_status) && $get_status < 95){
+            if($get_status < 95){
           ?>
-          <h3 class="order-form-titie formCompleteTitle">Please complete the forms(s) below to complete your order</h3>
+          <h3 class="order-form-titie formCompleteTitle">Please complete the form(s) below to complete your order</h3>
           <?php } ?>
 
             <?php
@@ -85,13 +85,7 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
               }
             } 
 
-            $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}-1", true );
-            if(!empty($get_order_id)){
-              $get_order_type = get_post_meta( $orderId, "_comp_order_type_{$productID}-1", true );              
-            } else {
-              $get_order_type = '';
-            }
-
+            
              $get_product_id = $item['product_id'];
              $post_product = get_post($get_product_id); 
              $slug_product = $post_product->post_name;
@@ -99,6 +93,13 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
 
              $allProductDes[] = $productName.' - '.$output_attribute;
             for($q=1;$q<=$item['qty'];$q++){
+
+            $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}-{$q}", true );
+            if(!empty($get_order_id)){
+              $get_order_type = get_post_meta( $orderId, "_comp_order_type_{$productID}-{$q}", true );              
+            } else {
+              $get_order_type = '';
+            }
             ?>
 
           <div class="divider"></div>
@@ -238,9 +239,9 @@ function removeItem(cloneThisDivAdd,removeNum){
 
 $(document).ready(function(){
   $('.order-form').find('input:not(.not_required), select:not(.not_required)').addClass('required');
-
-  $('.progress-lenght').html('<?php echo round($filupInPer,2); ?>%');
-  $('.progressbar').css('width','<?php echo round($filupInPer,2); ?>%');
+  var progressbarr = Math.round('<?php echo $filupInPer; ?>');
+  $('.progress-lenght').html(progressbarr+'%');
+  $('.progressbar').css('width',progressbarr+'%');
   $('.allProductDes').html('<?php echo $allProductD; ?>');
 });
 $(document).on("click", ":submit", function(e) {
