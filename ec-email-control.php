@@ -1055,7 +1055,7 @@ class WC_Email_Control {
 	        $page_template = dirname( __FILE__ ) . '/templates/order-form/order-completion-page.php';
 	    }
 	    if ( is_page( 'reminder-email' ) ) {
-	        $page_template = dirname( __FILE__ ) . '/pages/reminder-email-templete.php';
+	        $page_template = dirname( __FILE__ ) . '/pages/emailQue/reminder-email-templete.php';
 	    }
 	    return $page_template;
 	}
