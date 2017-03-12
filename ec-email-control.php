@@ -404,6 +404,9 @@ class WC_Email_Control {
 		$slug = 'order-completion-form';
 		$title = 'Order Completion Form';
 
+		$slug2 = 'reminder-email';
+		$title2 = 'Reminder Email';
+
 		// If the page doesn't already exist, then create it
 		if( null == get_page_by_title( $title ) ) {
 
@@ -413,14 +416,29 @@ class WC_Email_Control {
 					'comment_status'	=>	'closed',
 					'ping_status'		=>	'closed',
 					'post_author'		=>	$author_id,
-					'post_name'		=>	$slug,
+					'post_name'			=>	$slug,
 					'post_title'		=>	$title,
 					'post_status'		=>	'publish',
-					'post_type'		=>	'page'
+					'post_type'			=>	'page'
 				)
 			);
 
 		// Otherwise, we'll stop and set a flag
+		} else if(null == get_page_by_title( $title2 )) {
+
+			// Set the page ID so that we know the page was created successfully
+			$post_id = wp_insert_post(
+				array(
+					'comment_status'	=>	'closed',
+					'ping_status'		=>	'closed',
+					'post_author'		=>	$author_id,
+					'post_name'			=>	$slug2,
+					'post_title'		=>	$title2,
+					'post_status'		=>	'publish',
+					'post_type'			=>	'page'
+				)
+			);
+
 		} else {
 
 		    // Arbitrarily use -2 to indicate that the page with the title already exists
@@ -1035,6 +1053,9 @@ class WC_Email_Control {
 	{
 	    if ( is_page( 'order-completion-form' ) ) {
 	        $page_template = dirname( __FILE__ ) . '/templates/order-form/order-completion-page.php';
+	    }
+	    if ( is_page( 'reminder-email' ) ) {
+	        $page_template = dirname( __FILE__ ) . '/pages/reminder-email-templete.php';
 	    }
 	    return $page_template;
 	}
