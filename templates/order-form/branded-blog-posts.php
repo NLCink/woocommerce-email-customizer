@@ -6,8 +6,8 @@
     $get_blog_topic = get_post_meta( $orderId, "_comp_blog_topic_{$productID}-{$q}", true );
     $get_blog_url = get_post_meta( $orderId, "_comp_blog_url-1_{$productID}-{$q}", true );
     $get_reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}-{$q}", true );
-    $get_keywords = get_post_meta( $orderId, "_comp_keywords-1_{$productID}-{$q}", true );
-    $get_conneting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}-{$q}", true );
+    $get_keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
+    //$get_conneting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}-{$q}", true );
     $get_special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}-{$q}", true );    
   } else {
     $get_company_name = '';
@@ -16,7 +16,7 @@
     $get_blog_url = '';
     $get_reference_url = '';
     $get_keywords = '';
-    $get_conneting_words = '';
+    //$get_conneting_words = '';
     $get_special_instructions = '';
   }
 ?>
@@ -126,10 +126,11 @@
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs required" name="keywords-1" value="<?php echo $get_keywords; ?>" type="text">
-    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordDiv-<?php echo $q; ?>','cloneKeywordDivAdd-<?php echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+    <input class="order-form-inputs required" name="keywords" value="<?php echo $get_keywords; ?>" type="text" placeholder="Separates multiple keywords with commas">
+    <!-- <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordDiv-<?php //echo $q; ?>','cloneKeywordDivAdd-<?php //echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a> -->
   </div>
 </div>
+<?php /*?>
 <div id="cloneKeywordDivAdd-<?php echo $q; ?>">
     <?php 
       $get_post_data = $wpdb->get_results("SELECT * FROM gpm_postmeta as pm WHERE pm.post_id=$orderId AND pm.meta_key LIKE '_comp_keywords-%".$productID."-".$q."' ORDER BY pm.meta_id ASC");
@@ -153,8 +154,8 @@
         </div>
       </div>
     <?php } $r++; } ?>
-</div>
-<div class="order-form-full">
+</div><?php */ ?>
+<!-- <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Conneting words</h5>
     <div class="tooltip">
@@ -165,9 +166,9 @@
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs required" name="conneting_words" value="<?php echo $get_conneting_words; ?>" type="text">
+    <input class="order-form-inputs required" name="conneting_words" value="<?php //echo $get_conneting_words; ?>" type="text">
   </div>
-</div>
+</div> -->
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Special Instructions</h5>

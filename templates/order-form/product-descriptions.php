@@ -3,7 +3,7 @@
   if(!empty($get_order_id)){
     $product_name = get_post_meta( $orderId, "_comp_product_name_{$productID}-{$q}", true );
     $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}-{$q}", true );
-    $keywords = get_post_meta( $orderId, "_comp_keywords-1_{$productID}-{$q}", true );
+    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
     $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}-{$q}", true );
   } else {
     $product_name = '';
@@ -54,10 +54,11 @@ Disney</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="keywords-1" value="<?php echo $keywords; ?>" type="text">
-    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyPreDesDiv-<?php echo $q; ?>','cloneKeyPreDesDivAdd-<?php echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+    <input class="order-form-inputs" name="keywords" value="<?php echo $keywords; ?>" type="text" placeholder="Separates multiple keywords with commas">
+    <!-- <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyPreDesDiv-<?php //echo $q; ?>','cloneKeyPreDesDivAdd-<?php //echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a> -->
   </div>
 </div>
+<?php /* ?>
 <div id="cloneKeyPreDesDivAdd-<?php echo $q; ?>">
   <?php 
     $get_post_data = $wpdb->get_results("SELECT * FROM gpm_postmeta as pm WHERE pm.post_id=$orderId AND pm.meta_key LIKE '_comp_keywords-%".$productID."-".$q."' ORDER BY pm.meta_id ASC");
@@ -82,7 +83,7 @@ Disney</p>
         </div>
       </div>
    <?php } $r++; } ?>
-</div>
+</div><?php */ ?>
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Special Instructions</h5>

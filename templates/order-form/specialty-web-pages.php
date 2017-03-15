@@ -6,8 +6,8 @@
     $page_name = get_post_meta( $orderId, "_comp_page_name_{$productID}-{$q}", true );
     $example_websites = get_post_meta( $orderId, "_comp_example_websites-1_{$productID}-{$q}", true );
     $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}", true );
-    $keywords = get_post_meta( $orderId, "_comp_keywords-1_{$productID}-{$q}", true );
-    $connecting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}-{$q}", true );
+    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
+    //$connecting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}-{$q}", true );
     $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}-{$q}", true );    
   } else {
     $company_name = '';
@@ -16,7 +16,7 @@
     $example_websites = '';
     $reference_url = '';
     $keywords = '';
-    $connecting_words = '';
+    //$connecting_words = '';
     $special_instructions = '';
   }
 ?>
@@ -134,11 +134,11 @@ http://example.com</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="keywords-1" value="<?php echo $Keywords; ?>" type="text">
-    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordSpwpDiv-<?php echo $q; ?>','cloneKeywordSpwpDivAdd-<?php echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+    <input class="order-form-inputs" name="keywords" value="<?php echo $Keywords; ?>" type="text" placeholder="Separates multiple keywords with commas">
+    <!-- <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordSpwpDiv-<?php //echo $q; ?>','cloneKeywordSpwpDivAdd-<?php //echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a> -->
   </div>
 </div>
-<div id="cloneKeywordSpwpDivAdd-<?php echo $q; ?>">
+<?php /*?><div id="cloneKeywordSpwpDivAdd-<?php echo $q; ?>">
   <?php 
     $get_post_data = $wpdb->get_results("SELECT * FROM gpm_postmeta as pm WHERE pm.post_id=$orderId AND pm.meta_key LIKE '_comp_keywords-%".$productID."-".$q."' ORDER BY pm.meta_id ASC");
     $r=1;
@@ -162,8 +162,8 @@ http://example.com</p>
         </div>
       </div>
    <?php } $r++; } ?>
-</div>
-<div class="order-form-full">
+</div><?php */ ?>
+<!-- <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Connecting Words</h5>
     <div class="tooltip">
@@ -176,7 +176,7 @@ http://example.com</p>
   <div class="order-form-right">
     <input class="order-form-inputs" name="connecting_words" value="<?php echo $connecting_words; ?>" type="text">
   </div>
-</div>
+</div> -->
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Special Instructions</h5>

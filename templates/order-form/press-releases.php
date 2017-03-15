@@ -8,8 +8,8 @@
     $physical_address = get_post_meta( $orderId, "_comp_physical_address_{$productID}-{$q}", true );
     $time_day = get_post_meta( $orderId, "_comp_time_day_{$productID}-{$q}", true );
     $reference_url = get_post_meta( $orderId, "_comp_reference_url-1_{$productID}-{$q}", true );
-    $keywords = get_post_meta( $orderId, "_comp_keywords-1_{$productID}-{$q}", true );
-    $connecting_words = get_post_meta( $orderId, "_comp_connecting_words_{$productID}-{$q}", true );
+    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
+    //$connecting_words = get_post_meta( $orderId, "_comp_connecting_words_{$productID}-{$q}", true );
     $relevant_quotes = get_post_meta( $orderId, "_comp_relevant_quotes_{$productID}-{$q}", true );
     $boilerplate = get_post_meta( $orderId, "_comp_boilerplate_{$productID}-{$q}", true );    
     $news = get_post_meta( $orderId, "_comp_news_{$productID}-{$q}", true );
@@ -22,7 +22,7 @@
     $time_day = '';
     $reference_url = '';
     $keywords = '';
-    $connecting_words = '';
+    //$connecting_words = '';
     $relevant_quotes = '';
     $boilerplate = '';
     $news = '';
@@ -165,11 +165,11 @@
   </div>
 </div>
 <div class="order-form-right">
-  <input class="order-form-inputs" name="keywords-1" value="<?php echo $keywords; ?>" type="text">
-  <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyPreReDiv-<?php echo $q; ?>','cloneKeyPreReDivAdd-<?php echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+  <input class="order-form-inputs" name="keywords" value="<?php echo $keywords; ?>" type="text" placeholder="Separates multiple keywords with commas">
+  <!-- <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyPreReDiv-<?php //echo $q; ?>','cloneKeyPreReDivAdd-<?php //echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a> -->
 </div>
 </div>
-<div id="cloneKeyPreReDivAdd-<?php echo $q; ?>">
+<?php /*?><div id="cloneKeyPreReDivAdd-<?php echo $q; ?>">
   <?php 
     $get_post_data = $wpdb->get_results("SELECT * FROM gpm_postmeta as pm WHERE pm.post_id=$orderId AND pm.meta_key LIKE '_comp_keywords-%".$productID."-".$q."' ORDER BY pm.meta_id ASC");
     $r=1;
@@ -193,8 +193,8 @@
         </div>
       </div>
    <?php } $r++; } ?>
-</div>
-<div class="order-form-full">
+</div><?php */ ?>
+<!-- <div class="order-form-full">
 <div class="order-form-left">
   <h5 class="order-form-label">Connecting Words</h5>
   <div class="tooltip">
@@ -207,7 +207,7 @@
 <div class="order-form-right">
   <input class="order-form-inputs" name="connecting_words" value="<?php echo $connecting_words; ?>" type="text">
 </div>
-</div>
+</div> -->
 <div class="order-form-full">
 <div class="order-form-left">
   <h5 class="order-form-label">Relevant Quotes</h5>

@@ -5,8 +5,8 @@
     $current_website = get_post_meta( $orderId, "_comp_current_website_{$productID}-{$q}", true );
     $url_needing_rewritten = get_post_meta( $orderId, "_comp_url_needing_rewritten_{$productID}-{$q}", true );
     $page_name = get_post_meta( $orderId, "_comp_page_name_{$productID}-{$q}", true );
-    $keywords = get_post_meta( $orderId, "_comp_keywords-1_{$productID}-{$q}", true );
-    $connecting_words = get_post_meta( $orderId, "_comp_connecting_words_{$productID}-{$q}", true );
+    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
+    //$connecting_words = get_post_meta( $orderId, "_comp_connecting_words_{$productID}-{$q}", true );
     $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}-{$q}", true );
   } else {
     $company_name = '';
@@ -14,7 +14,7 @@
     $url_needing_rewritten = '';
     $page_name = '';
     $keywords = '';
-    $connecting_words = '';
+    //$connecting_words = '';
     $special_instructions = '';
   }
 ?>
@@ -114,11 +114,11 @@ air conditioners in SLC, AC repair in SLC</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="keywords-1" value="<?php echo $keywords; ?>" type="text">
-    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordWpreDiv-<?php echo $q; ?>','cloneKeywordWpreDivAdd-<?php echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+    <input class="order-form-inputs" name="keywords" value="<?php echo $keywords; ?>" type="text" placeholder="Separates multiple keywords with commas">
+    <!-- <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordWpreDiv-<?php //echo $q; ?>','cloneKeywordWpreDivAdd-<?php //echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a> -->
   </div>
 </div>
-<div id="cloneKeywordWpreDivAdd-<?php echo $q; ?>">
+<?php /* ?><div id="cloneKeywordWpreDivAdd-<?php echo $q; ?>">
   <?php 
     $get_post_data = $wpdb->get_results("SELECT * FROM gpm_postmeta as pm WHERE pm.post_id=$orderId AND pm.meta_key LIKE '_comp_keywords-%".$productID."-".$q."' ORDER BY pm.meta_id ASC");
     $r=1;
@@ -142,8 +142,8 @@ air conditioners in SLC, AC repair in SLC</p>
         </div>
       </div>
    <?php } $r++; } ?>
-</div>
-<div class="order-form-full">
+</div><?php */ ?>
+<!-- <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Connecting Words</h5>
     <div class="tooltip">
@@ -156,7 +156,7 @@ air conditioners in SLC, AC repair in SLC</p>
   <div class="order-form-right">
     <input class="order-form-inputs" name="connecting_words" value="<?php echo $connecting_words; ?>" type="text">
   </div>
-</div>
+</div> -->
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Special Instructions</h5>
