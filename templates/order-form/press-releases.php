@@ -9,6 +9,7 @@
     $time_day = get_post_meta( $orderId, "_comp_time_day_{$productID}-{$q}", true );
     $reference_url = get_post_meta( $orderId, "_comp_reference_url-1_{$productID}-{$q}", true );
     $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
+    $headline = get_post_meta( $orderId, "_comp_headline_{$productID}-{$q}", true );
     //$connecting_words = get_post_meta( $orderId, "_comp_connecting_words_{$productID}-{$q}", true );
     $relevant_quotes = get_post_meta( $orderId, "_comp_relevant_quotes_{$productID}-{$q}", true );
     $boilerplate = get_post_meta( $orderId, "_comp_boilerplate_{$productID}-{$q}", true );    
@@ -22,6 +23,7 @@
     $time_day = '';
     $reference_url = '';
     $keywords = '';
+    $headline = '';
     //$connecting_words = '';
     $relevant_quotes = '';
     $boilerplate = '';
@@ -34,7 +36,7 @@
   <div class="tooltip">
     <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
     <div class="tooltip-text">
-      <p>Enter your company name here</p>
+      <p>Enter the name of the company that the content is for.</p>
     </div>
   </div>
 </div>
@@ -81,7 +83,7 @@
   </div>
 </div>
 <div class="order-form-right">
-  <input class="order-form-inputs" name="day_month_year" value="<?php echo $day_month_year; ?>" placeholder="(If there is an actual event taking place)" type="text">
+  <input class="order-form-inputs not_required" name="day_month_year" value="<?php echo $day_month_year; ?>" placeholder="(If there is an actual event taking place)" type="text">
 </div>
 </div>
 <div class="order-form-full">
@@ -95,7 +97,7 @@
   </div>
 </div>
 <div class="order-form-right">
-  <input class="order-form-inputs" name="physical_address" value="<?php echo $physical_address; ?>" placeholder="(If there is an actual event taking place)" type="text">
+  <input class="order-form-inputs not_required" name="physical_address" value="<?php echo $physical_address; ?>" placeholder="(If there is an actual event taking place)" type="text">
 </div>
 </div>
 <div class="order-form-full">
@@ -109,7 +111,7 @@
   </div>
 </div>
 <div class="order-form-right">
-  <input class="order-form-inputs" name="time_day" value="<?php echo $time_day; ?>" placeholder="(If there is an actual event taking place)" type="text">
+  <input class="order-form-inputs not_required" name="time_day" value="<?php echo $time_day; ?>" placeholder="(If there is an actual event taking place)" type="text">
 </div>
 </div>
 <div class="order-form-full" id="cloneRefUrlDiv-<?php echo $q; ?>">
@@ -118,13 +120,12 @@
   <div class="tooltip">
     <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
     <div class="tooltip-text">
-      <p><strong>Example</strong><br>
-        http://example.com</p>
+      <p>Enter URLs the writer can reference for information.</p>
     </div>
   </div>
 </div>
 <div class="order-form-right">
-  <input class="order-form-inputs" name="reference_url-1" value="<?php echo $reference_url; ?>" type="text">
+  <input class="order-form-inputs not_required" name="reference_url-1" value="<?php echo $reference_url; ?>" type="text">
   <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneRefUrlDiv-<?php echo $q; ?>','cloneRefUrlDivAdd-<?php echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
 </div>
 </div>
@@ -141,8 +142,7 @@
             <div class="tooltip">
               <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
               <div class="tooltip-text">
-                <p><strong>Example</strong><br>
-                  http://example.com</p>
+                <p>Enter URLs the writer can reference for information.</p>
               </div>
             </div>
           </div>
@@ -165,8 +165,22 @@
   </div>
 </div>
 <div class="order-form-right">
-  <input class="order-form-inputs" name="keywords" value="<?php echo $keywords; ?>" type="text" placeholder="Separates multiple keywords with commas">
+  <input class="order-form-inputs not_required" name="keywords" value="<?php echo $keywords; ?>" type="text" placeholder="Separates multiple keywords with commas">
   <!-- <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyPreReDiv-<?php //echo $q; ?>','cloneKeyPreReDivAdd-<?php //echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a> -->
+</div>
+</div>
+<div class="order-form-full">
+<div class="order-form-left">
+  <h5 class="order-form-label">Headline</h5>
+  <div class="tooltip">
+    <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
+    <div class="tooltip-text">
+      <p>Insert the headline of your news event.</p>
+    </div>
+  </div>
+</div>
+<div class="order-form-right">
+  <input class="order-form-inputs not_required" name="headline" value="<?php echo $headline; ?>" type="text" placeholder="">
 </div>
 </div>
 <?php /*?><div id="cloneKeyPreReDivAdd-<?php echo $q; ?>">
@@ -210,6 +224,21 @@
 </div> -->
 <div class="order-form-full">
 <div class="order-form-left">
+  <h5 class="order-form-label">What's the News?</h5>
+  <div class="tooltip">
+    <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
+    <div class="tooltip-text">
+      <p><strong>Example:</strong><br>
+We've just expanded our services list to include 24 hour emergency services to Salt Lake City residents.  We now offer 24 hour services to all surrounding cities as well (From Ogden down to Provo).  There is no additional fee for this.  Trucks come fully stocked so all repairs can be made on the first visit.  See URL for more details on exactly how the service works. We can be contacted at 999-999-9999.</p>
+    </div>
+  </div>
+</div>
+<div class="order-form-right">
+  <textarea class="order-form-inputs not_required" name="news" rows="8" cols="80" placeholder="(Give us detailed information about what's being announced. Answer who, what, when, where and why. Include any details, statistics, dates or other relevant information)"><?php echo $news; ?></textarea>
+</div>
+</div>
+<div class="order-form-full">
+<div class="order-form-left">
   <h5 class="order-form-label">Relevant Quotes</h5>
   <div class="tooltip">
     <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
@@ -220,7 +249,7 @@
   </div>
 </div>
 <div class="order-form-right">
-  <textarea class="order-form-inputs" name="relevant_quotes" rows="8" cols="80" placeholder="(Include quotes from peaple/executives close to the sitiation. Please include person's name and title/occupation)"><?php echo $relevant_quotes; ?></textarea>
+  <textarea class="order-form-inputs not_required" name="relevant_quotes" rows="8" cols="80" placeholder="(Include quotes from peaple/executives close to the sitiation. Please include person's name and title/occupation)"><?php echo $relevant_quotes; ?></textarea>
 </div>
 </div>
 <div class="order-form-full">
@@ -236,21 +265,6 @@ Founded in 1974, Joe's Plumbing is a full-service plumbing and drain cleaning co
   </div>
 </div>
 <div class="order-form-right">
-  <textarea class="order-form-inputs" name="boilerplate" rows="8" cols="80" placeholder="(This is the 'About Us' section of the release)"><?php echo $boilerplate; ?></textarea>
-</div>
-</div>
-<div class="order-form-full">
-<div class="order-form-left">
-  <h5 class="order-form-label">What's the News?</h5>
-  <div class="tooltip">
-    <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
-    <div class="tooltip-text">
-      <p><strong>Example:</strong><br>
-We've just expanded our services list to include 24 hour emergency services to Salt Lake City residents.  We now offer 24 hour services to all surrounding cities as well (From Ogden down to Provo).  There is no additional fee for this.  Trucks come fully stocked so all repairs can be made on the first visit.  See URL for more details on exactly how the service works. We can be contacted at 999-999-9999.</p>
-    </div>
-  </div>
-</div>
-<div class="order-form-right">
-  <textarea class="order-form-inputs" name="news" rows="8" cols="80" placeholder="(Give us detailed information about what's being announced. Answer who, what, when, where and why. Include any details, statistics, dates or other relevant information)"><?php echo $news; ?></textarea>
+  <textarea class="order-form-inputs not_required" name="boilerplate" rows="8" cols="80" placeholder="(This is the 'About Us' section of the release)"><?php echo $boilerplate; ?></textarea>
 </div>
 </div>

@@ -8,7 +8,7 @@
     $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}-{$q}", true );
     $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
     //$connecting_words = get_post_meta( $orderId, "_comp_connecting_words_{$productID}-{$q}", true );
-    $headlines = get_post_meta( $orderId, "_comp_headlines_{$productID}-{$q}", true );
+    //$headlines = get_post_meta( $orderId, "_comp_headlines_{$productID}-{$q}", true );
     $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}-{$q}", true );
   } else {
     $company_name = '';
@@ -18,7 +18,7 @@
     $reference_url = '';
     $keywords = '';
     //$connecting_words = '';
-    $headlines = '';
+    //$headlines = '';
     $special_instructions = '';
   }
 ?>
@@ -28,7 +28,7 @@
     <div class="tooltip">
       <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
       <div class="tooltip-text">
-        <p>Enter your company name here</p>
+        <p>Enter the name of the company that the content is for.</p>
       </div>
     </div>
   </div>
@@ -115,8 +115,7 @@ Cooling<br>
     <div class="tooltip">
       <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
       <div class="tooltip-text">
-        <p><strong>Example:</strong><br>
-http://example.com</p>
+        <p>Enter URLs the writer can reference for information./p>
       </div>
     </div>
   </div>
@@ -176,10 +175,10 @@ http://example.com</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="connecting_words" value="<?php echo $connecting_words; ?>" type="text">
+    <input class="order-form-inputs" name="connecting_words" value="<?php //echo $connecting_words; ?>" type="text">
   </div>
 </div> -->
-<div class="order-form-full">
+<!-- <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">H1 or H2 Headlines</h5>
     <div class="tooltip">
@@ -194,24 +193,20 @@ H2:  Reasons to Invest in Professional Service for Your AC<br>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="headlines" value="<?php echo $headlines; ?>" type="text">
+    <input class="order-form-inputs" name="headlines" value="<?php //echo $headlines; ?>" type="text">
   </div>
-</div>
+</div> -->
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Special Instructions</h5>
     <div class="tooltip">
       <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
       <div class="tooltip-text">
-        <p><strong>Example:</strong><br>
-          Match the tone of the existing pages on the site.  Include the keywords 3 times each per page. The geo target is SLC, UT, so please use that where relevant. Company has A+ rating from the BBB and 24-hour emergency services. Include our phone # in call to action on each page. 777-777-7777<br>
-          <strong>Example:</strong><br>
-          Make sure to include a bulleted list of the AC Units that we carry somewhere on the page.
-        </p>
+        <p>Include information about the desired tone/style, target audience, and any specific things you’d like mentioned in the content.</p>
       </div>
     </div>
   </div>
   <div class="order-form-right">
-    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Insert general guidelines (optional)"><?php echo $special_instructions; ?></textarea>
+    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Insert the general guidelines for this content, if any"><?php echo $special_instructions; ?></textarea>
   </div>
 </div>

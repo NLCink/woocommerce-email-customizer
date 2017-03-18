@@ -26,7 +26,7 @@ Twitter</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="social_media_type" value="<?php echo $social_media_type; ?>" type="text">
+    <input class="order-form-inputs not_required" name="social_media_type" value="<?php echo $social_media_type; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -35,8 +35,7 @@ Twitter</p>
     <div class="tooltip">
       <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
       <div class="tooltip-text">
-        <p><strong>Example:</strong><br>
-http://example.com</p>
+        <p>Page we are writing a social media post for.</p>
       </div>
     </div>
   </div>
@@ -46,7 +45,7 @@ http://example.com</p>
 </div>
 <div class="order-form-full">
   <div class="order-form-left">
-    <h5 class="order-form-label">Subject (if no link provided)</h5>
+    <h5 class="order-form-label">Subject</h5>
     <div class="tooltip">
       <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
       <div class="tooltip-text">
@@ -56,7 +55,7 @@ Movies</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs not_required" name="subject" value="<?php echo $subject; ?>" type="text">
+    <input class="order-form-inputs" name="subject" value="<?php echo $subject; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -80,12 +79,11 @@ Movies</p>
     <div class="tooltip">
       <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
       <div class="tooltip-text">
-        <p><strong>Example:</strong><br>
-          I want 30 tweets around the subject of Disney movies. Include a link to the story you find.</p>
+        <p>Include information about the desired tone/style, target audience, and any specific things you’d like mentioned in the content.</p>
       </div>
     </div>
   </div>
   <div class="order-form-right">
-    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Social Media Post Special Instructions (optional)"><?php echo $special_instructions; ?></textarea>
+    <textarea class="order-form-inputs not_required" name="special_instructions" rows="8" cols="80" placeholder="Insert the general guidelines for this content, if any"><?php echo $special_instructions; ?></textarea>
   </div>
 </div>

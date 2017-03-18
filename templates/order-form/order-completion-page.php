@@ -30,6 +30,7 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
             $inc=1;
             $tot=0;
             $fill=0;
+            $duplicate_status = 1;
             foreach( $order->get_items() as $item_id => $item ) {            
               //echo $order->display_item_meta( $item );
             //echo $order->get_formatted_line_subtotal( $item );
@@ -104,7 +105,12 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
 
           <div class="divider"></div>
 
-          <h3 class="form-name">Form <?php echo $inc; ?></h3>
+          <h3 class="form-name">Form <?php echo $inc; ?> 
+          <?php if($q > 1 && $duplicate_status == 1) { $cloneFrom = $q-1; ?>
+          <div class="clonAboveForm"><a onclick="duplicatAbove('orderForm-<?php echo $productID.'-'.$cloneFrom; ?>','orderForm-<?php echo $productID.'-'.$q; ?>')" href="javascript:void(0)" title="Duplicate above data to this form">Duplicate above data to this form</a></div>
+          <?php } ?>
+          </h3>
+
           <div class="word-wrap">
             <h3 class="word-count">Product: <?php 
               echo $productName;
@@ -121,12 +127,12 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
             <div class="alert alert-success alert-success-<?php echo $productID.'-'.$q; ?>" style="display: none;">
             <strong>Success!</strong> Indicates a successful or positive action.
           </div>
-          <?php if(!empty($get_order_type) && $get_order_type == 'complete') { $fill++; ?>
+          <?php if(!empty($get_order_type) && $get_order_type == 'complete') { $duplicate_status=0; $fill++; ?>
           <div class="form-wrap area">
             <div class="alert alert-success alert-success-<?php echo $productID.'-'.$q; ?> completeForms">
             <strong>Success!</strong> You have successfully completed this form.
           </div>
-          <?php } else { ?>
+          <?php } else { $duplicate_status=1; ?>
             <form class="order-form area orderForm-<?php echo $productID.'-'.$q; ?>" id="orderForm-<?php echo $productID.'-'.$q; ?>" data-order-id="<?php echo $productID.'-'.$q; ?>" action="#" method="post">
             <input type="hidden" name="product_id" value="<?php echo $productID.'-'.$q; ?>">
             <input type="hidden" name="action" value="orderCompletion">
@@ -195,6 +201,15 @@ $get_order_number = get_post_meta( $orderId, "_order_number", true );
     <link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ); ?>main.css" />
 </div> <!-- #main-content -->
 <script type="text/javascript">
+function duplicatAbove(cloneFrom,cloneTo){
+  var allFormField = $('#' + cloneFrom).find('input:not([type=hidden]), textarea, select');
+        var values = {};
+        allFormField.each(function () {
+            values[this.name] = $(this).val();
+            $('#' + cloneTo).find('[name='+this.name+']').val($(this).val());
+        });
+        console.log(values);
+}
 function addNewItem(cloneThisDiv,cloneThisDivAdd,maxinput=0){
     var x = document.getElementById(cloneThisDiv).cloneNode(true);
     x.id = "";
@@ -238,7 +253,7 @@ function removeItem(cloneThisDivAdd,removeNum){
 }
 
 $(document).ready(function(){
-  $('.order-form').find('input:not(.not_required), select:not(.not_required)').addClass('required');
+  $('.order-form').find('input:not(.not_required), select:not(.not_required), textarea:not(.not_required)').addClass('required');
   var progressbarr = Math.round('<?php echo $filupInPer; ?>');
   $('.progress-lenght').html(progressbarr+'%');
   $('.progressbar').css('width',progressbarr+'%');

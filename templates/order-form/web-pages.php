@@ -47,7 +47,7 @@
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="current_website" value="<?php echo $current_website; ?>" type="text">
+    <input class="order-form-inputs not_required" name="current_website" value="<?php echo $current_website; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -81,7 +81,7 @@ Cooling<br>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="example_websites-1" value="<?php echo $example_websites; ?>" type="text">
+    <input class="order-form-inputs not_required" name="example_websites-1" value="<?php echo $example_websites; ?>" type="text">
     <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneExmWePDiv-<?php echo $q; ?>','cloneExmWePDivAdd-<?php echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
@@ -103,7 +103,7 @@ Cooling<br>
           </div>
         </div>
         <div class="order-form-right">
-          <input class="order-form-inputs" name="example_websites-<?php echo $r; ?>" value="<?php echo $value->meta_value; ?>" type="text" aria-required="true">
+          <input class="order-form-inputs not_required" name="example_websites-<?php echo $r; ?>" value="<?php echo $value->meta_value; ?>" type="text" aria-required="true">
           <a href="javascript:void(0)" class="btn-add-more btn-danger" onclick="removeItem('cloneExmWePDivAdd-<?php echo $q; ?>','rowCount-cloneExmWePDiv-<?php echo $q; ?>-<?php echo $r; ?>')"><i style="font-size:47px;margin-top:-3px;" class="fa fa-minus-square" aria-hidden="true"></i></a>
         </div>
       </div>
@@ -121,12 +121,12 @@ http://example.com</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="reference_url" value="<?php echo $reference_url; ?>" type="text">
+    <input class="order-form-inputs not_required" name="reference_url" value="<?php echo $reference_url; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full" id="cloneKeyWordWpDiv-<?php echo $q; ?>">
   <div class="order-form-left">
-    <h5 class="order-form-label">Keywords (up to 5)</h5>
+    <h5 class="order-form-label">Keywords (up to 3)</h5>
     <div class="tooltip">
       <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
       <div class="tooltip-text">
@@ -136,7 +136,7 @@ http://example.com</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="keywords" value="<?php echo $Keywords; ?>" type="text" placeholder="Separates multiple keywords with commas">
+    <input class="order-form-inputs not_required" name="keywords" value="<?php echo $Keywords; ?>" type="text" placeholder="Separates multiple keywords with commas">
     <!-- <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeyWordWpDiv-<?php //echo $q; ?>','cloneKeyWordWpDivAdd-<?php //echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a> -->
   </div>
 </div>
@@ -194,7 +194,7 @@ H2:  Reasons to Invest in Professional Service for Your AC<br>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="headlines" value="<?php echo $headlines; ?>" type="text">
+    <input class="order-form-inputs not_required" name="headlines" value="<?php echo $headlines; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -212,6 +212,6 @@ H2:  Reasons to Invest in Professional Service for Your AC<br>
     </div>
   </div>
   <div class="order-form-right">
-    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Insert general guidelines (optional)"><?php echo $special_instructions; ?></textarea>
+    <textarea class="order-form-inputs not_required" name="special_instructions" rows="8" cols="80" placeholder="Insert the general guidelines for this content, if any"><?php echo $special_instructions; ?></textarea>
   </div>
 </div>

@@ -1,7 +1,7 @@
 <?php 
   $get_order_id = get_post_meta( $orderId, "_comp_order_id_{$productID}-{$q}", true );
   if(!empty($get_order_id)){
-    $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}-{$q}", true );
+    $page_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}-{$q}", true );
     $primary_keyword = get_post_meta( $orderId, "_comp_primary_keyword_{$productID}-{$q}", true );
     $secondary_keyword = get_post_meta( $orderId, "_comp_secondary_keyword_{$productID}-{$q}", true );
     $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}-{$q}", true );    
@@ -14,17 +14,16 @@
 ?>
 <div class="order-form-full">
   <div class="order-form-left">
-    <h5 class="order-form-label">Reference URL</h5>
+    <h5 class="order-form-label">Page URL</h5>
     <div class="tooltip">
       <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
       <div class="tooltip-text">
-        <p><strong>Example:</strong><br>
-          http://example.com</p>
+        <p>This is the page we will write the description for.</p>
       </div>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="reference_url" value="<?php echo $reference_url; ?>" type="text">
+    <input class="order-form-inputs" name="page_url" value="<?php echo $page_url; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -39,7 +38,7 @@ diamond wedding ring</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="primary_keyword" value="<?php echo $primary_keyword; ?>" type="text">
+    <input class="order-form-inputs not_required" name="primary_keyword" value="<?php echo $primary_keyword; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full" id="cloneKeywordSecDiv-<?php echo $q; ?>">
@@ -54,7 +53,7 @@ diamond wedding ring</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="secondary_keyword" value="<?php echo $secondary_keyword; ?>" type="text">
+    <input class="order-form-inputs not_required" name="secondary_keyword" value="<?php echo $secondary_keyword; ?>" type="text">
     <!-- <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordSecDiv-<?php echo $q; ?>','cloneKeywordSecDivAdd-<?php //echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a> -->
   </div>
 </div>
@@ -89,13 +88,11 @@ diamond wedding ring</p>
     <div class="tooltip">
       <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
       <div class="tooltip-text">
-        <p><strong>Example:</strong><br>
-          These are meta tags for product pages. Mention the primary keyword once. Mention primary keyword wtihin the first few words of the first sentence if possible. Quickly describe the product in an enticing way, and tie it into our company if you can. </p>
-        <p>Mention that this ring is completely hand set.</p>
+        <p>Include information about the desired tone/style, target audience, and any specific things you’d like mentioned in the content.</p>
       </div>
     </div>
   </div>
   <div class="order-form-right">
-    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Meta Description Special Instructions"><?php echo $special_instructions; ?></textarea>
+    <textarea class="order-form-inputs not_required" name="special_instructions" rows="8" cols="80" placeholder="Insert the general guidelines for this content, if any"><?php echo $special_instructions; ?></textarea>
   </div>
 </div>
