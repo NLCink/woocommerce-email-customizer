@@ -5,8 +5,8 @@
     $current_website = get_post_meta( $orderId, "_comp_current_website_{$productID}-{$q}", true );
     $url_needing_rewritten = get_post_meta( $orderId, "_comp_url_needing_rewritten_{$productID}-{$q}", true );
     $page_name = get_post_meta( $orderId, "_comp_page_name_{$productID}-{$q}", true );
-    $keywords = get_post_meta( $orderId, "_comp_keywords-1_{$productID}-{$q}", true );
-    $connecting_words = get_post_meta( $orderId, "_comp_connecting_words_{$productID}-{$q}", true );
+    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
+    //$connecting_words = get_post_meta( $orderId, "_comp_connecting_words_{$productID}-{$q}", true );
     $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}-{$q}", true );
   } else {
     $company_name = '';
@@ -14,7 +14,7 @@
     $url_needing_rewritten = '';
     $page_name = '';
     $keywords = '';
-    $connecting_words = '';
+    //$connecting_words = '';
     $special_instructions = '';
   }
 ?>
@@ -24,12 +24,12 @@
     <div class="tooltip">
       <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
       <div class="tooltip-text">
-        <p>Enter your company name here</p>
+        <p>Enter the name of the company that the content is for.</p>
       </div>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="company_name" value="<?php echo $company_name; ?>" type="text">
+    <input class="order-form-inputs not_required" name="company_name" value="<?php echo $company_name; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -43,7 +43,7 @@
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="current_website" value="<?php echo $current_website; ?>" type="text">
+    <input class="order-form-inputs not_required" name="current_website" value="<?php echo $current_website; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -73,7 +73,7 @@
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="page_name" value="<?php echo $page_name; ?>" type="text">
+    <input class="order-form-inputs not_required" name="page_name" value="<?php echo $page_name; ?>" type="text">
     <!-- <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('clonePageWpreDiv-<?php //echo $q; ?>','clonePageWpreDivAdd-<?php //echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a> -->
   </div>
 </div>
@@ -114,11 +114,11 @@ air conditioners in SLC, AC repair in SLC</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="keywords-1" value="<?php echo $keywords; ?>" type="text">
-    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordWpreDiv-<?php echo $q; ?>','cloneKeywordWpreDivAdd-<?php echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+    <input class="order-form-inputs not_required" name="keywords" value="<?php echo $keywords; ?>" type="text" placeholder="Separates multiple keywords with commas">
+    <!-- <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordWpreDiv-<?php //echo $q; ?>','cloneKeywordWpreDivAdd-<?php //echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a> -->
   </div>
 </div>
-<div id="cloneKeywordWpreDivAdd-<?php echo $q; ?>">
+<?php /* ?><div id="cloneKeywordWpreDivAdd-<?php echo $q; ?>">
   <?php 
     $get_post_data = $wpdb->get_results("SELECT * FROM gpm_postmeta as pm WHERE pm.post_id=$orderId AND pm.meta_key LIKE '_comp_keywords-%".$productID."-".$q."' ORDER BY pm.meta_id ASC");
     $r=1;
@@ -142,8 +142,8 @@ air conditioners in SLC, AC repair in SLC</p>
         </div>
       </div>
    <?php } $r++; } ?>
-</div>
-<div class="order-form-full">
+</div><?php */ ?>
+<!-- <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Connecting Words</h5>
     <div class="tooltip">
@@ -156,21 +156,18 @@ air conditioners in SLC, AC repair in SLC</p>
   <div class="order-form-right">
     <input class="order-form-inputs" name="connecting_words" value="<?php echo $connecting_words; ?>" type="text">
   </div>
-</div>
+</div> -->
 <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Special Instructions</h5>
     <div class="tooltip">
       <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
       <div class="tooltip-text">
-        <p><strong>Example:</strong><br>
-These URLs have duplicate content. We just need each page rewritten so that it is completely original and unique.  Make sure each page is optimized for the GEO location listed in the page name. Include the keywords 3 times each per page.  Include a call to action with our phone #.<br>
-<strong>Example:</strong>
-Make sure to include a bulleted list of the AC Units that we carry somewhere on the page.</p>
+        <p>Include information about the desired tone/style, target audience, and any specific things you’d like mentioned in the content.</p>
       </div>
     </div>
   </div>
   <div class="order-form-right">
-    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Insert general guidelines for this branded blog post"><?php echo $special_instructions; ?></textarea>
+    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Insert the general guidelines for this content, if any"><?php echo $special_instructions; ?></textarea>
   </div>
 </div>

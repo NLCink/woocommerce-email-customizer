@@ -6,8 +6,9 @@
     $page_name = get_post_meta( $orderId, "_comp_page_name_{$productID}-{$q}", true );
     $example_websites = get_post_meta( $orderId, "_comp_example_websites-1_{$productID}-{$q}", true );
     $reference_url = get_post_meta( $orderId, "_comp_reference_url_{$productID}", true );
-    $keywords = get_post_meta( $orderId, "_comp_keywords-1_{$productID}-{$q}", true );
-    $connecting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}-{$q}", true );
+    $keywords = get_post_meta( $orderId, "_comp_keywords_{$productID}-{$q}", true );
+    $headlines = get_post_meta( $orderId, "_comp_headlines_{$productID}-{$q}", true );
+    //$connecting_words = get_post_meta( $orderId, "_comp_conneting_words_{$productID}-{$q}", true );
     $special_instructions = get_post_meta( $orderId, "_comp_special_instructions_{$productID}-{$q}", true );    
   } else {
     $company_name = '';
@@ -16,7 +17,8 @@
     $example_websites = '';
     $reference_url = '';
     $keywords = '';
-    $connecting_words = '';
+    $headlines = '';
+    //$connecting_words = '';
     $special_instructions = '';
   }
 ?>
@@ -45,7 +47,7 @@
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="current_website" value="<?php echo $current_website; ?>" type="text">
+    <input class="order-form-inputs not_required" name="current_website" value="<?php echo $current_website; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -79,7 +81,7 @@ Cooling<br>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="example_websites-1" value="<?php echo $example_websites; ?>" type="text">
+    <input class="order-form-inputs not_required" name="example_websites-1" value="<?php echo $example_websites; ?>" type="text">
     <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneExpWebSpwpDiv-<?php echo $q; ?>','cloneExpWebSpwpDivAdd-<?php echo $q; ?>',5)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
   </div>
 </div>
@@ -101,7 +103,7 @@ Cooling<br>
           </div>
         </div>
         <div class="order-form-right">
-          <input class="order-form-inputs" name="example_websites-<?php echo $r; ?>" value="<?php echo $value->meta_value; ?>" type="text" aria-required="true">
+          <input class="order-form-inputs not_required" name="example_websites-<?php echo $r; ?>" value="<?php echo $value->meta_value; ?>" type="text" aria-required="true">
           <a href="javascript:void(0)" class="btn-add-more btn-danger" onclick="removeItem('cloneExpWebSpwpDivAdd-<?php echo $q; ?>','rowCount-cloneExpWebSpwpDiv-<?php echo $q; ?>-<?php echo $r; ?>')"><i style="font-size:47px;margin-top:-3px;" class="fa fa-minus-square" aria-hidden="true"></i></a>
         </div>
       </div>
@@ -119,7 +121,7 @@ http://example.com</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="reference_url" value="<?php echo $reference_url; ?>" type="text">
+    <input class="order-form-inputs not_required" name="reference_url" value="<?php echo $reference_url; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full" id="cloneKeywordSpwpDiv-<?php echo $q; ?>">
@@ -134,11 +136,11 @@ http://example.com</p>
     </div>
   </div>
   <div class="order-form-right">
-    <input class="order-form-inputs" name="keywords-1" value="<?php echo $Keywords; ?>" type="text">
-    <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordSpwpDiv-<?php echo $q; ?>','cloneKeywordSpwpDivAdd-<?php echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a>
+    <input class="order-form-inputs not_required" name="keywords" value="<?php echo $Keywords; ?>" type="text" placeholder="Separates multiple keywords with commas">
+    <!-- <a href="javascript:void(0)" class="btn-add-more" onclick="addNewItem('cloneKeywordSpwpDiv-<?php //echo $q; ?>','cloneKeywordSpwpDivAdd-<?php //echo $q; ?>',3)"><img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/plus-icon.png" alt="plus-icon" style="padding: 12px;"></a> -->
   </div>
 </div>
-<div id="cloneKeywordSpwpDivAdd-<?php echo $q; ?>">
+<?php /*?><div id="cloneKeywordSpwpDivAdd-<?php echo $q; ?>">
   <?php 
     $get_post_data = $wpdb->get_results("SELECT * FROM gpm_postmeta as pm WHERE pm.post_id=$orderId AND pm.meta_key LIKE '_comp_keywords-%".$productID."-".$q."' ORDER BY pm.meta_id ASC");
     $r=1;
@@ -162,8 +164,8 @@ http://example.com</p>
         </div>
       </div>
    <?php } $r++; } ?>
-</div>
-<div class="order-form-full">
+</div><?php */ ?>
+<!-- <div class="order-form-full">
   <div class="order-form-left">
     <h5 class="order-form-label">Connecting Words</h5>
     <div class="tooltip">
@@ -175,6 +177,24 @@ http://example.com</p>
   </div>
   <div class="order-form-right">
     <input class="order-form-inputs" name="connecting_words" value="<?php echo $connecting_words; ?>" type="text">
+  </div>
+</div> -->
+<div class="order-form-full">
+  <div class="order-form-left">
+    <h5 class="order-form-label">H1 or H2 Headlines</h5>
+    <div class="tooltip">
+      <img src="http://plugin.bkacontent.com/wp-content/uploads/2017/01/tooltip-img.png" alt="tooltip-img">
+      <div class="tooltip-text">
+        <p><strong>Example:</strong><br>
+H1:  Professional Air Conditioning Services<br>
+H2:  Service for all Types of Air Conditioner Units<br>
+H2:  Reasons to Invest in Professional Service for Your AC<br>
+(Separate each heading by pressing CTRL-Enter.)</p>
+      </div>
+    </div>
+  </div>
+  <div class="order-form-right">
+    <input class="order-form-inputs not_required" name="headlines" value="<?php echo $headlines; ?>" type="text">
   </div>
 </div>
 <div class="order-form-full">
@@ -191,6 +211,6 @@ Make sure to include a bulleted list of the AC Units that we carry somewhere on 
     </div>
   </div>
   <div class="order-form-right">
-    <textarea class="order-form-inputs" name="special_instructions" rows="8" cols="80" placeholder="Insert general guidelines (optional)"><?php echo $special_instructions; ?></textarea>
+    <textarea class="order-form-inputs not_required" name="special_instructions" rows="8" cols="80" placeholder="Insert the general guidelines for this content, if any"><?php echo $special_instructions; ?></textarea>
   </div>
 </div>

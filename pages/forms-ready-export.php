@@ -30,6 +30,8 @@ class CSVExport
     {
         global $wpdb;
         $csv_output = '';
+        $csv_head = array();
+        $csv_value = array();
         $postId = $_GET['export'];
         $multiple = (isset($_GET['multiple']) ? $_GET['multiple'] : '');
         if(!empty($multiple)){
@@ -38,8 +40,8 @@ class CSVExport
             $get_post_data = $wpdb->get_results("SELECT pm.post_id, pm.meta_key as title , pm.meta_value as value FROM gpm_postmeta as pm WHERE pm.post_id=$postId AND pm.meta_key LIKE '_comp_%' ORDER BY pm.meta_id ASC");
         }
         
-        $csv_output .= "Title,Values,";
-        $csv_output .= "\n";
+        //$csv_output .= "Title,Values,";
+        //$csv_output .= "\n";
         $inc=0;
         foreach ($get_post_data as $key => $value) {
             $export_title = explode("_", $value->title);
@@ -47,7 +49,7 @@ class CSVExport
                 
             if($export_title[2] == 'product' && $export_title[3] == 'id'){
                 if($inc !=0 ){ $csv_output .= "\n"; } $inc++;
-                $csv_output .= "Product Name,";
+                $csv_head[] = "Product Name";
                 $order = wc_get_order( $value->post_id );
                 $items = $order->get_items(); 
 
@@ -105,18 +107,30 @@ class CSVExport
                         } else {
                             $item_qty = ' x '.$item['qty'];
                         }
-                        $csv_output .= $product_name.$item_qty.' - '.$output_attribute.",";
+                        $csv_value[] = $product_name.$item_qty.' - '.$output_attribute;
                     }
                 }
             } else {
-                $csv_output .= ucfirst($export_title[2])." ".ucfirst($export_title[3]).",";
-                $csv_output .= $value->value.",";
+                $csv_head[] = ucfirst($export_title[2])." ".ucfirst($export_title[3]);
+                $csv_value[] = $value->value;
             }
-            $csv_output .= "\n";
+            //$csv_output .= "\n";
         }
         }
 
+        if(!empty($csv_head)){
+            foreach ($csv_head as $key => $csvHead) {
+                $csv_output .= $csvHead.",";
+            }
+            $csv_output .= "\n";
+            foreach ($csv_value as $key => $csvValue) {
+                $csv_output .= $csvValue.",";
+            }
+        }
+
         return $csv_output;
+
+        //return $csv_output;
     }
 }
 
